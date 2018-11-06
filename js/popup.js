@@ -15,9 +15,47 @@ browser.tabs.query({ active: true, currentWindow: true })
   .then(func)
   .catch(console.error);
 
+$( function() {
+  $('.container').tooltip({
+    content: 'Loading…',
+    items: 'a.detected__category-link',
+    show: null, // show immediately
+    open: function(event, ui)
+    {
+        if (typeof(event.originalEvent) === 'undefined')
+        {
+            return false;
+        }
+        
+        var $id = $(ui.tooltip).attr('id');
+        
+        // close any lingering tooltips
+        $('div.ui-tooltip').not('#' + $id).remove();
+        
+        // ajax function to pull in data and add it to the tooltip goes here
+    },
+    close: function(event, ui)
+    {
+        ui.tooltip.hover(function()
+        {
+            $(this).stop(true).fadeTo(400, 1); 
+        },
+        function()
+        {
+            $(this).fadeOut('400', function()
+            {
+                $(this).remove();
+            });
+        });
+    }
+  });
+} );
+
+
 function replaceDomWhenReady(dom) {
   if (/complete|interactive|loaded/.test(document.readyState)) {
     replaceDom(dom);
+
   } else {
     document.addEventListener('DOMContentLoaded', () => {
       replaceDom(dom);
@@ -316,3 +354,4 @@ function technologyHasTooltip(technology, technologyTooltipArray) {
   console.log("check for tooltip for " + technology);
   return technologyTooltipArray.hasOwnProperty(technology);
 }
+

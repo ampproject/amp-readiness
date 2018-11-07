@@ -4,7 +4,7 @@
 	"author": "Jeffrey Jose and Phillip Kriegel",
 	"homepage_url": "https://github.com/ampproject/ampbench/tree/master/readiness-tool",
 	"description": "Identify web technologies that are relevant to AMP",
-	"version": "3.1.0",
+	"version": "3.1.1",
 	"default_locale": "en",
 	"manifest_version": 2,
 	"icons": {
@@ -66,5 +66,5 @@
 		"http://*/*",
 		"https://*/*"
 	],
-	"content_security_policy": "script-src 'self'; object-src 'self'"
+	"content_security_policy": "script-src 'self' ; object-src 'self'"
 }

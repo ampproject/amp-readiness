@@ -17,8 +17,11 @@ browser.tabs.query({ active: true, currentWindow: true })
 
 $( function() {
   $('.container').tooltip({
-    content: 'Loading…',
-    items: 'a.detected__category-link',
+    tooltipClass: "custom-ui-tooltip",
+    content: function() {
+      return $(this).attr('data_tooltip_left');
+    },
+    items: '.tooltip',
     show: null, // show immediately
     open: function(event, ui)
     {
@@ -38,7 +41,7 @@ $( function() {
     {
         ui.tooltip.hover(function()
         {
-            $(this).stop(true).fadeTo(400, 1); 
+            $(this).stop(true).fadeTo(100, 1); 
         },
         function()
         {

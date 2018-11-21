@@ -1,4 +1,8 @@
 .header {
+
+
+
+  
   align-items: center;
 	background: linear-gradient(160deg, #32067c, #150233);
   height: 4rem;
@@ -484,4 +488,26 @@ input+.collapsible+div {
 
 input:checked+.collapsible+div {
   display: block;
+}
+.custom-ui-tooltip {
+  background: #666 !important; 
+  color: white !important;
+  border: none !important;
+  padding: 0 !important;
+  opacity: 1 !important;
+}
+.ui-tooltip-content {
+  position: relative;
+  padding: 1em;
+}
+.ui-tooltip-content::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  display: block;
+  width: 0;
+  top: 18px;
+  right: -10px;
+  border-color: transparent #666;
+  border-width: 10px 0 10px 10px;
 }

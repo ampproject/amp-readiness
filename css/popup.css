@@ -165,6 +165,7 @@
   font-size: .7rem;
   margin-left: .3rem;
   padding: .1rem .2rem;
+  text-decoration: unset;
 }
 
 .detected__app:hover .detected__app-name {
@@ -366,7 +367,7 @@ footer div a:hover {
   visibility: hidden;
 }
 
-.tooltip {
+.tooltip .detected__app-name {
   text-decoration: underline;
   text-decoration-color: red;
   text-decoration-style: dashed;
@@ -378,88 +379,14 @@ footer div a:hover {
   vertical-align: middle;
   font-size: 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .question-mark:before {
   font-weight: normal;
 }
 
-.tooltip:before {
-  content: '>\0000a0';
-}
-/* Tooltip Styles */
-/* Add this attribute to the element that needs a tooltip */
 
-
-.tooltip[data_tooltip_left] {
-  position: relative;
-  cursor: pointer;
-}
-/* Hide the tooltip content by default */
-
-
-
-.tooltip[data_tooltip_left]:before,
-.tooltip[data_tooltip_left]:after {
-  visibility: hidden;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-  pointer-events: none;
-}
-/* Position tooltip above the element */
-
-.tooltip[data_tooltip_left]:before {
-  position: absolute;
-  right: 105%;
-  margin-bottom: 5px;
-  padding: 7px;
-  width: 160px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  background-color: #000;
-  background-color: hsla(0, 0%, 20%, 0.9);
-  color: #fff;
-  content: attr(data_tooltip_left);
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.2;
-  z-index: 3;
-}
-/* Triangle hack to make tooltip look like a speech bubble */
-
-.tooltip[data_tooltip_left]:after {
-  position: absolute;
-  right: 105%;
-  margin-right: -5px;
-  margin-top: 10px;
-  width: 0;
-  border-left: 5px solid hsla(0, 0%, 20%, 0.9);
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid transparent;
-  content: " ";
-  font-size: 0;
-  line-height: 0;
-}
-/* Show tooltip content on hover */
-
-.tooltip.question-mark[data_tooltip_left]:before {
-  right: 20px;
-}
-
-.tooltip.question-mark[data_tooltip_left]:after {
-  right: 20px;
-}
-
-
-.tooltip[data_tooltip_left]:hover:before,
-.tooltip[data_tooltip_left]:hover:after {
-  visibility: visible;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-  filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
-  opacity: 1;
-}
 
 
 /* Expanding lists */
@@ -489,25 +416,61 @@ input+.collapsible+div {
 input:checked+.collapsible+div {
   display: block;
 }
-.custom-ui-tooltip {
-  background: #666 !important; 
-  color: white !important;
-  border: none !important;
-  padding: 0 !important;
+.ui-tooltip {
+  position: absolute !important;
+  z-index: 2000000000 !important;
+  border-radius: 4px !important;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 16px !important;
   opacity: 1 !important;
+  box-sizing: border-box !important;
+  width: 340px !important;
+  padding: 18px 0px 0px 0px !important;
 }
 .ui-tooltip-content {
-  position: relative;
-  padding: 1em;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  color: rgba(0,0,0,0.87);
+  font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
-.ui-tooltip-content::after {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  display: block;
-  width: 0;
-  top: 18px;
-  right: -10px;
-  border-color: transparent #666;
-  border-width: 10px 0 10px 10px;
+
+span.tooltip_title {
+  color: #202124;
+  font-family: 'Google Sans',Roboto,sans-serif;
+  font-size: 22px;
+  line-height: 28px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 18px 0px 0px 0px !important;
+  margin: 0 22px 14px 22px !important;
+}
+
+p.tooltip_description {
+  font: 400 14px/20px Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  margin: 5px 22px 14px 22px;
+}
+
+button.tooltip_button {
+  background-color: #1a73e8;
+  color: white;
+  float: right;
+  border-radius: 4px;
+  font-family: 'Google Sans',Roboto,sans-serif !important;
+  margin: 5px !important;
+  font-size: 14px !important;
+  font-weight: 500;
+  padding: 5px;
+  cursor: pointer;
+}
+
+img.tooltip_image {
+  display: inline-block;
+	height: 24px;
+  margin-left:22px;
+  margin-right: -15px;
+  vertical-align: -.2rem;
+  width: 24px;  
+}
+
+div.tooltip_footer {
+  border-top: 1px solid #dadce0;
 }

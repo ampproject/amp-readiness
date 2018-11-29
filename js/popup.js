@@ -18,8 +18,29 @@ browser.tabs.query({ active: true, currentWindow: true })
 $( function() {
   $('.container').tooltip({
     tooltipClass: "custom-ui-tooltip",
+    position: { my: "right center", collision: "fit"},
     content: function() {
-      return $(this).attr('data_tooltip_left');
+      htmlResult = ""
+      if ($(this).hasClass("detected__app")){
+        title = $(this).find(".detected__app-name").text()
+        description = $(this).attr('data_tooltip_left')
+        version = $(this).find(".detected__app-version").text()
+        img = $(this).find(".detected__app-icon").attr('src')
+        htmlResult ="<img class='tooltip_image' src="+ img +">" +
+                    "<span class='tooltip_title'>" + title + " " + version + "</span>"+
+                    "<p class='tooltip_description'>"+description+"</p>"
+      }
+      else if ($(this).hasClass("question-mark")){
+        title = $(this).siblings(".detected__category-link").text()
+        description = $(this).attr('data_tooltip_left')
+        reference = $(this).attr('data_tooltip_reference')
+        htmlResult = "<span class='tooltip_title'>"+title+"</span>"+
+                    "<p class='tooltip_description'>"+description+"</p>"
+        if (reference != "null"){
+          htmlResult += "<div class='tooltip_footer'><a target='_blank' href='"+reference+"'><button class='tooltip_button'>Reference</button></a></div>"  
+        }    
+      }
+      return htmlResult
     },
     items: '.tooltip',
     show: null, // show immediately
@@ -41,11 +62,11 @@ $( function() {
     {
         ui.tooltip.hover(function()
         {
-            $(this).stop(true).fadeTo(100, 1); 
+            $(this).stop(true).fadeTo(400, 1); 
         },
         function()
         {
-            $(this).fadeOut('400', function()
+            $(this).fadeOut(400, function()
             {
                 $(this).remove();
             });
@@ -244,7 +265,8 @@ function appsToDomTemplate(response) {
                 ], [
                   'span', {
                     class: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
-                    data_tooltip_left: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]:''}`,
+                    data_tooltip_left: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["content"]:''}`,
+                    data_tooltip_reference: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["reference"]:''}`
                   },
                   "    (?)"
                 ]

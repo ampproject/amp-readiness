@@ -77,16 +77,30 @@ function post(url, body) {
     .catch(error => wappalyzer.log(`POST ${url}: ${error}`, 'driver', 'error'));
 }
 
-fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/apps.json')
+// Prod config
+// fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/apps.json')
+//   .then(response => response.json())
+//   .then((json) => {
+//     wappalyzer.apps = json.apps;
+//     wappalyzer.categories = json.categories;
+    
+//     fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/extended_apps.json')
+//       .then(response_ext => response_ext.json())
+//       .then((json_ext) => {
+// Prod config
+
+// Testing config
+fetch('../apps.json')
   .then(response => response.json())
   .then((json) => {
     wappalyzer.apps = json.apps;
     wappalyzer.categories = json.categories;
     
-    fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/extended_apps.json')
+    fetch('../extended_apps.json')
       .then(response_ext => response_ext.json())
       .then((json_ext) => {
-        
+// Testing config
+
         wappalyzer.apps = Object.assign({}, wappalyzer.apps, json_ext.apps);
 
         wappalyzer.parseJsPatterns();

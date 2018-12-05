@@ -100,15 +100,28 @@ function replaceDom(domTemplate) {
 }
 
 function appsToDomTemplate(response) {
-  let template = [];
+  
   let amp_supported_template = [];
   let amp_work_around_template = [];
   let amp_not_supported_template = [];
+  //Default template is empty
+  let template = [
+      'div', {
+        class: 'empty',
+      },
+      [
+        'span', {
+          class: 'empty__text',
+        },
+        browser.i18n.getMessage('noAppsDetected'),
+      ],
+    ];
   //Control what categories of apps we will use
   // let approved_categories = [1,5,6,10,11,32,36,41,42,52];
   let approved_categories = [1,5,6,10,11,12,16,18,32,36,41,42,52,59]; //Original set
 
   if (response.tabCache && Object.keys(response.tabCache.detected).length > 0) {
+    console.log(response.tabCache)
     const categories = {};
 
     // Group apps by category
@@ -120,236 +133,227 @@ function appsToDomTemplate(response) {
         }
       });
     }
-    for (const cat in categories) {
-      const amp_supported_apps = [];
-      const amp_work_around_apps = [];
-      const amp_not_supported_apps = [];
 
-      for (const appName in categories[cat].apps) {
-        const confidence = response.tabCache.detected[appName].confidenceTotal;
-        const version = response.tabCache.detected[appName].version;
-        if(isAMPSupported(appName, response.supported_apps)){
-          amp_supported_apps.push(
-            [
-              'a', {
-                class: 'detected__app',
-                target: '_blank',
-                href: `${response.apps[appName].website}`,
-              }, [
-                'img', {
-                  class: 'detected__app-icon',
-                  src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
-                },
-              ], [
-                'span', {
-                  class: 'detected__app-name',
-                },
-                appName,
-              ], version ? [
-                'span', {
-                  class: 'detected__app-version',
-                },
-                version,
-              ] : null, confidence < 100 ? [
-                'span', {
-                  class: 'detected__app-confidence',
-                },
-                `${confidence}% sure`,
-              ] : null,
-            ],
-          );
-        } else if(isAMPIncompatible(appName, response.incompatible_apps)){
-          amp_not_supported_apps.push(
-            [
-              'a', {
-                class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
-                data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
-                target: '_blank',
-                href: `${response.apps[appName].website}`,
-              }, [
-                'img', {
-                  class: 'detected__app-icon',
-                  src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
-                },
-              ], [
-                'span', {
-                  class: 'detected__app-name',
-                },
-                appName,
-              ], version ? [
-                'span', {
-                  class: 'detected__app-version',
-                },
-                version,
-              ] : null, confidence < 100 ? [
-                'span', {
-                  class: 'detected__app-confidence',
-                },
-                `${confidence}% sure`,
-              ] : null,
-            ],
-          );
-        } else {
-          amp_work_around_apps.push(
-            [
-              'a', {
-                class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
-                data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
-                target: '_blank',
-                href: `${response.apps[appName].website}`,
-              }, [
-                'img', {
-                  class: 'detected__app-icon',
-                  src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
-                },
-              ], [
-                'span', {
-                  class: 'detected__app-name',
-                },
-                appName,
-              ], version ? [
-                'span', {
-                  class: 'detected__app-version',
-                },
-                version,
-              ] : null, confidence < 100 ? [
-                'span', {
-                  class: 'detected__app-confidence',
-                },
-                `${confidence}% sure`,
-              ] : null,
-            ],
-          );
-        }
-      }
-      if(amp_supported_apps.length != 0){
-        amp_supported_template.push(
-            [
-              'div', {
-                class: 'detected__category',
-              }, [
-                'div', {
-                  class: 'detected__category-name',
+    //Check if we have any relevant technologies
+    if (Object.keys(categories).length > 0) {
+
+      for (const cat in categories) {
+        const amp_supported_apps = [];
+        const amp_work_around_apps = [];
+        const amp_not_supported_apps = [];
+
+        for (const appName in categories[cat].apps) {
+          const confidence = response.tabCache.detected[appName].confidenceTotal;
+          const version = response.tabCache.detected[appName].version;
+          if(isAMPSupported(appName, response.supported_apps)){
+            amp_supported_apps.push(
+              [
+                'a', {
+                  class: 'detected__app',
+                  target: '_blank',
+                  href: `${response.apps[appName].website}`,
                 }, [
-                  'a', {
-                    class: 'detected__category-link',
-                    target: '_blank',
-                    href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
+                  'img', {
+                    class: 'detected__app-icon',
+                    src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
                   },
-                  browser.i18n.getMessage(`categoryName${cat}`),
-                ],
-              ], [
-                'div', {
-                  class: 'detected__apps',
-                },
-                amp_supported_apps,
-              ],
-            ],
-          );
-      }
-      if(amp_work_around_apps.length != 0){
-        amp_work_around_template.push(
-            [
-              'div', {
-                class: 'detected__category',
-              }, [
-                'div', {
-                  class: 'detected__category-name',
-                }, [
-                  'a', {
-                    class: 'detected__category-link',
-                    target: '_blank',
-                    href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
-                  },
-                  browser.i18n.getMessage(`categoryName${cat}`),
                 ], [
                   'span', {
-                    class: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
-                    data_tooltip_left: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["content"]:''}`,
-                    data_tooltip_reference: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["reference"]:''}`
+                    class: 'detected__app-name',
                   },
-                  "    (?)"
-                ]
-              ], [
-                'div', {
-                  class: 'detected__apps',
-                },
-                amp_work_around_apps,
+                  appName,
+                ], version ? [
+                  'span', {
+                    class: 'detected__app-version',
+                  },
+                  version,
+                ] : null, confidence < 100 ? [
+                  'span', {
+                    class: 'detected__app-confidence',
+                  },
+                  `${confidence}% sure`,
+                ] : null,
               ],
-            ],
-          );
-      }
-      if(amp_not_supported_apps.length != 0){
-        amp_not_supported_template.push(
-            [
-              'div', {
-                class: 'detected__category',
-              }, [
-                'div', {
-                  class: 'detected__category-name',
+            );
+          } else if(isAMPIncompatible(appName, response.incompatible_apps)){
+            amp_not_supported_apps.push(
+              [
+                'a', {
+                  class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                  data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  target: '_blank',
+                  href: `${response.apps[appName].website}`,
                 }, [
-                  'a', {
-                    class: 'detected__category-link',
-                    target: '_blank',
-                    href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
+                  'img', {
+                    class: 'detected__app-icon',
+                    src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
                   },
-                  browser.i18n.getMessage(`categoryName${cat}`),
                 ], [
-                  [
+                  'span', {
+                    class: 'detected__app-name',
+                  },
+                  appName,
+                ], version ? [
+                  'span', {
+                    class: 'detected__app-version',
+                  },
+                  version,
+                ] : null, confidence < 100 ? [
+                  'span', {
+                    class: 'detected__app-confidence',
+                  },
+                  `${confidence}% sure`,
+                ] : null,
+              ],
+            );
+          } else {
+            amp_work_around_apps.push(
+              [
+                'a', {
+                  class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                  data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  target: '_blank',
+                  href: `${response.apps[appName].website}`,
+                }, [
+                  'img', {
+                    class: 'detected__app-icon',
+                    src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
+                  },
+                ], [
+                  'span', {
+                    class: 'detected__app-name',
+                  },
+                  appName,
+                ], version ? [
+                  'span', {
+                    class: 'detected__app-version',
+                  },
+                  version,
+                ] : null, confidence < 100 ? [
+                  'span', {
+                    class: 'detected__app-confidence',
+                  },
+                  `${confidence}% sure`,
+                ] : null,
+              ],
+            );
+          }
+        }
+        if(amp_supported_apps.length != 0){
+          amp_supported_template.push(
+              [
+                'div', {
+                  class: 'detected__category',
+                }, [
+                  'div', {
+                    class: 'detected__category-name',
+                  }, [
+                    'a', {
+                      class: 'detected__category-link',
+                      target: '_blank',
+                      href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
+                    },
+                    browser.i18n.getMessage(`categoryName${cat}`),
+                  ],
+                ], [
+                  'div', {
+                    class: 'detected__apps',
+                  },
+                  amp_supported_apps,
+                ],
+              ],
+            );
+        }
+        if(amp_work_around_apps.length != 0){
+          amp_work_around_template.push(
+              [
+                'div', {
+                  class: 'detected__category',
+                }, [
+                  'div', {
+                    class: 'detected__category-name',
+                  }, [
+                    'a', {
+                      class: 'detected__category-link',
+                      target: '_blank',
+                      href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
+                    },
+                    browser.i18n.getMessage(`categoryName${cat}`),
+                  ], [
                     'span', {
-                      class: `${categoryHasTooltip(cat, response.incom_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
-                      data_tooltip_left: `${categoryHasTooltip(cat, response.incom_cat_tooltips) ? response.incom_cat_tooltips[cat]:''}`,
+                      class: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
+                      data_tooltip_left: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["content"]:''}`,
+                      data_tooltip_reference: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["reference"]:''}`
                     },
                     "    (?)"
                   ]
+                ], [
+                  'div', {
+                    class: 'detected__apps',
+                  },
+                  amp_work_around_apps,
                 ],
-              ], [
-                'div', {
-                  class: 'detected__apps',
-                },
-                amp_not_supported_apps,
               ],
-            ],
-          );
+            );
+        }
+        if(amp_not_supported_apps.length != 0){
+          amp_not_supported_template.push(
+              [
+                'div', {
+                  class: 'detected__category',
+                }, [
+                  'div', {
+                    class: 'detected__category-name',
+                  }, [
+                    'a', {
+                      class: 'detected__category-link',
+                      target: '_blank',
+                      href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
+                    },
+                    browser.i18n.getMessage(`categoryName${cat}`),
+                  ], [
+                    [
+                      'span', {
+                        class: `${categoryHasTooltip(cat, response.incom_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
+                        data_tooltip_left: `${categoryHasTooltip(cat, response.incom_cat_tooltips) ? response.incom_cat_tooltips[cat]:''}`,
+                      },
+                      "    (?)"
+                    ]
+                  ],
+                ], [
+                  'div', {
+                    class: 'detected__apps',
+                  },
+                  amp_not_supported_apps,
+                ],
+              ],
+            );
+        }
       }
+      
+      //Change template when we have detected apps that are AMP relevant
+      template = [
+            [
+              'div', {
+                class: 'amp_supported card',
+              },
+              amp_supported_template,
+            ],
+            [
+              'div', {
+                class: 'amp_work_around card',
+              },
+              amp_work_around_template,
+            ],
+            [
+              'div', {
+                class: 'amp_not_supported card',
+              },
+              amp_not_supported_template,
+            ]
+          ];
     }
-    
-    
-
-    template = [
-          [
-            'div', {
-              class: 'amp_supported card',
-            },
-            amp_supported_template,
-          ],
-          [
-            'div', {
-              class: 'amp_work_around card',
-            },
-            amp_work_around_template,
-          ],
-          [
-            'div', {
-              class: 'amp_not_supported card',
-            },
-            amp_not_supported_template,
-          ]
-        ];
-  } else {
-    template = [
-      'div', {
-        class: 'empty',
-      },
-      [
-        'span', {
-          class: 'empty__text',
-        },
-        browser.i18n.getMessage('noAppsDetected'),
-      ],
-    ];
   }
-
   return template;
 }
 
@@ -380,12 +384,12 @@ function technologyHasTooltip(technology, technologyTooltipArray) {
   return technologyTooltipArray.hasOwnProperty(technology);
 }
 
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-58015925-3']);
-_gaq.push(['_trackPageview']);
+// var _gaq = _gaq || [];
+// _gaq.push(['_setAccount', 'UA-58015925-3']);
+// _gaq.push(['_trackPageview']);
 
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = 'https://ssl.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
+// (function() {
+//   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+//   ga.src = 'https://ssl.google-analytics.com/ga.js';
+//   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+// })();

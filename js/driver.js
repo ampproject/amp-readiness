@@ -78,7 +78,7 @@ function post(url, body) {
 }
 
 // Prod config
-// fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/apps.json')
+// fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json')
 //   .then(response => response.json())
 //   .then((json) => {
 //     wappalyzer.apps = json.apps;
@@ -89,8 +89,8 @@ function post(url, body) {
 //       .then((json_ext) => {
 // Prod config
 
-// Testing config
-fetch('../apps.json')
+// We always fetch directly from Wappalyzer's raw apps.json content to get the latest stuff
+fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json')
   .then(response => response.json())
   .then((json) => {
     wappalyzer.apps = json.apps;
@@ -389,13 +389,3 @@ wappalyzer.driver.ping = (hostnameCache = {}, adCache = []) => {
       }
     });
 };
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-58015925-3']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = 'https://ssl.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();

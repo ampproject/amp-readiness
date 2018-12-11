@@ -155,7 +155,7 @@ function appsToDomTemplate(response) {
                 }, [
                   'img', {
                     class: 'detected__app-icon',
-                    src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
+                    src: `${locateIcon(appName, response.apps)}` ,
                   },
                 ], [
                   'span', {
@@ -186,7 +186,7 @@ function appsToDomTemplate(response) {
                 }, [
                   'img', {
                     class: 'detected__app-icon',
-                    src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
+                    src: `${locateIcon(appName, response.apps)}` ,
                   },
                 ], [
                   'span', {
@@ -217,7 +217,7 @@ function appsToDomTemplate(response) {
                 }, [
                   'img', {
                     class: 'detected__app-icon',
-                    src: `../images/icons/${response.apps[appName].icon || 'default.svg'}`,
+                    src: `${locateIcon(appName, response.apps)}` ,
                   },
                 ], [
                   'span', {
@@ -382,6 +382,14 @@ function categoryHasTooltip(category, categoryTooltipArray) {
 function technologyHasTooltip(technology, technologyTooltipArray) {
   console.log("check for tooltip for " + technology);
   return technologyTooltipArray.hasOwnProperty(technology);
+}
+
+function locateIcon(appName, app_array) {
+  if ("extended" in app_array[appName] || app_array[appName].icon.slice(-4) === ".svg"){
+    return "/images/icons/" + app_array[appName].icon;
+  } else {
+    return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon;
+  }
 }
 
 // var _gaq = _gaq || [];

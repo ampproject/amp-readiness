@@ -6,7 +6,8 @@
             ],
             "html": "__bkframe",
             "icon": "BlueKai.png",
-            "website": "https://www.oracle.com/marketingcloud/products/data-management-platform/index.html"
+            "website": "https://www.oracle.com/marketingcloud/products/data-management-platform/index.html",
+            "extended": true
         },
         "Bing Ads": {
             "cats": [
@@ -14,7 +15,8 @@
             ],
             "html": "<script[\\s\\S]*bat\\.bing\\.com/bat.js[\\s\\S]*script>",
             "icon": "Bing Ads.png",
-            "website": "https://bingads.microsoft.com/"
+            "website": "https://bingads.microsoft.com/",
+            "extended": true
         },
         "Branch": {
             "cats": [
@@ -22,7 +24,8 @@
             ],
             "html": "cdn\\.branch\\.io/",
             "icon": "Branch.png",
-            "website": "https://branch.io/"
+            "website": "https://branch.io/",
+            "extended": true
         },
         "Google Ads": {
             "cats": [
@@ -30,7 +33,8 @@
             ],
             "html": "<script[\\s\\S]*googleads\\.g\\.doubleclick\\.net/pagead/viewthroughconversion[\\s\\S]*script>",
             "icon": "Google Ads.png",
-            "website": "https://ads.google.com/home/"
+            "website": "https://ads.google.com/home/",
+            "extended": true
         },
         "Koego": {
             "cats": [
@@ -38,7 +42,8 @@
             ],
             "html": "tracking\\.koego\\.com/end/ego\\.js",
             "icon": "Koego.png",
-            "website": "http://www.koego.com/"
+            "website": "http://www.koego.com/",
+            "extended": true
         },
         "Krux (Salesforce DMP)": {
             "cats": [
@@ -51,7 +56,8 @@
                 "cdn\\.krxd\\.net/partnerjs"
             ],
             "icon": "Krux.png",
-            "website": "https://www.salesforce.com/products/marketing-cloud/data-management/"
+            "website": "https://www.salesforce.com/products/marketing-cloud/data-management/",
+            "extended": true
         },
         "Prospector": {
             "cats": [
@@ -62,7 +68,8 @@
                 "<[^>]+data-name=['\"]prospectscript"
             ],
             "icon": "Prospector.png",
-            "website": "https://www.prospectorpro.co/"
+            "website": "https://www.prospectorpro.co/",
+            "extended": true
         },
         "Sklik": {
             "cats": [
@@ -70,7 +77,8 @@
             ],
             "html": "c\\.imedia\\.cz/js/script.js",
             "icon": "Sklik.png",
-            "website": "https://www.sklik.cz/"
+            "website": "https://www.sklik.cz/",
+            "extended": true
         },
         "Sharethrough": {
             "cats": [
@@ -78,7 +86,8 @@
             ],
             "html": "\\.sharethrough\\.com",
             "icon": "Sharethrough.png",
-            "website": "https://www.sharethrough.com/"
+            "website": "https://www.sharethrough.com/",
+            "extended": true
         },
         "Skimlinks": {
             "cats": [
@@ -86,7 +95,8 @@
             ],
             "html": "skimlinks.*\\.js",
             "icon": "Skimlinks.png",
-            "website": "https://skimlinks.com/"
+            "website": "https://skimlinks.com/",
+            "extended": true
         },
         "Yieldmo": {
             "cats": [
@@ -94,7 +104,8 @@
             ],
             "html": "static\\.yieldmo\\.com",
             "icon": "Yieldmo.png",
-            "website": "https://www.yieldmo.com/"
+            "website": "https://www.yieldmo.com/",
+            "extended": true
         },
         "Taboola": {
             "cats": [
@@ -102,7 +113,8 @@
             ],
             "html": "cdn.taboola.com",
             "icon": "Taboola.png",
-            "website": "https://www.taboola.com/"
+            "website": "https://www.taboola.com/",
+            "extended": true
         },
         "Bizible": {
             "cats": [
@@ -110,7 +122,8 @@
             ],
             "html": "https://cdn.bizible.com/BizibleAcct.js",
             "icon": "Marketo.png",
-            "website": "https://www.bizible.com/"
+            "website": "https://www.bizible.com/",
+            "extended": true
         },
         "CallRail": {
             "cats": [
@@ -118,7 +131,8 @@
             ],
             "html": "cdn.callrail.com",
             "icon": "CallRail.png",
-            "website": "https://www.callrail.com/"
+            "website": "https://www.callrail.com/",
+            "extended": true
         }
     },
     "supported": [

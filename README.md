@@ -12,4 +12,4 @@ Install the extension from the [Chrome Store](https://chrome.google.com/webstore
 
 ### Credits
 
-The extension uses detection rules from [Wappalyzer](https://github.com/AliasIO/Wappalyzer) to identify technologies on the page
+Architecture + Detection Logic - [Wappalyzer](https://github.com/AliasIO/Wappalyzer).

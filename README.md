@@ -1,6 +1,6 @@
 ## AMP Readiness
 
-AMP Readiness Chrome Extension allows you to quickly see what technologies used on the page are AMP compatible.
+AMP Readiness is a chrome extension allows you to quickly see what technologies used on the page are AMP compatible.
 
 ### License
 
@@ -12,4 +12,4 @@ Install the extension from the [Chrome Store](https://chrome.google.com/webstore
 
 ### Credits
 
-The Chrome Extension uses detection rules from [Wappalyzer](https://github.com/AliasIO/Wappalyzer) to identify technologies on the page
+The extension uses detection rules from [Wappalyzer](https://github.com/AliasIO/Wappalyzer) to identify technologies on the page

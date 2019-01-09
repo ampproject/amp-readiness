@@ -14,7 +14,7 @@
 	},
 	"page_action": {
 		"default_icon": "images/amp-readiness-new.png",
-		"default_title": "AMP Readiness Tool",
+		"default_title": "AMP Readiness Tool (TEST)",
 		"default_popup": "html/popup.html"
 	},
 	"background": {

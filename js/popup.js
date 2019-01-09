@@ -479,8 +479,11 @@ function technologyHasTooltip(technology, technologyTooltipArray) {
 }
 
 function locateIcon(appName, app_array) {
-  if ("extended" in app_array[appName] || app_array[appName].icon.slice(-4) === ".svg"){
+  // if ("extended" in app_array[appName] || ){
+  if ("extended" in app_array[appName]){
     return "/images/icons/" + app_array[appName].icon;
+  } else if (app_array[appName].icon.slice(-4) === ".svg"){ 
+    return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon + "?sanitize=true";
   } else {
     return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon;
   }

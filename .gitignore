@@ -1,4 +1,4 @@
 node_modules/
-.DS_Store
 .eslintrc.js
 yarn.lock
+.DS_Store

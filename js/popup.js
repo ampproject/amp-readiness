@@ -1,5 +1,8 @@
 /** global: chrome */
 /** global: browser */
+let activeTab;
+let pageHtml;
+var convertableApps = {}, convertableUrls = [];
 
 const func = (tabs) => {
   (chrome || browser).runtime.sendMessage({
@@ -7,6 +10,11 @@ const func = (tabs) => {
     tab: tabs[0],
     source: 'popup.js',
   }, (response) => {
+    activeTab = tabs[0].id;
+    pageHtml = response.html;
+    // Store external for use on click
+    convertableApps = response.convertable_apps;
+    convertableUrls = response.tracked_urls;
     replaceDomWhenReady(appsToDomTemplate(response));
   });
 };
@@ -15,13 +23,26 @@ browser.tabs.query({ active: true, currentWindow: true })
   .then(func)
   .catch(console.error);
 
-$( function() {
+$(function() {
+   /**
+   * Handles click event on </> buttons for code conversion
+   */
+  $('.detected__app-convert').click(function(e) {
+	  e.preventDefault();
+	  e.stopPropagation();
+	  convertApp($(this).data('type'));
+	  console.log("Converting code for: " + $(this).data('type'))
+  });
+
+  /**
+   * Create tooltips for categories and technologies
+   */
   $('.container').tooltip({
     tooltipClass: "custom-ui-tooltip",
     position: { my: "right center", collision: "fit"},
     content: function() {
       htmlResult = ""
-      if ($(this).hasClass("detected__app")){
+      if ($(this).hasClass("detected__app")) {
         title = $(this).find(".detected__app-name").text()
         description = $(this).attr('data_tooltip_left')
         version = $(this).find(".detected__app-version").text()
@@ -30,12 +51,12 @@ $( function() {
                     "<span class='tooltip_title'>" + title + " " + version + "</span>"+
                     "<p class='tooltip_description'>"+description+"</p>"
       }
-      else if ($(this).hasClass("question-mark")){
+      else if ($(this).hasClass("question-mark")) {
         title = $(this).siblings(".detected__category-link").text()
         description = $(this).attr('data_tooltip_left')
         reference = $(this).attr('data_tooltip_reference')
         htmlResult = "<span class='tooltip_title'>"+title+"</span>"+
-                    "<p class='tooltip_description'>"+description+"</p>"
+                     "<p class='tooltip_description'>"+description+"</p>"
         if (reference != "null"){
           htmlResult += "<div class='tooltip_footer'><a target='_blank' href='"+reference+"'><button class='tooltip_button'>Reference</button></a></div>"  
         }    
@@ -44,10 +65,8 @@ $( function() {
     },
     items: '.tooltip',
     show: null, // show immediately
-    open: function(event, ui)
-    {
-        if (typeof(event.originalEvent) === 'undefined')
-        {
+    open: function(event, ui) {
+        if (typeof(event.originalEvent) === 'undefined'){
             return false;
         }
         
@@ -56,25 +75,86 @@ $( function() {
         // close any lingering tooltips
         $('div.ui-tooltip').not('#' + $id).remove();
         
-        // ajax function to pull in data and add it to the tooltip goes here
     },
-    close: function(event, ui)
-    {
-        ui.tooltip.hover(function()
-        {
+    close: function(event, ui) {
+        ui.tooltip.hover(function() {
             $(this).stop(true).fadeTo(400, 1); 
-        },
-        function()
-        {
-            $(this).fadeOut(400, function()
-            {
+        }, function() {
+            $(this).fadeOut(400, function() {
                 $(this).remove();
             });
         });
     }
-  });
-} );
+  });  
+});
 
+function convertApp(app) {
+  
+	var template, content, matches = [];
+	console.log(typeof convertableApps[app].regex);
+	// Loop through regexes
+	var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
+	// Check for matches on the first regex
+	for (var i = 0; i < expressions.length; i++) {
+		// Check for data on each regex
+		var regex = new RegExp(expressions[i], ["i"]);
+		// Find pattern in every URL
+		for (url in convertableUrls) {
+			 result = regex.exec(url);
+			 // Set the template only once
+			 if (result !== null) {
+				 if (!template) {
+					 content = convertableApps[app].content;
+					 template = convertableApps[app].template;
+				 }
+				 // Add our result to the matches list
+         matches.push(result);
+         console.log("found a match in a URL");
+				 break;	// stop once we find a match
+		 	 }
+		}
+		// Find pattern in the HTML (on 0 matches)
+		if (matches.length < 1) {
+      // Check for matches on the first regex
+      console.log(pageHtml)
+			result = regex.exec(pageHtml);
+			console.log(result);
+			// Set the template only once
+			if (result !== null) {
+				if (!template) {
+					content = convertableApps[app].content;
+					template = convertableApps[app].template;
+				}
+				// Add our result to the matches list
+        matches.push(result);
+        console.log("found a match in the HTML");
+				break;	// stop once we find a match
+		 	}
+		}		
+	}
+	console.log(matches);
+	if (template && matches) {
+		/*
+		console.log("Found a match in: " + url);
+		console.log(html);
+		console.log(matches);
+		console.log(renderAppConversionHtml(html, matches));
+		*/
+		var html = content ? '<p class="converted-content">' + content + '</p>' : '';
+			html += '<pre>' + renderAppConversionHtml(template, matches) + '</pre>';
+			// DEBUG
+			// html += '<p class="converted-match">Match found in: ' + url + '</p>';
+		$('.converter').html(html);
+	} else {
+		alert('No matches found');
+	}
+}
+
+function renderAppConversionHtml(html, matches) {
+	//
+	return html.replace(new RegExp('\\{0}\\}', 'g'), matches[0])
+		.replace(new RegExp('<', 'g'), '&lt;');
+}
 
 function replaceDomWhenReady(dom) {
   if (/complete|interactive|loaded/.test(document.readyState)) {
@@ -119,9 +199,9 @@ function appsToDomTemplate(response) {
   //Control what categories of apps we will use
   // let approved_categories = [1,5,6,10,11,32,36,41,42,52];
   let approved_categories = [1,5,6,10,11,12,16,18,32,36,41,42,52,59]; //Original set
+  
 
   if (response.tabCache && Object.keys(response.tabCache.detected).length > 0) {
-    console.log(response.tabCache)
     const categories = {};
 
     // Group apps by category
@@ -146,9 +226,11 @@ function appsToDomTemplate(response) {
           const confidence = response.tabCache.detected[appName].confidenceTotal;
           const version = response.tabCache.detected[appName].version;
           if(isAMPSupported(appName, response.supported_apps)){
+            convertable = isAMPConvertable(appName, response.convertable_apps);
+        // console.log(convertable);			
             amp_supported_apps.push(
               [
-                'a', {
+                    'a', {
                   class: 'detected__app',
                   target: '_blank',
                   href: `${response.apps[appName].website}`,
@@ -172,8 +254,15 @@ function appsToDomTemplate(response) {
                     class: 'detected__app-confidence',
                   },
                   `${confidence}% sure`,
-                ] : null,
-              ],
+                ] : null, convertable ? [
+                'span', {
+                    class: 'detected__app-convert',
+            title: 'Convert to AMP HTML',
+              "data-type": appName
+                  }, 
+          '</>'
+                ] : null
+        ]
             );
           } else if(isAMPIncompatible(appName, response.incompatible_apps)){
             amp_not_supported_apps.push(
@@ -365,12 +454,17 @@ function appsToDomTemplate(response) {
  * @return {boolean}
  */
 function isAMPSupported(appName, supported_array) {
-  console.log("testing " + appName);
+  console.log("testing AMP support for " + appName);
   return supported_array.includes(appName);
 }
 
+function isAMPConvertable(appName, convertable_array) {
+    console.log("testing AMP convertability for " + appName);
+    return convertable_array.hasOwnProperty(appName);
+}
+
 function isAMPIncompatible(appName, incompatible_array) {
-  console.log("testing " + appName);
+  console.log("testing AMP incompatibility for " + appName);
   return incompatible_array.includes(appName);
 }
 
@@ -392,12 +486,12 @@ function locateIcon(appName, app_array) {
   }
 }
 
-// var _gaq = _gaq || [];
-// _gaq.push(['_setAccount', 'UA-58015925-3']);
-// _gaq.push(['_trackPageview']);
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-58015925-3']);
+_gaq.push(['_trackPageview']);
 
-// (function() {
-//   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-//   ga.src = 'https://ssl.google-analytics.com/ga.js';
-//   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-// })();
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = 'https://ssl.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();

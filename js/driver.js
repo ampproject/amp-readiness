@@ -99,7 +99,6 @@ fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json
     fetch('../extended_apps.json')
       .then(response_ext => response_ext.json())
       .then((json_ext) => {
-// Testing config
 
         wappalyzer.apps = Object.assign({}, wappalyzer.apps, json_ext.apps);
 
@@ -114,6 +113,8 @@ fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json
         wappalyzer.conv_cat_tooltips = json_ext.conversionCategoryTooltips;
         wappalyzer.incom_cat_tooltips = json_ext.incompatibleCategoryTooltips;
         wappalyzer.tech_tooltips = json_ext.technologyTooltips;        
+        wappalyzer.convertable_apps = json_ext.conversionPatterns;  
+		    wappalyzer.tracked_urls = {};      
     })
     .catch(error => wappalyzer.log(`GET extended_apps.json: ${error}`, 'driver', 'error'));
   })
@@ -151,6 +152,7 @@ getOption('hostnameCache', {})
 // Run content script on all tabs
 browser.tabs.query({ url: ['http://*/*', 'https://*/*'] })
   .then((tabs) => {
+    wappalyzer.log('driver', 'new tab opened');
     tabs.forEach((tab) => {
       browser.tabs.executeScript(tab.id, {
         file: '../js/content.js',
@@ -228,9 +230,12 @@ browser.webRequest.onCompleted.addListener((request) => {
           incompatible_apps: wappalyzer.incompatible_apps,
           conv_cat_tooltips: wappalyzer.conv_cat_tooltips,
           incom_cat_tooltips: wappalyzer.incom_cat_tooltips,
-          tech_tooltips: wappalyzer.tech_tooltips
+          tech_tooltips: wappalyzer.tech_tooltips,
+          convertable_apps: wappalyzer.convertable_apps,
+          tracked_urls: getUrlCache(message.tab.id),
+          html: wappalyzer.pageHtml,
         };
-
+        
         break;
 
       case 'set_option':
@@ -253,6 +258,40 @@ browser.webRequest.onCompleted.addListener((request) => {
 });
 
 wappalyzer.driver.document = document;
+
+/**
+ * Url Caching (populated via via network.js) helpers
+ */
+const networkFilters = {
+  urls: ["*://*/*"]
+};
+const urlCache = {};
+function addUrlToRequestCache(tab, url) {
+  wappalyzer.log("Tab: " + tab);
+
+	if (typeof urlCache[tab] === "undefined") {
+    wappalyzer.log("New Tab");
+		urlCache[tab] = [];
+  }
+  wappalyzer.log("Adding URL: " + url);
+  urlCache[tab].push(url);
+
+}
+function getUrlCache(tab) {
+	return typeof urlCache[tab] !== "undefined" 
+		? urlCache[tab] 
+		: {};
+}
+function clearRequestCache(tab) {
+	urlCache[tab] = null;
+}
+
+chrome.webRequest.onBeforeRequest.addListener((details) => {
+
+  const { tabId, requestId } = details;
+  addUrlToRequestCache(tabId, details.url);
+  return;
+}, networkFilters);
 
 /**
  * Log messages to console

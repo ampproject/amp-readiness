@@ -49,10 +49,9 @@
           }
         }
       }
-
       postMessage({ id: 'js', js }, '*');
     };
-
+    postMessage({ id: 'new_relic', relic: window.NREUM.info.applicationID}, '*');
     addEventListener('message', onMessage);
   } catch (e) {
     // Fail quietly

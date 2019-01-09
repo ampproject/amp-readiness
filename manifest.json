@@ -1,25 +1,25 @@
 {
-	"name": "AMP Readiness Tool",
-	"short_name": "AMP Readiness Tool",
-	"author": "Jeffrey Jose and Phillip Kriegel",
+	"name": "AMP Readiness Tool (TEST)",
+	"short_name": "AMP Readiness Tool (TEST)",
+	"author": "Jeffrey Jose, Phillip Kriegel, Frank Broersen",
 	"homepage_url": "https://github.com/ampproject/ampbench/tree/master/readiness-tool",
 	"description": "Identify web technologies that are relevant to AMP",
-	"version": "3.1.3",
+	"version": "3.1.4",
 	"default_locale": "en",
 	"manifest_version": 2,
 	"icons": {
-		"16": "images/amp-readiness.png",
-		"48": "images/amp-readiness.png",
-		"128": "images/amp-readiness.png"
+		"16": "images/amp-readiness-new.png",
+		"48": "images/amp-readiness-new.png",
+		"128": "images/amp-readiness-new.png"
 	},
 	"page_action": {
-		"default_icon": "images/amp-readiness.png",
+		"default_icon": "images/amp-readiness-new.png",
 		"default_title": "AMP Readiness Tool",
 		"default_popup": "html/popup.html"
 	},
 	"background": {
-		"page": "html/background.html"
-
+		"page": "html/background.html",
+		"persistent": true
 	},
 	"content_scripts": [
 		{
@@ -32,21 +32,6 @@
 				"js/content.js"
 			],
 			"run_at": "document_idle"
-		},
-		{
-			"matches": [
-        "http://*/*",
-				"https://*/*"
-			],
-			"exclude_matches": [
-				"https://*.modirum.com/*",
-				"https://www.alphaecommerce.gr/*"
-			],
-			"js": [
-				"js/lib/iframe.js"
-			],
-			"run_at": "document_start",
-			"all_frames": true
 		}
 	],
 	"web_accessible_resources": [

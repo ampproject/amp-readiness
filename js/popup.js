@@ -479,13 +479,20 @@ function technologyHasTooltip(technology, technologyTooltipArray) {
 }
 
 function locateIcon(appName, app_array) {
-  // if ("extended" in app_array[appName] || ){
+  //Check to see if we are using extended definitions
   if ("extended" in app_array[appName]){
     return "/images/icons/" + app_array[appName].icon;
-  } else if (app_array[appName].icon.slice(-4) === ".svg"){ 
-    return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon + "?sanitize=true";
+  //Check to see if Wappalyzer has defined an icon
+  } else if ("icon" in app_array[appName]){
+    //Check for svg icons
+    if (app_array[appName].icon.slice(-4) === ".svg"){ 
+      return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon + "?sanitize=true";
+    } else {
+      return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon;
+    }
   } else {
-    return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/" + app_array[appName].icon;
+    //returns the default icon
+    return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/default.svg?sanitize=true"
   }
 }
 

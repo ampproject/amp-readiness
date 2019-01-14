@@ -77,46 +77,46 @@ function post(url, body) {
     .catch(error => wappalyzer.log(`POST ${url}: ${error}`, 'driver', 'error'));
 }
 
-// Prod config
-// fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json')
-//   .then(response => response.json())
-//   .then((json) => {
-//     wappalyzer.apps = json.apps;
-//     wappalyzer.categories = json.categories;
-    
-//     fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/extended_apps.json')
-//       .then(response_ext => response_ext.json())
-//       .then((json_ext) => {
-// Prod config
+function readApps(json) {
+  wappalyzer.apps = json.apps;
+  wappalyzer.categories = json.categories;
+  
+  fetch('../extended_apps.json')
+    .then(response_ext => response_ext.json())
+    .then((json_ext) => {
 
-// We always fetch directly from Wappalyzer's raw apps.json content to get the latest stuff
+      wappalyzer.apps = Object.assign({}, wappalyzer.apps, json_ext.apps);
+
+      wappalyzer.parseJsPatterns();
+
+      categoryOrder = Object.keys(wappalyzer.categories)
+        .map(categoryId => parseInt(categoryId, 10))
+        .sort((a, b) => wappalyzer.categories[a].priority - wappalyzer.categories[b].priority);
+
+      wappalyzer.supported_apps = json_ext.supported;
+      wappalyzer.incompatible_apps = json_ext.incompatible;
+      wappalyzer.conv_cat_tooltips = json_ext.conversionCategoryTooltips;
+      wappalyzer.incom_cat_tooltips = json_ext.incompatibleCategoryTooltips;
+      wappalyzer.tech_tooltips = json_ext.technologyTooltips;        
+      wappalyzer.convertable_apps = json_ext.conversionPatterns;  
+      wappalyzer.tracked_urls = {};      
+  })
+  .catch(error => wappalyzer.log(`GET extended_apps.json: ${error}`, 'driver', 'error'));
+}
+
+// We always fetch directly from Wappalyzer's raw apps.json content to get the latest content
 fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json')
-  .then(response => response.json())
-  .then((json) => {
-    wappalyzer.apps = json.apps;
-    wappalyzer.categories = json.categories;
-    
-    fetch('../extended_apps.json')
-      .then(response_ext => response_ext.json())
-      .then((json_ext) => {
-
-        wappalyzer.apps = Object.assign({}, wappalyzer.apps, json_ext.apps);
-
-        wappalyzer.parseJsPatterns();
-
-        categoryOrder = Object.keys(wappalyzer.categories)
-          .map(categoryId => parseInt(categoryId, 10))
-          .sort((a, b) => wappalyzer.categories[a].priority - wappalyzer.categories[b].priority);
-
-        wappalyzer.supported_apps = json_ext.supported;
-        wappalyzer.incompatible_apps = json_ext.incompatible;
-        wappalyzer.conv_cat_tooltips = json_ext.conversionCategoryTooltips;
-        wappalyzer.incom_cat_tooltips = json_ext.incompatibleCategoryTooltips;
-        wappalyzer.tech_tooltips = json_ext.technologyTooltips;        
-        wappalyzer.convertable_apps = json_ext.conversionPatterns;  
-		    wappalyzer.tracked_urls = {};      
-    })
-    .catch(error => wappalyzer.log(`GET extended_apps.json: ${error}`, 'driver', 'error'));
+  .then((response) => {
+    //If we don't get a 200, we access the local version
+    if(!response.ok) {
+      console.log("Failed to retrive apps.json, falling back to local version");
+      fetch('../apps.json')
+      .then(response => response.json())
+      .then(json => readApps(json))
+    } else {
+      response.json()
+      .then(json => readApps(json))
+    }
   })
   .catch(error => wappalyzer.log(`GET apps.json: ${error}`, 'driver', 'error'));
 

@@ -467,8 +467,8 @@
 		},
 		"Google Tag Manager": {
 			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
-			"regex": ["(GTM-)([0-9a-z]+)"],
-			"template": "<!-- AMP Analytics {0:1} -->\n<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n<!-- Google Tag Manager Sample -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id=[GTM_CONTAINER_ID]&gtm.url=SOURCE_URL\" data-credentials=\"include\"></amp-analytics>"
+			"regex": ["GTM-[0-9a-z]+"],
+			"template": "<!-- AMP Analytics {0:1} -->\n<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n<!-- Google Tag Manager Sample -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id={0}\" data-credentials=\"include\"></amp-analytics>"
 		},
 		"New Relic": {
 			"content": "",

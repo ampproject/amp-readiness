@@ -519,6 +519,7 @@ class Wappalyzer {
 
     return asyncForEach(patterns, (pattern) => {
       if (pattern.regex.test(url.canonical)) {
+        this.log(`Detected ${app.name} using URL`, 'core');
         addDetected(app, pattern, 'url', url.canonical);
       }
     });
@@ -536,6 +537,7 @@ class Wappalyzer {
 
     return asyncForEach(patterns, (pattern) => {
       if (pattern.regex.test(html)) {
+        this.log(`Detected ${app.name} using html`, 'core');
         addDetected(app, pattern, 'html', html);
       }
     });
@@ -554,6 +556,7 @@ class Wappalyzer {
     return asyncForEach(patterns, (pattern) => {
       scripts.forEach((uri) => {
         if (pattern.regex.test(uri)) {
+          this.log(`Detected ${app.name} using script`, 'core');
           addDetected(app, pattern, 'script', uri);
         }
       });
@@ -591,6 +594,7 @@ class Wappalyzer {
 
           promises.push(asyncForEach(patterns[meta], (pattern) => {
             if (content && content.length === 4 && pattern.regex.test(content[2])) {
+              this.log(`Detected ${app.name} using meta`, 'core');
               addDetected(app, pattern, 'meta', content[2], meta);
             }
           }));
@@ -616,6 +620,7 @@ class Wappalyzer {
           if (headerName in headers) {
             headers[headerName].forEach((headerValue) => {
               if (pattern.regex.test(headerValue)) {
+                this.log(`Detected ${app.name} using headers`, 'core');
                 addDetected(app, pattern, 'headers', headerValue, headerName);
               }
             });
@@ -642,6 +647,7 @@ class Wappalyzer {
           const cookie = cookies.find(_cookie => _cookie.name.toLowerCase() === cookieName);
 
           if (cookie && pattern.regex.test(cookie.value)) {
+            this.log(`Detected ${app.name} using cookies`, 'core');
             addDetected(app, pattern, 'cookies', cookie.value, cookieName);
           }
         }));
@@ -664,6 +670,7 @@ class Wappalyzer {
           const value = results[string][index];
 
           if (pattern && pattern.regex.test(value)) {
+            this.log(`Detected ${app.name} using js`, 'core');
             addDetected(app, pattern, 'js', value);
           }
         }));

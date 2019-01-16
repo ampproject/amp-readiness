@@ -4,7 +4,7 @@
 	"author": "Jeffrey Jose, Phillip Kriegel, Frank Broersen",
 	"homepage_url": "https://github.com/ampproject/ampbench/tree/master/readiness-tool",
 	"description": "Identify web technologies that are relevant to AMP",
-	"version": "3.1.4",
+	"version": "3.1.5",
 	"default_locale": "en",
 	"manifest_version": 2,
 	"icons": {
@@ -31,7 +31,7 @@
 				"node_modules/webextension-polyfill/dist/browser-polyfill.js",
 				"js/content.js"
 			],
-			"run_at": "document_idle"
+			"run_at": "document_end"
 		}
 	],
 	"web_accessible_resources": [

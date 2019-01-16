@@ -317,39 +317,6 @@ wappalyzer.driver.displayApps = (detected, meta, context) => {
   tabCache[tab.id].detected = detected;
 
   let found = false;
-
-  // Find the main application to display
-  [options.pinnedCategory].concat(categoryOrder).forEach((match) => {
-    Object.keys(detected).forEach((appName) => {
-      const app = detected[appName];
-
-      app.props.cats.forEach((category) => {
-        if (category === match && !found) {
-          let icon = app.props.icon || 'default.svg';
-
-          if (!options.dynamicIcon) {
-            icon = 'default.svg';
-          }
-
-          if (/\.svg$/i.test(icon)) {
-            icon = `converted/${icon.replace(/\.svg$/, '.png')}`;
-          }
-
-          try {
-            browser.pageAction.setIcon({
-              tabId: tab.id,
-              path: `../images/icons/${icon}`,
-            });
-          } catch (e) {
-            // Firefox for Android does not support setIcon see https://bugzilla.mozilla.org/show_bug.cgi?id=1331746
-          }
-
-          found = true;
-        }
-      });
-    });
-  });
-
   if (typeof chrome !== 'undefined') {
     // Browser polyfill doesn't seem to work here
     chrome.pageAction.show(tab.id);

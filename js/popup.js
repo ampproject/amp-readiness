@@ -89,59 +89,44 @@ $(function() {
 });
 
 function convertApp(app) {
-  
-	var template, content, matches = [];
-	console.log(typeof convertableApps[app].regex);
+
+	var template, content, match = null;
 	// Loop through regexes
 	var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
 	// Check for matches on the first regex
 	for (var i = 0; i < expressions.length; i++) {
-		// Check for data on each regex
+		// Check for data on each regex (i flag ignores case)
 		var regex = new RegExp(expressions[i], ["i"]);
-		// Find pattern in every URL
+    // Find pattern in every URL
 		for (url in convertableUrls) {
 			 result = regex.exec(url);
 			 // Set the template only once
 			 if (result !== null) {
-				 if (!template) {
-					 content = convertableApps[app].content;
-					 template = convertableApps[app].template;
-				 }
-				 // Add our result to the matches list
-         matches.push(result);
-         console.log("found a match in a URL");
-				 break;	// stop once we find a match
+        console.log("found a match in a URL:" + url);
+        match = result[0]
+        content = convertableApps[app].content;
+        template = convertableApps[app].template;
+				break;	// stop once we find a match
 		 	 }
 		}
-		// Find pattern in the HTML (on 0 matches)
-		if (matches.length < 1) {
+		// Check for the pattern in the HTML if we didn't find it in the URLs
+		if (match == null) {
       // Check for matches on the first regex
-      console.log(pageHtml)
 			result = regex.exec(pageHtml);
-			console.log(result);
-			// Set the template only once
 			if (result !== null) {
-				if (!template) {
-					content = convertableApps[app].content;
-					template = convertableApps[app].template;
-				}
-				// Add our result to the matches list
-        matches.push(result);
-        console.log("found a match in the HTML");
-				break;	// stop once we find a match
+				console.log("found a match in the HTML:" + pageHtml);
+        match = result[0]
+        content = convertableApps[app].content;
+        template = convertableApps[app].template;
 		 	}
 		}		
 	}
-	console.log(matches);
-	if (template && matches) {
-		/*
-		console.log("Found a match in: " + url);
-		console.log(html);
-		console.log(matches);
-		console.log(renderAppConversionHtml(html, matches));
-		*/
+	if (match) {
+		console.log("Found a match: " + match);
+    renderedHTML = renderAppConversionHtml(template, match);
+    console.log(renderedHTML)
 		var html = content ? '<p class="converted-content">' + content + '</p>' : '';
-			html += '<pre>' + renderAppConversionHtml(template, matches) + '</pre>';
+			html += '<pre>' + renderedHTML + '</pre>';
 			// DEBUG
 			// html += '<p class="converted-match">Match found in: ' + url + '</p>';
 		$('.converter').html(html);
@@ -150,10 +135,10 @@ function convertApp(app) {
 	}
 }
 
-function renderAppConversionHtml(html, matches) {
-	//
-	return html.replace(new RegExp('\\{0}\\}', 'g'), matches[0])
-		.replace(new RegExp('<', 'g'), '&lt;');
+function renderAppConversionHtml(html, match) {
+  return html.replace('{0}', match)
+             .replace(new RegExp('<', 'g'), '&lt;')
+             .replace(new RegExp('>', 'g'), '&gt;'); 
 }
 
 function replaceDomWhenReady(dom) {

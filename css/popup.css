@@ -159,6 +159,52 @@
 .detected__app-name {
 }
 
+.converter {
+}
+.converter p.converted-content {
+	font-size: 13px;
+	line-height: 15px;
+}
+.converter p.converted-match {
+	font-size: 13px;
+	line-height: 15px;
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.converter p a {
+	color: #1c79c0;
+	text-decoration: none;
+}
+.converter p a:hover {
+	text-decoration: underline;
+}
+.converter pre {
+	background: #fff;
+	border: 1px solid #ccc;	
+	display: block;
+	font-size: 10px;
+	line-height: 15px;
+	margin: 5px 0 0;
+	padding: 5px 10px;
+}
+
+.detected__app-convert {
+	background: #1c79c0;
+	border-radius: 5px;
+	color: #fff;
+	display: block;
+	float: right;
+	font-size: 11px;
+	line-height: 13px;
+	margin: 6px 0 0;
+	padding: 2px 5px 2px;
+	text-transform: uppercase;
+}
+.detected__app-convert:hover {
+	opacity: 1;
+}
+
 .detected__app-version, .detected__app-confidence {
   background: #eee;
   border-radius: 3px;

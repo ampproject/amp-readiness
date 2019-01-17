@@ -125,12 +125,14 @@ class Wappalyzer {
     this.conv_cat_tooltips = {};
     this.incom_cat_tooltips = {};
     this.tech_tooltips = {};
+    this.convertable_apps = {};
     this.categories = {};
     this.driver = {};
     this.jsPatterns = {};
     this.detected = {};
     this.hostnameCache = {};
     this.adCache = [];
+    this.pageHtml = "";
 
     this.config = {
       websiteURL: 'https://www.wappalyzer.com/',
@@ -172,7 +174,7 @@ class Wappalyzer {
       if (typeof html !== 'string') {
         html = '';
       }
-
+      this.pageHtml = html;
       const matches = data.html.match(/<html[^>]*[: ]lang="([a-z]{2}((-|_)[A-Z]{2})?)"/i);
 
       language = matches && matches.length ? matches[1] : null;
@@ -235,8 +237,7 @@ class Wappalyzer {
           if (Object.keys(apps).length) {
             this.log(`Identified ${Object.keys(apps).join(', ')} (${url.hostname})`, 'core');
           }
-          this.log(this.detected, 'zaddy');
-          this.log("HELLO THERE");
+          
           this.driver.displayApps(this.detected[url.canonical], { language }, context);
 
           return resolve();
@@ -518,6 +519,7 @@ class Wappalyzer {
 
     return asyncForEach(patterns, (pattern) => {
       if (pattern.regex.test(url.canonical)) {
+        this.log(`Detected ${app.name} using URL`, 'core');
         addDetected(app, pattern, 'url', url.canonical);
       }
     });
@@ -535,6 +537,7 @@ class Wappalyzer {
 
     return asyncForEach(patterns, (pattern) => {
       if (pattern.regex.test(html)) {
+        this.log(`Detected ${app.name} using html`, 'core');
         addDetected(app, pattern, 'html', html);
       }
     });
@@ -553,6 +556,7 @@ class Wappalyzer {
     return asyncForEach(patterns, (pattern) => {
       scripts.forEach((uri) => {
         if (pattern.regex.test(uri)) {
+          this.log(`Detected ${app.name} using script`, 'core');
           addDetected(app, pattern, 'script', uri);
         }
       });
@@ -590,6 +594,7 @@ class Wappalyzer {
 
           promises.push(asyncForEach(patterns[meta], (pattern) => {
             if (content && content.length === 4 && pattern.regex.test(content[2])) {
+              this.log(`Detected ${app.name} using meta`, 'core');
               addDetected(app, pattern, 'meta', content[2], meta);
             }
           }));
@@ -615,6 +620,7 @@ class Wappalyzer {
           if (headerName in headers) {
             headers[headerName].forEach((headerValue) => {
               if (pattern.regex.test(headerValue)) {
+                this.log(`Detected ${app.name} using headers`, 'core');
                 addDetected(app, pattern, 'headers', headerValue, headerName);
               }
             });
@@ -641,6 +647,7 @@ class Wappalyzer {
           const cookie = cookies.find(_cookie => _cookie.name.toLowerCase() === cookieName);
 
           if (cookie && pattern.regex.test(cookie.value)) {
+            this.log(`Detected ${app.name} using cookies`, 'core');
             addDetected(app, pattern, 'cookies', cookie.value, cookieName);
           }
         }));
@@ -663,6 +670,7 @@ class Wappalyzer {
           const value = results[string][index];
 
           if (pattern && pattern.regex.test(value)) {
+            this.log(`Detected ${app.name} using js`, 'core');
             addDetected(app, pattern, 'js', value);
           }
         }));

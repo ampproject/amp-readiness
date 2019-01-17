@@ -9,7 +9,7 @@
 	"optionDynamicIcon":        { "message": "Use technology icon instead of Wappalyzer logo" },
 	"optionTracking":           { "message": "Anonymously send identified technologies to wappalyzer.com" },
 	"nothingToDo":              { "message": "Nothing to do here." },
-	"noAppsDetected":           { "message": "No technologies detected." },
+	"noAppsDetected":           { "message": "No technologies detected. Please make sure the page is fully loaded before clicking the extension." },
   "categoryPin":              { "message": "Always show icon" },
 	"categoryName1":            { "message": "CMS" },
 	"categoryName2":            { "message": "Message Board" },

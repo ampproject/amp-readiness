@@ -77,45 +77,46 @@ function post(url, body) {
     .catch(error => wappalyzer.log(`POST ${url}: ${error}`, 'driver', 'error'));
 }
 
-// Prod config
-// fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json')
-//   .then(response => response.json())
-//   .then((json) => {
-//     wappalyzer.apps = json.apps;
-//     wappalyzer.categories = json.categories;
-    
-//     fetch('https://raw.githubusercontent.com/philkrie/ampbench/master/readiness-tool/extended_apps.json')
-//       .then(response_ext => response_ext.json())
-//       .then((json_ext) => {
-// Prod config
+function readApps(json) {
+  wappalyzer.apps = json.apps;
+  wappalyzer.categories = json.categories;
+  
+  fetch('../extended_apps.json')
+    .then(response_ext => response_ext.json())
+    .then((json_ext) => {
 
-// We always fetch directly from Wappalyzer's raw apps.json content to get the latest stuff
+      wappalyzer.apps = Object.assign({}, wappalyzer.apps, json_ext.apps);
+
+      wappalyzer.parseJsPatterns();
+
+      categoryOrder = Object.keys(wappalyzer.categories)
+        .map(categoryId => parseInt(categoryId, 10))
+        .sort((a, b) => wappalyzer.categories[a].priority - wappalyzer.categories[b].priority);
+
+      wappalyzer.supported_apps = json_ext.supported;
+      wappalyzer.incompatible_apps = json_ext.incompatible;
+      wappalyzer.conv_cat_tooltips = json_ext.conversionCategoryTooltips;
+      wappalyzer.incom_cat_tooltips = json_ext.incompatibleCategoryTooltips;
+      wappalyzer.tech_tooltips = json_ext.technologyTooltips;        
+      wappalyzer.convertable_apps = json_ext.conversionPatterns;  
+      wappalyzer.tracked_urls = {};      
+  })
+  .catch(error => wappalyzer.log(`GET extended_apps.json: ${error}`, 'driver', 'error'));
+}
+
+// We always fetch directly from Wappalyzer's raw apps.json content to get the latest content
 fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json')
-  .then(response => response.json())
-  .then((json) => {
-    wappalyzer.apps = json.apps;
-    wappalyzer.categories = json.categories;
-    
-    fetch('../extended_apps.json')
-      .then(response_ext => response_ext.json())
-      .then((json_ext) => {
-// Testing config
-
-        wappalyzer.apps = Object.assign({}, wappalyzer.apps, json_ext.apps);
-
-        wappalyzer.parseJsPatterns();
-
-        categoryOrder = Object.keys(wappalyzer.categories)
-          .map(categoryId => parseInt(categoryId, 10))
-          .sort((a, b) => wappalyzer.categories[a].priority - wappalyzer.categories[b].priority);
-
-        wappalyzer.supported_apps = json_ext.supported;
-        wappalyzer.incompatible_apps = json_ext.incompatible;
-        wappalyzer.conv_cat_tooltips = json_ext.conversionCategoryTooltips;
-        wappalyzer.incom_cat_tooltips = json_ext.incompatibleCategoryTooltips;
-        wappalyzer.tech_tooltips = json_ext.technologyTooltips;        
-    })
-    .catch(error => wappalyzer.log(`GET extended_apps.json: ${error}`, 'driver', 'error'));
+  .then((response) => {
+    //If we don't get a 200, we access the local version
+    if(!response.ok) {
+      console.log("Failed to retrive apps.json, falling back to local version");
+      fetch('../apps.json')
+      .then(response => response.json())
+      .then(json => readApps(json))
+    } else {
+      response.json()
+      .then(json => readApps(json))
+    }
   })
   .catch(error => wappalyzer.log(`GET apps.json: ${error}`, 'driver', 'error'));
 
@@ -151,6 +152,7 @@ getOption('hostnameCache', {})
 // Run content script on all tabs
 browser.tabs.query({ url: ['http://*/*', 'https://*/*'] })
   .then((tabs) => {
+    wappalyzer.log('driver', 'new tab opened');
     tabs.forEach((tab) => {
       browser.tabs.executeScript(tab.id, {
         file: '../js/content.js',
@@ -228,9 +230,12 @@ browser.webRequest.onCompleted.addListener((request) => {
           incompatible_apps: wappalyzer.incompatible_apps,
           conv_cat_tooltips: wappalyzer.conv_cat_tooltips,
           incom_cat_tooltips: wappalyzer.incom_cat_tooltips,
-          tech_tooltips: wappalyzer.tech_tooltips
+          tech_tooltips: wappalyzer.tech_tooltips,
+          convertable_apps: wappalyzer.convertable_apps,
+          tracked_urls: getUrlCache(message.tab.id),
+          html: wappalyzer.pageHtml,
         };
-
+        
         break;
 
       case 'set_option':
@@ -253,6 +258,40 @@ browser.webRequest.onCompleted.addListener((request) => {
 });
 
 wappalyzer.driver.document = document;
+
+/**
+ * Url Caching (populated via via network.js) helpers
+ */
+const networkFilters = {
+  urls: ["*://*/*"]
+};
+const urlCache = {};
+function addUrlToRequestCache(tab, url) {
+  wappalyzer.log("Tab: " + tab);
+
+	if (typeof urlCache[tab] === "undefined") {
+    wappalyzer.log("New Tab");
+		urlCache[tab] = [];
+  }
+  wappalyzer.log("Adding URL: " + url);
+  urlCache[tab].push(url);
+
+}
+function getUrlCache(tab) {
+	return typeof urlCache[tab] !== "undefined" 
+		? urlCache[tab] 
+		: {};
+}
+function clearRequestCache(tab) {
+	urlCache[tab] = null;
+}
+
+chrome.webRequest.onBeforeRequest.addListener((details) => {
+
+  const { tabId, requestId } = details;
+  addUrlToRequestCache(tabId, details.url);
+  return;
+}, networkFilters);
 
 /**
  * Log messages to console
@@ -278,39 +317,6 @@ wappalyzer.driver.displayApps = (detected, meta, context) => {
   tabCache[tab.id].detected = detected;
 
   let found = false;
-
-  // Find the main application to display
-  [options.pinnedCategory].concat(categoryOrder).forEach((match) => {
-    Object.keys(detected).forEach((appName) => {
-      const app = detected[appName];
-
-      app.props.cats.forEach((category) => {
-        if (category === match && !found) {
-          let icon = app.props.icon || 'default.svg';
-
-          if (!options.dynamicIcon) {
-            icon = 'default.svg';
-          }
-
-          if (/\.svg$/i.test(icon)) {
-            icon = `converted/${icon.replace(/\.svg$/, '.png')}`;
-          }
-
-          try {
-            browser.pageAction.setIcon({
-              tabId: tab.id,
-              path: `../images/icons/${icon}`,
-            });
-          } catch (e) {
-            // Firefox for Android does not support setIcon see https://bugzilla.mozilla.org/show_bug.cgi?id=1331746
-          }
-
-          found = true;
-        }
-      });
-    });
-  });
-
   if (typeof chrome !== 'undefined') {
     // Browser polyfill doesn't seem to work here
     chrome.pageAction.show(tab.id);

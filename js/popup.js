@@ -103,14 +103,13 @@ function convertApp(app) {
 			 // Set the template only once
 			 if (result !== null) {
         console.log("found a match in a URL:" + url);
-        match = result[0]
         content = convertableApps[app].content;
         template = convertableApps[app].template;
 				break;	// stop once we find a match
 		 	 }
 		}
 		// Check for the pattern in the HTML if we didn't find it in the URLs
-		if (match == null) {
+		if (result == null) {
       // Check for matches on the first regex
 			result = regex.exec(pageHtml);
 			if (result !== null) {
@@ -121,9 +120,10 @@ function convertApp(app) {
 		 	}
 		}		
 	}
-	if (match) {
-		console.log("Found a match: " + match);
-    renderedHTML = renderAppConversionHtml(template, match);
+	if (result) {
+    console.log("Found a match: " + result);
+    console.log(template)
+    renderedHTML = renderAppConversionHtml(template, result, app);
     console.log(renderedHTML)
 		var html = content ? '<p class="converted-content">' + content + '</p>' : '';
 			html += '<pre>' + renderedHTML + '</pre>';
@@ -135,8 +135,17 @@ function convertApp(app) {
 	}
 }
 
-function renderAppConversionHtml(html, match) {
-  return html.replace('{0}', match)
+function renderAppConversionHtml(html, result, app) {
+  if (convertableApps[app].type === "amp-analytics"){
+    html = "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" + html;
+  }
+  if (app === "New Relic"){
+    return html.replace('{0}', result[0])
+      .replace('{1}', result[1])
+      .replace(new RegExp('<', 'g'), '&lt;')
+      .replace(new RegExp('>', 'g'), '&gt;');
+  }
+  return html.replace(/\{0\}/g, result[0])
              .replace(new RegExp('<', 'g'), '&lt;')
              .replace(new RegExp('>', 'g'), '&gt;'); 
 }

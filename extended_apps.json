@@ -461,19 +461,22 @@
     },
 	"conversionPatterns": {
 		"Google Analytics": {
+            "type": "amp-analytics",
 			"content": "",
 			"regex": "UA-\\d+-\\d+",
-			"template": "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"{0}\",\n    \"config\" : {\n      \"{0}\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\n</amp-analytics>"
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"{0}\",\n    \"config\" : {\n      \"{0}\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\n</amp-analytics>"
 		},
 		"Google Tag Manager": {
+            "type": "amp-analytics",
 			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
 			"regex": ["GTM-[0-9a-z]+"],
-			"template": "<!-- AMP Analytics {0:1} -->\n<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n<!-- Google Tag Manager Sample -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id={0}\" data-credentials=\"include\"></amp-analytics>"
+            "template": "<!-- Google Tag Manager -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id={0}\" data-credentials=\"include\"></amp-analytics>"
 		},
 		"New Relic": {
+            "type": "amp-analytics",
 			"content": "",
 			"regex": ["(\"licenseKey\":\")([0-9a-z]+)(\")", "(\"applicationID\":\")([0-9]+)(\")"],
-			"template": "Licence: {0:2}, App: {1:2}"
+			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\n<script type=\"application/json\">\n{\n\"vars\": {\n\"appId\": \"{0}\",\n\"licenseKey\": \"{1}\"\n}\n}\n</script>\n</amp-analytics>"
 		}
 	}
 }

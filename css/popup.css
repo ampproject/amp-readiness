@@ -1,13 +1,13 @@
 .header {
+  font-weight: 500;
+  font-size: 14pt;
+  color: #0389ff;
+  height: 25px;
+  padding: 10px 0 10px 0;
+}
 
-
-
-  
-  align-items: center;
-	background: linear-gradient(160deg, #32067c, #150233);
-  height: 4rem;
-  display: flex;
-
+.header * {
+  vertical-align: middle;
 }
 
 .header__link:focus {
@@ -34,37 +34,15 @@
   justify-content: center;
   max-height: 350px;
   overflow-y: overlay;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
 }
 
 .card {
-  background: #fff;
-  box-shadow: 0px 3px 20px 0 rgba(0, 0, 0, 0.075);
   box-sizing: border-box;
   flex: 0 0 245px;
   padding: 0px 10px;
   margin-right: 10px;
   position: relative;
   height: 100%;
-}
-
-.amp_supported {
-  border-left-color: #34a853;
-  border-left-width: 5px;
-  border-left-style: solid;
-}
-
-.amp_work_around {
-  border-left-color: #34a853;
-  border-left-width: 5px;
-  border-left-style: solid;
-}
-
-.amp_not_supported {
-  border-left-color: #ff9100;
-  border-left-width: 5px;
-  border-left-style: solid;
 }
 
 .card-inner {
@@ -93,14 +71,13 @@
 }
 
 .detected__category-name {
-  border-bottom: 1px solid #dbdbdb;
   display: block;
-  margin-bottom: .5rem;
 }
 
 .detected__category-link {
-  color: #1c79c0;
-  font-weight: bold;
+  color: #202124;
+  font-size: 11pt;
+  font-weight: normal;
   line-height: 2rem;
   text-decoration: none;
 }
@@ -137,10 +114,14 @@
 }
 
 .detected__app {
-  color: #4a4a4a;
-  display: block;
+  color: #3c4043;
   line-height: 1.7rem;
   text-decoration: none;
+  display: block;
+}
+
+div.convertable_apps .detected__app {
+  display: inline;
 }
 
 .detected__app:focus {
@@ -157,6 +138,7 @@
 }
 
 .detected__app-name {
+  font-size: 9pt;
 }
 
 .converter {
@@ -190,12 +172,11 @@
 }
 
 .detected__app-convert {
-	background: #1c79c0;
 	border-radius: 5px;
 	color: #fff;
 	display: block;
-	float: right;
-	font-size: 11px;
+  display: inline;
+  font-size: 11px;
 	line-height: 13px;
 	margin: 6px 0 0;
 	padding: 2px 5px 2px;
@@ -246,17 +227,18 @@
   justify-content: center;
 }
 
-.empty__text {
+div.convertable_apps {
+  display: block;
 }
 
 html {
-  background-color: #f1f1f1;
+  background-color: #fff;
   color: #333;
   width: 780px;
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Google Sans", sans-serif;
   font-size: 100%;
   min-width: 400px;
   margin: 0 8px;
@@ -272,14 +254,77 @@ header {
 }
 
 #logo {
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
 }
 
 .logo {
   float: left;
+  height: 25px;
   margin: 0 0 0px 10px;
 }
+
+.settings {
+  float: right;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.settings-button {
+  background: transparent;
+  border: none;
+}
+
+#settings-icon {
+  height: 25px;
+  width: 25px;
+  pointer-events: none;
+}
+
+#chevrons {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  top: 6px;
+}
+
+#code_brackets {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  top: 6px;
+  pointer-events: none;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.settings-dropdown {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0px;
+  margin-right: 15px;
+  border-radius: 15px;
+  padding: 0px 10px;
+}
+
+.settings-dropdown > br:after{ 
+  border-bottom:1px black;
+  content: "";
+  display: block;}
+/* Links inside the dropdown */
+.settings-dropdown a {
+  color: black;
+  padding: 6px 2px;
+  text-decoration: none;
+  display: block;
+  font-weight: lighter;
+  font-size: 9pt;
+}
+
+/* Change color of dropdown links on hover */
+.settings-dropdown a:hover {background-color: #ddd}
 
 .info {
   float: right;
@@ -292,15 +337,14 @@ header {
 }
 
 .title {
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 400;
+  text-transform: capitalize;
+  font-weight: lighter;
+  font-size: 13pt;
   letter-spacing: .56px;
   line-height: 16px;
   margin: 5px 10px 5px 0px;
   position: relative;
   flex: 0 0 245px;
-  font-weight:bold;
 }
 
 .title::after {
@@ -321,27 +365,27 @@ header {
 }
 
 .supported {
-  color: #34a853;
+  color: #1e8e3e;
 }
 
 .work-around {
-  color: #34a853;
+  color: #1e8e3e;
 }
 
 .not-supported {
-  color: #ff9100;
+  color: #f29900;
 }
 
 .supported::after {
-  background: linear-gradient(to right, #34a853, #cbf1d1);
+  background: #1e8e3e;
 }
 
 .work-around::after {
-  background: linear-gradient(to right, #34a853, #cbf1d1);
+  background: #1e8e3e;
 }
 
 .not-supported::after {
-  background: linear-gradient(to right, #ff9100, #ffecd3);
+  background: #f29900;
 }
 
 .rows {
@@ -430,6 +474,14 @@ footer div a:hover {
 
 .question-mark:before {
   font-weight: normal;
+}
+
+span.tooltip.detected__app {
+  display: inline;
+}
+
+span.tooltip.detected__app > object {
+  display: inline !important;
 }
 
 

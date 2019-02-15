@@ -23,17 +23,32 @@ browser.tabs.query({ active: true, currentWindow: true })
   .then(func)
   .catch(console.error);
 
-$(function() {
+$(window).on('load', function() {
    /**
    * Handles click event on </> buttons for code conversion
    */
   $('.detected__app-convert').click(function(e) {
-	  e.preventDefault();
+    e.preventDefault();
 	  e.stopPropagation();
+    console.log("Converting code for: " + $(this).data('type'))
 	  convertApp($(this).data('type'));
-	  console.log("Converting code for: " + $(this).data('type'))
   });
 
+  $('.settings-button').click(function(e) {
+    e.preventDefault();
+	  e.stopPropagation();
+    console.log("Clicked settings button");
+    $(".settings-dropdown").css("display", "block");
+  });
+
+  $(window).hover(function(e) {
+    if ($(e.target).attr('class')){
+      if (!($(e.target).attr('class').includes("settings"))) {
+        $(".settings-dropdown").css("display", "none");
+      }
+    }
+  })
+  
   /**
    * Create tooltips for categories and technologies
    */
@@ -43,10 +58,10 @@ $(function() {
     content: function() {
       htmlResult = ""
       if ($(this).hasClass("detected__app")) {
-        title = $(this).find(".detected__app-name").text()
+        title = $(this).parent().find(".detected__app-name").text()
         description = $(this).attr('data_tooltip_left')
-        version = $(this).find(".detected__app-version").text()
-        img = $(this).find(".detected__app-icon").attr('src')
+        version = $(this).parent().find(".detected__app-version").text()
+        img = $(this).parent().find(".detected__app-icon").attr('src')
         htmlResult ="<img class='tooltip_image' src="+ img +">" +
                     "<span class='tooltip_title'>" + title + " " + version + "</span>"+
                     "<p class='tooltip_description'>"+description+"</p>"
@@ -87,6 +102,10 @@ $(function() {
     }
   });  
 });
+
+function showSettings() {
+  
+}
 
 function convertApp(app) {
 
@@ -224,39 +243,50 @@ function appsToDomTemplate(response) {
         // console.log(convertable);			
             amp_supported_apps.push(
               [
-                    'a', {
-                  class: 'detected__app',
-                  target: '_blank',
-                  href: `${response.apps[appName].website}`,
+                'div', {
+                  class: 'convertable_apps'
                 }, [
-                  'img', {
-                    class: 'detected__app-icon',
-                    src: `${locateIcon(appName, response.apps)}` ,
-                  },
-                ], [
+                  'a', {
+                    class: 'detected__app',
+                    target: '_blank',
+                    href: `${response.apps[appName].website}`,
+                  }, [
+                    'img', {
+                      class: 'detected__app-icon',
+                      src: `${locateIcon(appName, response.apps)}` ,
+                    },
+                  ], [
+                    'span', {
+                      class: 'detected__app-name',
+                    },
+                    appName,
+                  ], version ? [
+                    'span', {
+                      class: 'detected__app-version',
+                    },
+                    version,
+                  ] : null, confidence < 100 ? [
+                    'span', {
+                      class: 'detected__app-confidence',
+                    },
+                    `${confidence}% sure`,
+                  ] : null
+                ], convertable ? [
                   'span', {
-                    class: 'detected__app-name',
-                  },
-                  appName,
-                ], version ? [
-                  'span', {
-                    class: 'detected__app-version',
-                  },
-                  version,
-                ] : null, confidence < 100 ? [
-                  'span', {
-                    class: 'detected__app-confidence',
-                  },
-                  `${confidence}% sure`,
-                ] : null, convertable ? [
-                'span', {
                     class: 'detected__app-convert',
-            title: 'Convert to AMP HTML',
-              "data-type": appName
-                  }, 
-          '</>'
-                ] : null
-        ]
+                    title: 'Convert to AMP HTML',
+                    "data-type": appName
+                  }, [
+                    'object', {
+                      type: 'image/svg+xml',
+                      data:'../images/code_brackets.svg',
+                      id:'code_brackets'
+                    }
+                  ] 
+                  ] : ['span', {
+                    class: 'test'
+                  }]
+              ]
             );
           } else if(isAMPIncompatible(appName, response.incompatible_apps)){
             amp_not_supported_apps.push(
@@ -287,14 +317,20 @@ function appsToDomTemplate(response) {
                   },
                   `${confidence}% sure`,
                 ] : null,
+                [
+                  'object', {
+                    type: 'image/svg+xml',
+                    data:'../images/chevrons.svg',
+                    id:'chevrons'
+                  }
+                ] 
               ],
             );
           } else {
             amp_work_around_apps.push(
               [
                 'a', {
-                  class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
-                  data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  class: 'detected__app',
                   target: '_blank',
                   href: `${response.apps[appName].website}`,
                 }, [
@@ -318,6 +354,19 @@ function appsToDomTemplate(response) {
                   },
                   `${confidence}% sure`,
                 ] : null,
+                [
+                  'span', {
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  }, [
+                    'object', {
+                      style: 'display:none',
+                      type: 'image/svg+xml',
+                      data:'../images/chevrons.svg',
+                      id:'chevrons'
+                    }
+                  ] 
+                ] 
               ],
             );
           }
@@ -367,8 +416,13 @@ function appsToDomTemplate(response) {
                       class: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
                       data_tooltip_left: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["content"]:''}`,
                       data_tooltip_reference: `${categoryHasTooltip(cat, response.conv_cat_tooltips) ? response.conv_cat_tooltips[cat]["reference"]:''}`
-                    },
-                    "    (?)"
+                    }, [
+                      'object', {
+                        type: 'image/svg+xml',
+                        data:'../images/chevrons.svg',
+                        id:'chevrons'
+                      }
+                    ] 
                   ]
                 ], [
                   'div', {
@@ -399,8 +453,13 @@ function appsToDomTemplate(response) {
                       'span', {
                         class: `${categoryHasTooltip(cat, response.incom_cat_tooltips) ? 'tooltip question-mark':'no-tooltip'}`,
                         data_tooltip_left: `${categoryHasTooltip(cat, response.incom_cat_tooltips) ? response.incom_cat_tooltips[cat]:''}`,
-                      },
-                      "    (?)"
+                      }, [
+                        'object', {
+                          type: 'image/svg+xml',
+                          data:'../images/chevrons.svg',
+                          id:'chevrons'
+                        }
+                      ] 
                     ]
                   ],
                 ], [

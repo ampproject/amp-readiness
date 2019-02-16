@@ -458,5 +458,25 @@
         "jQuery": "jQuery is a very common JS library that is used for convenience, but doesn't enable anything that can't be accomplished with AMP JS",
         "GoSquared": "If you aren't using the chat feature of GoSquared, then it is possible to integrate GoSquared Analytics within AMP. A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page",
         "reCAPTCHA": "reCAPTCHA will have native support in AMP by the end of Q1, 2019. Please reference ampproject/amphtml issue 2273 in GitHub for any updates."
-    }
+    },
+	"conversionPatterns": {
+		"Google Analytics": {
+            "type": "amp-analytics",
+			"content": "",
+			"regex": "UA-\\d+-\\d+",
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"{0}\",\n    \"config\" : {\n      \"{0}\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\n</amp-analytics>"
+		},
+		"Google Tag Manager": {
+            "type": "amp-analytics",
+			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
+			"regex": ["GTM-[0-9a-z]+"],
+            "template": "<!-- Google Tag Manager -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id={0}\" data-credentials=\"include\"></amp-analytics>"
+		},
+		"New Relic": {
+            "type": "amp-analytics",
+			"content": "",
+			"regex": ["(\"licenseKey\":\")([0-9a-z]+)(\")", "(\"applicationID\":\")([0-9]+)(\")"],
+			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\n<script type=\"application/json\">\n{\n\"vars\": {\n\"appId\": \"{0}\",\n\"licenseKey\": \"{1}\"\n}\n}\n</script>\n</amp-analytics>"
+		}
+	}
 }

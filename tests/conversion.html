@@ -1,0 +1,35 @@
+<html>
+  <body>
+    <script language=javascript>
+
+	// Google Analytics
+	  var txt = 'https://www.google-analytics.com/r/collect?v=1&_v=j72&a=1458850358&t=pageview&_s=1&dl=https%3A%2F%2Famp-mock-api.appspot.com%2F&ul=nl-nl&de=UTF-8&dt=AMP%20Mock%20API%20Builder&sd=24-bit&sr=411x731&vp=411x731&je=0&_u=AACAAUAB~&jid=1599960840&gjid=711314752&cid=1027921307.1535117171&tid=UA-72553439-8&_gid=519767389.1543914842&_r=1&gtm=2oubc0&z=1723429870';
+	  var re = 'UA-\\d+-\\d+';      
+      var p = new RegExp(re,["i"]);
+      var m = p.exec(txt);
+	  console.log(m);	 
+	  
+	  // Google Tag Manager
+	  var txt = "https://www.googletagmanager.com/gtm.js?id=GTM-WQK8NCZ&l=gtmdataLayer";
+	  var txt = "https://www.googletagmanager.com/gtm.js?id=GTM-B9X5"
+      var re = '(GTM-)([0-9a-z]+)';      
+      var p = new RegExp(re,["i"]);
+      var m = p.exec(txt);
+	  console.log(m);	 
+	  
+	  // New Relic part 1:
+	  var txt = ',"licenseKey":"71e5b141d1",';
+      var re = '("licenseKey":")([0-9a-z]+)(")';      
+      var p = new RegExp(re,["i"]);
+      var m = p.exec(txt);
+	  console.log(m[2]);	 
+	  
+	  // New Relic part 2
+	  var txt = ',"applicationID":"13836153",';
+      var re = '("applicationID":")([0-9]+)(")';  
+      var p = new RegExp(re,["i"]);
+      var m = p.exec(txt);
+	  console.log(m[2]);	 
+    </script>
+  </body>
+</html>

@@ -109,8 +109,11 @@ function showSettings() {
 
 function convertApp(app) {
 
-	var template, content, match = null;
-	// Loop through regexes
+  var template, content = null;
+  var result = [];
+  // Loop through regexes
+  content = convertableApps[app].content;
+  template = convertableApps[app].template;
 	var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
 	// Check for matches on the first regex
 	for (var i = 0; i < expressions.length; i++) {
@@ -118,13 +121,12 @@ function convertApp(app) {
 		var regex = new RegExp(expressions[i], ["i"]);
     // Find pattern in every URL
 		for (url in convertableUrls) {
-			 result = regex.exec(url);
+			 regex_results = regex.exec(url);
 			 // Set the template only once
-			 if (result !== null) {
+			 if (regex_results !== null) {
         console.log("found a match in a URL:" + url);
-        content = convertableApps[app].content;
-        template = convertableApps[app].template;
-				break;	// stop once we find a match
+        //Push the first of the results on there
+        result.push(regex_results[0]);
 		 	 }
 		}
 		// Check for the pattern in the HTML if we didn't find it in the URLs
@@ -133,40 +135,33 @@ function convertApp(app) {
 			result = regex.exec(pageHtml);
 			if (result !== null) {
 				console.log("found a match in the HTML:" + pageHtml);
-        match = result[0]
-        content = convertableApps[app].content;
-        template = convertableApps[app].template;
+        result = result[0]
 		 	}
 		}		
-	}
-	if (result) {
-    console.log("Found a match: " + result);
-    console.log(template)
-    renderedHTML = renderAppConversionHtml(template, result, app);
-    console.log(renderedHTML)
-		var html = content ? '<p class="converted-content">' + content + '</p>' : '';
-			html += '<pre>' + renderedHTML + '</pre>';
-			// DEBUG
-			// html += '<p class="converted-match">Match found in: ' + url + '</p>';
-		$('.converter').html(html);
-	} else {
-		alert('No matches found');
-	}
+  }
+  console.log(template);
+  console.log(content);
+
+  renderedHTML = renderAppConversionHtml(template, result, app);
+  var html = content ? '<p class="converted-content">' + content + '</p>' : '';
+  html += '<pre>' + renderedHTML + '</pre>';
+  $('.converter').html(html);
 }
 
 function renderAppConversionHtml(html, result, app) {
   if (convertableApps[app].type === "amp-analytics"){
     html = "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" + html;
   }
-  if (app === "New Relic"){
-    return html.replace('{0}', result[0])
-      .replace('{1}', result[1])
-      .replace(new RegExp('<', 'g'), '&lt;')
-      .replace(new RegExp('>', 'g'), '&gt;');
+  if (result != null) {
+    console.log(result);
+    if (app === "New Relic"){
+      html = html.replace('{0}', result[0]).replace('{1}', result[1]);
+    } else if (app === "Google Tag Manager" || app === "Google Analytics"){
+      html = html.replace(/\{0\}/g, result[0]);
+    }
   }
-  return html.replace(/\{0\}/g, result[0])
-             .replace(new RegExp('<', 'g'), '&lt;')
-             .replace(new RegExp('>', 'g'), '&gt;'); 
+  return html.replace(new RegExp('<', 'g'), '&lt;')
+              .replace(new RegExp('>', 'g'), '&gt;'); ;
 }
 
 function replaceDomWhenReady(dom) {
@@ -292,8 +287,7 @@ function appsToDomTemplate(response) {
             amp_not_supported_apps.push(
               [
                 'a', {
-                  class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
-                  data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  class: `detected__app`,
                   target: '_blank',
                   href: `${response.apps[appName].website}`,
                 }, [
@@ -318,11 +312,17 @@ function appsToDomTemplate(response) {
                   `${confidence}% sure`,
                 ] : null,
                 [
-                  'object', {
-                    type: 'image/svg+xml',
-                    data:'../images/chevrons.svg',
-                    id:'chevrons'
-                  }
+                  'span', {
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  }, [
+                    'object', {
+                      style: 'display:none',
+                      type: 'image/svg+xml',
+                      data:'../images/chevrons.svg',
+                      id:'chevrons'
+                    }
+                  ] 
                 ] 
               ],
             );

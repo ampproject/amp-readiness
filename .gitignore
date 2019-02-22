@@ -1,1 +1,4 @@
 node_modules/
+.eslintrc.js
+yarn.lock
+.DS_Store

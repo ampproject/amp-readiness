@@ -1,5 +1,5 @@
 .header {
-  font-weight: 500;
+  font-weight: bold;
   font-size: 14pt;
   color: #0389ff;
   height: 25px;
@@ -106,7 +106,7 @@
 
 .detected__app {
   color: #3c4043;
-  line-height: 1.7rem;
+  line-height: 1.4rem;
   text-decoration: none;
   display: block;
 }
@@ -129,7 +129,7 @@ div.convertable_apps .detected__app {
 }
 
 .detected__app-name {
-  font-size: 9pt;
+  font-size: 10pt;
 }
 
 .converter p.converted-content {
@@ -139,7 +139,7 @@ div.convertable_apps .detected__app {
 .converter p.converted-match {
 	font-size: 13px;
 	line-height: 15px;
-	white-space: nowrap; 
+	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -152,7 +152,7 @@ div.convertable_apps .detected__app {
 }
 .converter pre {
 	background: #fff;
-	border: 1px solid #ccc;	
+	border: 1px solid #ccc;
 	display: block;
 	font-size: 10px;
 	line-height: 15px;
@@ -252,6 +252,12 @@ header {
   margin: 0 0 0px 10px;
 }
 
+.logo span {
+  float: left;
+  margin-left: 2px;
+  margin-top: 2px;
+}
+
 .settings {
   float: right;
   height: 25px;
@@ -297,7 +303,7 @@ header {
   padding: 10px;
 }
 
-.settings-dropdown > br:after{ 
+.settings-dropdown > br:after{
   border-bottom:1px black;
   content: "";
   display: block;}
@@ -328,7 +334,6 @@ header {
   text-transform: capitalize;
   font-weight: lighter;
   font-size: 13pt;
-  letter-spacing: .56px;
   line-height: 16px;
   margin: 5px 10px 5px 0px;
   position: relative;

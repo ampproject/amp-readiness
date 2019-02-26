@@ -4,16 +4,16 @@
 	"author": "Jeffrey Jose, Phillip Kriegel, Frank Broersen",
 	"homepage_url": "https://github.com/ampproject/ampbench/tree/master/readiness-tool",
 	"description": "Identify web technologies that are relevant to AMP",
-	"version": "3.1.8",
+	"version": "3.1.9",
 	"default_locale": "en",
 	"manifest_version": 2,
 	"icons": {
-		"16": "images/amp-readiness-new.png",
-		"48": "images/amp-readiness-new.png",
-		"128": "images/amp-readiness-new.png"
+		"16": "images/amp-readiness-dogfood.png",
+		"48": "images/amp-readiness-dogfood.png",
+		"128": "images/amp-readiness-dogfood.png"
 	},
 	"page_action": {
-		"default_icon": "images/amp-readiness-new.png",
+		"default_icon": "images/amp-readiness-dogfood.png",
 		"default_title": "AMP Readiness Tool (TEST)",
 		"default_popup": "html/popup.html"
 	},

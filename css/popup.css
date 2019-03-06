@@ -4,6 +4,7 @@
   color: #0389ff;
   height: 25px;
   padding: 10px 0 10px 0;
+  letter-spacing: 0.5px;
 }
 
 .header * {
@@ -47,6 +48,7 @@
   display: flex;
   flex-direction: row;
   height: 31px;
+  letter-spacing: 0.5px;
 }
 
 .detected {
@@ -71,10 +73,8 @@
   font-weight: normal;
   line-height: 2rem;
   text-decoration: none;
-}
-
-.detected__category-link:hover {
-  color: #4a4a4a;
+  cursor: default;
+  letter-spacing: 0.5px;
 }
 
 .detected__category-pin-wrapper {
@@ -109,6 +109,11 @@
   line-height: 1.4rem;
   text-decoration: none;
   display: block;
+  transition: 100ms all ease-in-out;
+}
+
+.detected__app:hover {
+  background-color: #F8FCFF;
 }
 
 div.convertable_apps .detected__app {
@@ -130,6 +135,8 @@ div.convertable_apps .detected__app {
 
 .detected__app-name {
   font-size: 10pt;
+  transition: 100ms all ease-in-out;
+  font-family: "Roboto", sans-serif;
 }
 
 .converter {
@@ -173,6 +180,9 @@ div.convertable_apps .detected__app {
   margin: -4px 0 0;
   float: right;
 	text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 100ms all ease-in-out;
 }
 .detected__app-convert:hover {
 	opacity: 1;
@@ -188,7 +198,7 @@ div.convertable_apps .detected__app {
 }
 
 .detected__app:hover .detected__app-name {
-  color: #1c79c0;
+  color: #0389ff;
 }
 
 .detected__app:hover .detected__app-version {
@@ -221,8 +231,13 @@ div.convertable_apps .detected__app {
 
 div.convertable_apps {
   display: block;
+  transition: 100ms all ease-in-out;
 }
 
+
+div.convertable_apps:hover {
+  background-color: #F8FCFF;
+}
 html {
   background-color: #fff;
   color: #333;
@@ -282,6 +297,14 @@ header {
 .back-button {
   background: transparent;
   border: none;
+  outline: none;
+  opacity: 0.5;
+  transition: 100ms all ease-in-out;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  opacity: 1;
 }
 
 #back-icon {
@@ -476,7 +499,13 @@ footer div a:hover {
   vertical-align: middle;
   font-size: 10px;
   font-weight: bold;
-  cursor: pointer;
+  cursor: pointer !important;
+  opacity: 0.5;
+  transition: 100ms all ease-in-out;
+}
+
+.question-mark:hover {
+  opacity: 1;
 }
 
 .question-mark:before {
@@ -574,37 +603,62 @@ img.tooltip_image {
   margin-left:22px;
   margin-right: -15px;
   vertical-align: -.2rem;
-  width: 24px;  
+  width: 24px;
 }
 
 /* jQuery Tab Widget Styles */
+.ui-tabs .ui-tabs-nav {
+  border-bottom: 1px solid #DDDDDD !important;
+  border-radius: 0px !important;
+}
+
 .ui-widget.ui-widget-content {
   border: none !important;
 }
 
 .ui-tabs .ui-tabs-nav li a{
-  color: #0389ff;
+  color: #3c4043;
   font-weight: lighter;
-  font-size: 13pt;
+  font-size: 11pt;
   line-height: 16px;
   position: relative;
   outline: none;
+  cursor: pointer !important;
 }
 
 .ui-tabs .ui-tabs-nav li {
   outline: none;
+  font-family: "Google Sans", sans-serif;
+  border: none;
+  padding: 0px !important;
+  margin: 1px 0 0 0 !important;
+}
+
+
+.ui-tabs .ui-tabs-nav li.ui-state-active {
+  border-bottom: 2px solid #0389ff !important;
 }
 
 .ui-tabs .ui-tabs-nav li::before{
-  background: #0389ff;
-  height: 2px;
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
 }
 
 .ui-widget-header {
   background: none !important;
   border: none !important;
 }
+
+.ui-state-default a {
+  background-color: white;
+}
+
+.ui-state-active a{
+  background-color: #F8FCFF;
+  color: #0389ff !important;
+}
+
+.ui-tabs .ui-tabs-nav li:hover a {
+  background-color: #F8FCFF;
+  color: #0389ff;
+}
+
+

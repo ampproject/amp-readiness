@@ -19,15 +19,6 @@
   padding-left: 2em;
 }
 
-.header__logo {
-  display: inline-block;
-  margin: .2rem 0 0 1.5rem;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translateZ(0) scale(1.0, 1.0);
-  transform: translateZ(0);
-  height: 2rem;
-}
-
 .container {
   display: flex;
   flex-direction: row;
@@ -142,44 +133,45 @@ div.convertable_apps .detected__app {
 }
 
 .converter {
+  display: none;
 }
-.converter p.converted-content {
-	font-size: 13px;
-	line-height: 15px;
+
+.back-button {
+  display: none;
 }
-.converter p.converted-match {
-	font-size: 13px;
-	line-height: 15px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+
+.converter-tabs {
+  display: none;
 }
-.converter p a {
-	color: #1c79c0;
-	text-decoration: none;
-}
-.converter p a:hover {
-	text-decoration: underline;
-}
-.converter pre {
-	background: #fff;
-	border: 1px solid #ccc;
+
+.converter-tabs pre {
+  background: #fff;
 	display: block;
 	font-size: 10px;
 	line-height: 15px;
 	margin: 5px 0 0;
-	padding: 5px 10px;
+}
+
+.converter-tabs p a {
+	color: #1c79c0;
+	text-decoration: none;
+}
+.converter-tabs p a:hover {
+	text-decoration: underline;
+}
+
+.converter-tabs p.converted-content {
+	font-size: 13px;
+	line-height: 15px;
 }
 
 .detected__app-convert {
 	border-radius: 5px;
 	color: #fff;
-	display: block;
-  display: inline;
   font-size: 11px;
 	line-height: 13px;
-	margin: 6px 0 0;
-	padding: 2px 5px 2px;
+  margin: -4px 0 0;
+  float: right;
 	text-transform: uppercase;
 }
 .detected__app-convert:hover {
@@ -287,6 +279,17 @@ header {
   pointer-events: none;
 }
 
+.back-button {
+  background: transparent;
+  border: none;
+}
+
+#back-icon {
+  height: 25px;
+  width: 25px;
+  pointer-events: none;
+}
+
 #chevrons {
   position: relative;
   height: 20px;
@@ -312,7 +315,7 @@ header {
   right: 0px;
   margin-right: 15px;
   border-radius: 15px;
-  padding: 0px 10px;
+  padding: 10px;
 }
 
 .settings-dropdown > br:after{
@@ -330,7 +333,7 @@ header {
 }
 
 /* Change color of dropdown links on hover */
-.settings-dropdown a:hover {background-color: #ddd}
+.settings-dropdown a:hover {text-decoration: underline}
 
 .info {
   float: right;
@@ -361,7 +364,6 @@ header {
   right: 0;
   top: 24px;
 }
-.title .dot {}
 
 .title .text {
   margin-top: 2px;
@@ -539,7 +541,7 @@ input:checked+.collapsible+div {
 span.tooltip_title {
   color: #202124;
   font-family: 'Google Sans',Roboto,sans-serif;
-  font-size: 22px;
+  font-size: 16pt;
   line-height: 28px;
   overflow: hidden;
   white-space: nowrap;
@@ -548,18 +550,19 @@ span.tooltip_title {
 }
 
 p.tooltip_description {
-  font: 400 14px/20px Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  font: 400 Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  font-size: 10.5pt;
   margin: 5px 22px 14px 22px;
 }
 
 button.tooltip_button {
-  background-color: #1a73e8;
-  color: white;
+  color: #0389ff;
   float: right;
   border-radius: 4px;
+  border-color: white;
   font-family: 'Google Sans',Roboto,sans-serif !important;
   margin: 5px !important;
-  font-size: 14px !important;
+  font-size: 9pt !important;
   font-weight: 500;
   padding: 5px;
   cursor: pointer;
@@ -571,9 +574,37 @@ img.tooltip_image {
   margin-left:22px;
   margin-right: -15px;
   vertical-align: -.2rem;
-  width: 24px;
+  width: 24px;  
 }
 
-div.tooltip_footer {
-  border-top: 1px solid #dadce0;
+/* jQuery Tab Widget Styles */
+.ui-widget.ui-widget-content {
+  border: none !important;
+}
+
+.ui-tabs .ui-tabs-nav li a{
+  color: #0389ff;
+  font-weight: lighter;
+  font-size: 13pt;
+  line-height: 16px;
+  position: relative;
+  outline: none;
+}
+
+.ui-tabs .ui-tabs-nav li {
+  outline: none;
+}
+
+.ui-tabs .ui-tabs-nav li::before{
+  background: #0389ff;
+  height: 2px;
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.ui-widget-header {
+  background: none !important;
+  border: none !important;
 }

@@ -24,6 +24,7 @@ browser.tabs.query({ active: true, currentWindow: true })
   .catch(console.error);
 
 $(window).on('load', function() {
+
    /**
    * Handles click event on </> buttons for code conversion
    */
@@ -40,6 +41,18 @@ $(window).on('load', function() {
     console.log("Clicked settings button");
     $(".settings-dropdown").css("display", "block");
   });
+
+  $('.back-button').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.container').show();
+    $('.title-container').show();
+    $('.converter').empty();
+    $('.converter').hide();
+    $('.back-button').hide();
+    $('.converter-tabs').hide();
+
+  })
 
   $(window).hover(function(e) {
     if ($(e.target).attr('class')){
@@ -100,73 +113,92 @@ $(window).on('load', function() {
             });
         });
     }
-  });  
+  });
+
+  $('.detected__app-convert').each(function(){
+    var new_tab = $(this).data('type');
+    $('.converter-tabs>ul').append("<li><a href='#"+hashCode(new_tab)+"'>"+new_tab+"</a></li>");
+    $('.converter-tabs').append("<div id='"+hashCode(new_tab)+"'></div>");
+  });
+
+  $('.converter-tabs').tabs();
+  
+  $('.ui-tabs-tab').click(function(e) {
+    var appName = $(this).first().text();
+    console.log(appName);
+    convertApp(appName);
+  });
 });
 
-function showSettings() {
-  
-}
 
 function convertApp(app) {
+  var appHash = hashCode(app);
+  //Check to see if we already have the tab filled
+  if(!$('.converter-tabs #' + appHash).is(':empty')) {
+    console.log("already generated snippet!");
+  } else {
+    var template, content = null;
+    var result = [];
+    // Loop through regexes
+    content = convertableApps[app].content;
+    template = convertableApps[app].template;
+    var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
+    // Check for matches on the first regex
+    for (var i = 0; i < expressions.length; i++) {
+      // Check for data on each regex (i flag ignores case)
+      var regex = new RegExp(expressions[i], ["i"]);
+      // Find pattern in every URL
+      for (url in convertableUrls) {
+        regex_results = regex.exec(url);
+        // Set the template only once
+        if (regex_results !== null) {
+          console.log("found a match in a URL:" + url);
+          //Push the first of the results on there
+          result.push(regex_results[0]);
+        }
+      }
+      // Check for the pattern in the HTML if we didn't find it in the URLs
+      if (result == null) {
+        // Check for matches on the first regex
+        result = regex.exec(pageHtml);
+        if (result !== null) {
+          console.log("found a match in the HTML:" + pageHtml);
+          result = result[0]
+        }
+      }		
+    }
+    console.log(template);
+    console.log(content);
 
-	var template, content, match = null;
-	// Loop through regexes
-	var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
-	// Check for matches on the first regex
-	for (var i = 0; i < expressions.length; i++) {
-		// Check for data on each regex (i flag ignores case)
-		var regex = new RegExp(expressions[i], ["i"]);
-    // Find pattern in every URL
-		for (url in convertableUrls) {
-			 result = regex.exec(url);
-			 // Set the template only once
-			 if (result !== null) {
-        console.log("found a match in a URL:" + url);
-        content = convertableApps[app].content;
-        template = convertableApps[app].template;
-				break;	// stop once we find a match
-		 	 }
-		}
-		// Check for the pattern in the HTML if we didn't find it in the URLs
-		if (result == null) {
-      // Check for matches on the first regex
-			result = regex.exec(pageHtml);
-			if (result !== null) {
-				console.log("found a match in the HTML:" + pageHtml);
-        match = result[0]
-        content = convertableApps[app].content;
-        template = convertableApps[app].template;
-		 	}
-		}		
-	}
-	if (result) {
-    console.log("Found a match: " + result);
-    console.log(template)
     renderedHTML = renderAppConversionHtml(template, result, app);
-    console.log(renderedHTML)
-		var html = content ? '<p class="converted-content">' + content + '</p>' : '';
-			html += '<pre>' + renderedHTML + '</pre>';
-			// DEBUG
-			// html += '<p class="converted-match">Match found in: ' + url + '</p>';
-		$('.converter').html(html);
-	} else {
-		alert('No matches found');
-	}
+    var html = content ? '<p class="converted-content">' + content + '</p>' : '';
+    html += '<pre>' + renderedHTML + '</pre>';
+
+    $('.converter-tabs #'+ appHash).prepend(html);
+  }
+
+  $('.container').hide();
+  $('.title-container').hide();
+  var index = $('.converter-tabs a[href="#'+appHash+'"]').parent().index();
+  $(".converter-tabs").tabs("option", "active", index);
+  $('.back-button').show();
+  $('.converter-tabs').show();
 }
 
 function renderAppConversionHtml(html, result, app) {
   if (convertableApps[app].type === "amp-analytics"){
     html = "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" + html;
   }
-  if (app === "New Relic"){
-    return html.replace('{0}', result[0])
-      .replace('{1}', result[1])
-      .replace(new RegExp('<', 'g'), '&lt;')
-      .replace(new RegExp('>', 'g'), '&gt;');
+  if (result != null) {
+    console.log(result);
+    if (app === "New Relic"){
+      html = html.replace('{0}', result[0]).replace('{1}', result[1]);
+    } else if (app === "Google Tag Manager" || app === "Google Analytics"){
+      html = html.replace(/\{0\}/g, result[0]);
+    }
   }
-  return html.replace(/\{0\}/g, result[0])
-             .replace(new RegExp('<', 'g'), '&lt;')
-             .replace(new RegExp('>', 'g'), '&gt;'); 
+  return html.replace(new RegExp('<', 'g'), '&lt;')
+              .replace(new RegExp('>', 'g'), '&gt;'); ;
 }
 
 function replaceDomWhenReady(dom) {
@@ -292,8 +324,7 @@ function appsToDomTemplate(response) {
             amp_not_supported_apps.push(
               [
                 'a', {
-                  class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
-                  data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  class: `detected__app`,
                   target: '_blank',
                   href: `${response.apps[appName].website}`,
                 }, [
@@ -318,11 +349,17 @@ function appsToDomTemplate(response) {
                   `${confidence}% sure`,
                 ] : null,
                 [
-                  'object', {
-                    type: 'image/svg+xml',
-                    data:'../images/chevrons.svg',
-                    id:'chevrons'
-                  }
+                  'span', {
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  }, [
+                    'object', {
+                      style: 'display:none',
+                      type: 'image/svg+xml',
+                      data:'../images/chevrons.svg',
+                      id:'chevrons'
+                    }
+                  ] 
                 ] 
               ],
             );
@@ -547,6 +584,17 @@ function locateIcon(appName, app_array) {
     //returns the default icon
     return "https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/icons/default.svg?sanitize=true"
   }
+}
+
+function hashCode (str){
+  var hash = 0;
+  if (str.length == 0) return hash;
+  for (i = 0; i < str.length; i++) {
+      char = str.charCodeAt(i);
+      hash = ((hash<<5)-hash)+char;
+      hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
 }
 
 var _gaq = _gaq || [];

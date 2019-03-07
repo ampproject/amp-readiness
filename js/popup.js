@@ -31,14 +31,14 @@ $(window).on('load', function() {
    */
   $('.detected__app-convert').click(function(e) {
     e.preventDefault();
-	  e.stopPropagation();
+    e.stopPropagation();
     console.log("Converting code for: " + $(this).data('type'))
-	  convertApp($(this).data('type'));
+    convertApp($(this).data('type'));
   });
 
   $('.settings-button').click(function(e) {
     e.preventDefault();
-	  e.stopPropagation();
+    e.stopPropagation();
     console.log("Clicked settings button");
     $(".settings-dropdown").css("display", "block");
   });
@@ -52,7 +52,6 @@ $(window).on('load', function() {
     $('.converter').hide();
     $('.back-button').hide();
     $('.converter-tabs').hide();
-
   })
 
   $(window).hover(function(e) {
@@ -93,7 +92,7 @@ $(window).on('load', function() {
       return htmlResult
     },
     items: '.tooltip',
-    show: null, // show immediately
+    show: { delay: 500, duration: 100 }, // add delay
     open: function(event, ui) {
         if (typeof(event.originalEvent) === 'undefined'){
             return false;
@@ -119,9 +118,9 @@ $(window).on('load', function() {
   $('.detected__app-convert').each(function(){
     var new_tab = $(this).data('type');
     var icon = locateIcon(new_tab, allApps);
-    $('.converter-tabs>ul').append("<li><img src='" + icon + "' style='vertical-align: middle' /><a href='#"+hashCode(new_tab)+"'>"+new_tab+"</a></li>");
-
-    $('.converter-tabs').append("<div id='"+hashCode(new_tab)+"'></div>");
+    var hash = hashCode(new_tab);
+    $('.converter-tabs > ul').append("<li><img src='" + icon + "' style='vertical-align: middle' /><a href='#" + hash + "'>" + new_tab + "</a></li>");
+    $('.converter-tabs').append("<div id='" + hash + "'></div>");
   });
 
   $('.converter-tabs').tabs();
@@ -168,24 +167,25 @@ function convertApp(app) {
           console.log("found a match in the HTML:" + pageHtml);
           result = result[0]
         }
-      }		
+      }   
     }
     console.log(template);
     console.log(content);
 
     renderedHTML = renderAppConversionHtml(template, result, app);
     var html = content ? '<p class="converted-content">' + content + '</p>' : '';
-    html += '<pre>' + renderedHTML + '</pre>';
+    html += '<pre id="highlight" class="language-html">' + renderedHTML + '</pre>';
 
     $('.converter-tabs #'+ appHash).prepend(html);
+    Prism.highlightElement(document.getElementById('highlight'));
   }
 
   $('.container').hide();
   $('.title-container').hide();
   var index = $('.converter-tabs a[href="#'+appHash+'"]').parent().index();
   $(".converter-tabs").tabs("option", "active", index);
-  $('.back-button').show();
   $('.converter-tabs').show();
+  $('.back-button').show();
 }
 
 function renderAppConversionHtml(html, result, app) {
@@ -275,7 +275,7 @@ function appsToDomTemplate(response) {
           const version = response.tabCache.detected[appName].version;
           if(isAMPSupported(appName, response.supported_apps)){
             convertable = isAMPConvertable(appName, response.convertable_apps);
-        // console.log(convertable);			
+        // console.log(convertable);      
             amp_supported_apps.push(
               [
                 'div', {

@@ -174,10 +174,9 @@ function convertApp(app) {
 
     renderedHTML = renderAppConversionHtml(template, result, app);
     var html = content ? '<p class="converted-content">' + content + '</p>' : '';
-    html += '<pre id="highlight" class="language-html">' + renderedHTML + '</pre>';
+    html += '<pre><code class="language-html">' + renderedHTML + '</code></pre>';
 
     $('.converter-tabs #'+ appHash).prepend(html);
-    Prism.highlightElement(document.getElementById('highlight'));
   }
 
   $('.container').hide();
@@ -186,6 +185,8 @@ function convertApp(app) {
   $(".converter-tabs").tabs("option", "active", index);
   $('.converter-tabs').show();
   $('.back-button').show();
+  Prism.highlightAll();
+
 }
 
 function renderAppConversionHtml(html, result, app) {

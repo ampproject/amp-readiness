@@ -160,13 +160,12 @@ div.convertable_apps .detected__app {
 }
 
 .converter-tabs pre {
-  border: 1px solid #ccc;
   background: #fff;
   display: block;
   font-size: 10px;
   line-height: 15px;
   margin: 0;
-  padding: 5px 10px;
+  padding: 10px;
 }
 
 .converter-tabs p a {
@@ -698,7 +697,7 @@ img.tooltip_image {
   position: relative;
   background: transparent;
   top: 3px;
-  margin-right: 1em;
+  margin-left: .5em;
 }
 
 .ui-widget-header {
@@ -738,4 +737,12 @@ img.tooltip_image {
   color: #0389ff;
 }
 
+pre[class*="language-"]>code {
+  background: white;
+  border: none;
+  box-shadow: none;
+}
 
+.ui-tabs-anchor {
+  float: right !important;
+}

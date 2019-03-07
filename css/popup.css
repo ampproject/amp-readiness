@@ -134,11 +134,11 @@ div.convertable_apps .detected__app {
 }
 
 .detected__app-icon {
-	display: inline-block;
-	height: 16px;
+  display: inline-block;
+  height: 16px;
   margin-right: .5rem;
-	vertical-align: -.2rem;
-	width: 16px;
+  vertical-align: -.2rem;
+  width: 16px;
 }
 
 .detected__app-name {
@@ -160,40 +160,44 @@ div.convertable_apps .detected__app {
 }
 
 .converter-tabs pre {
+  border: 1px solid #ccc;
   background: #fff;
-	display: block;
-	font-size: 10px;
-	line-height: 15px;
-	margin: 5px 0 0;
+  display: block;
+  font-size: 10px;
+  line-height: 15px;
+  margin: 0;
+  padding: 5px 10px;
 }
 
 .converter-tabs p a {
-	color: #1c79c0;
-	text-decoration: none;
+  color: #1c79c0;
+  text-decoration: none;
 }
 .converter-tabs p a:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
-
 .converter-tabs p.converted-content {
-	font-size: 13px;
-	line-height: 15px;
+  font-size: 13px;
+  line-height: 15px;
+}
+.converter-tabs.ui-tabs .ui-tabs-panel {
+  padding: 0;
 }
 
 .detected__app-convert {
-	border-radius: 5px;
-	color: #fff;
+  border-radius: 5px;
+  color: #fff;
   font-size: 11px;
-	line-height: 13px;
+  line-height: 13px;
   margin: -4px 0 0;
   float: right;
-	text-transform: uppercase;
+  text-transform: uppercase;
   cursor: pointer;
   opacity: 0.7;
   transition: 100ms all ease-in-out;
 }
 .detected__app-convert:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .detected__app-version, .detected__app-confidence {
@@ -218,16 +222,16 @@ div.convertable_apps .detected__app {
 }
 
 .detected-app {
-	padding: 7px 0;
+  padding: 7px 0;
 }
 
 .detected-app:first-child {
-	padding-top: 0;
+  padding-top: 0;
 }
 
 .detected-app:last-child {
-	border: none;
-	padding-bottom: 0;
+  border: none;
+  padding-bottom: 0;
 }
 
 .empty {
@@ -313,7 +317,7 @@ header {
   border: none;
   outline: none;
   opacity: 0.5;
-  transition: 100ms all ease-in-out;
+  /*transition: 100ms all ease-in-out;*/
   cursor: pointer;
 }
 
@@ -376,11 +380,11 @@ header {
   margin: 5px;
   color: #AAA;
   border-color: white;
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 1px solid #ccc;
-	padding: 0;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  padding: 0;
 
 }
 .settings-dropdown div {
@@ -647,7 +651,7 @@ button.tooltip_button:hover {
 
 img.tooltip_image {
   display: inline-block;
-	height: 24px;
+  height: 24px;
   margin-left:22px;
   margin-right: -15px;
   vertical-align: -.2rem;
@@ -656,8 +660,9 @@ img.tooltip_image {
 
 /* jQuery Tab Widget Styles */
 .ui-tabs .ui-tabs-nav {
-  border-bottom: 1px solid #DDDDDD !important;
+  /*border-bottom: 1px solid #DDDDDD !important;*/
   border-radius: 0px !important;
+  padding: 0;
 }
 
 .ui-widget.ui-widget-content {

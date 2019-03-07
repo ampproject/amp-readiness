@@ -2,7 +2,7 @@
 /** global: browser */
 let activeTab;
 let pageHtml;
-var convertableApps = {}, convertableUrls = [];
+var convertableApps = {}, convertableUrls = [], allApps = {};
 
 const func = (tabs) => {
   (chrome || browser).runtime.sendMessage({
@@ -15,6 +15,7 @@ const func = (tabs) => {
     // Store external for use on click
     convertableApps = response.convertable_apps;
     convertableUrls = response.tracked_urls;
+    allApps = response.apps;
     replaceDomWhenReady(appsToDomTemplate(response));
   });
 };
@@ -117,7 +118,9 @@ $(window).on('load', function() {
 
   $('.detected__app-convert').each(function(){
     var new_tab = $(this).data('type');
-    $('.converter-tabs>ul').append("<li><a href='#"+hashCode(new_tab)+"'>"+new_tab+"</a></li>");
+    var icon = locateIcon(new_tab, allApps);
+    $('.converter-tabs>ul').append("<li><img src='" + icon + "' style='vertical-align: middle' /><a href='#"+hashCode(new_tab)+"'>"+new_tab+"</a></li>");
+
     $('.converter-tabs').append("<div id='"+hashCode(new_tab)+"'></div>");
   });
 

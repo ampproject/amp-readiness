@@ -112,6 +112,14 @@
   transition: 100ms all ease-in-out;
 }
 
+.tooltip.detected__app {
+  opacity: 0.5;
+}
+
+.tooltip.detected__app:hover {
+  opacity: 1;
+}
+
 .detected__app:hover {
   background-color: #F8FCFF;
 }
@@ -679,7 +687,13 @@ img.tooltip_image {
   border-bottom: 2px solid #0389ff !important;
 }
 
-.ui-tabs .ui-tabs-nav li::before{
+.ui-tabs .ui-tabs-nav img{
+  height: 20px;
+  width: 20px;
+  position: relative;
+  background: transparent;
+  top: 3px;
+  margin-right: 1em;
 }
 
 .ui-widget-header {
@@ -695,6 +709,24 @@ img.tooltip_image {
   background-color: #F8FCFF;
   color: #0389ff !important;
 }
+
+.ui-state-active img {
+  
+}
+
+.ui-tabs-tab {
+  background: transparent !important;
+}
+
+.ui-tabs-tab:hover {
+  background: #F8FCFF !important;
+}
+
+.ui-tabs-tab.ui-state-active {
+  background: #F8FCFF !important;
+}
+
+
 
 .ui-tabs .ui-tabs-nav li:hover a {
   background-color: #F8FCFF;

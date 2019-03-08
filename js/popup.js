@@ -43,6 +43,14 @@ $(window).on('load', function() {
     $(".settings-dropdown").css("display", "block");
   });
 
+  $('#license-button').click(function(e) {
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      window.open(chrome.runtime.getURL('options.html'));
+    }
+  });
+
   $('.back-button').click(function(e) {
     e.preventDefault();
     e.stopPropagation();

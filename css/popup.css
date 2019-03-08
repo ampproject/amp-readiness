@@ -259,6 +259,7 @@ body {
   font-family: "Google Sans", sans-serif;
   font-size: 100%;
   min-width: 400px;
+  min-height: 220px;
   margin: 0 8px;
 }
 

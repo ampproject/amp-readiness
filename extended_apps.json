@@ -476,7 +476,7 @@
             "type": "amp-analytics",
 			"content": "",
 			"regex": ["(\"licenseKey\":\")([0-9a-z]+)(\")", "(\"applicationID\":\")([0-9]+)(\")"],
-			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\n<script type=\"application/json\">\n{\n\"vars\": {\n\"appId\": \"{0}\",\n\"licenseKey\": \"{1}\"\n}\n}\n</script>\n</amp-analytics>"
+			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application\/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": {0},\r\n      \"licenseKey\": {1}r\n    }\r\n  }\r\n<\/script>\r\n<\/amp-analytics>"
 		}
 	}
 }

@@ -4,8 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<link rel="stylesheet" href="../css/popup.css">
-		<link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/lib/jquery-ui.css">
+	<link rel="stylesheet" href="../css/lib/prism.css">
+	<link rel="stylesheet" href="../css/popup.css">
+
 
 
 		<script src="../node_modules/webextension-polyfill/dist/browser-polyfill.js"></script>
@@ -13,6 +15,7 @@
 		<script src="../node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
 
 		<script src="../js/lib/jsontodom.js"></script>
+    <script src="../js/lib/prism.js"></script>
 		<script src="../js/popup.js"></script>
 	</head>
 	<body>
@@ -29,12 +32,22 @@
 					</object>
 				</button>
 				<div class="settings-dropdown">
-						<a class="settings-choice" href="https://github.com/ampproject/amphtml/blob/master/LICENSE" target="_blank">LICENSE</a>
+          <div>
+						<a id="license-button" href="#" class="settings-choice">LICENSE</a>
+          </div>
+          <div>
 						<a class="settings-choice" href="https://ampproject.org" target="_blank">ampproject.org</a>
+          </div>
 						<hr>
-						<a class="settings-choice" href="#">Send Feedback</a>
-						<a class="settings-choice" href="#">Github</a>
-						<a class="settings-choice" href="#">Help</a>
+          <div>
+						<a class="settings-choice" href="https://github.com/ampproject/amp-readiness/issues" target="_blank">Send Feedback</a>
+          </div>
+          <div>
+						<a class="settings-choice" href="https://github.com/ampproject/amp-readiness/" target="_blank">Github</a>
+          </div>
+          <div>
+						<a class="settings-choice" href="https://github.com/ampproject/amp-readiness/blob/master/README.md" target="_blank">Help</a>
+          </div>
 				</div>
 			</div>
 		</div>
@@ -49,8 +62,15 @@
 				<span class="text">Not Compatible</span>
 			</h3>
 		</div>
-    	<div class="container"></div>
-    	<div class="converter"></div>
+		<div class="container"></div>
+		<div class="converter-tabs">
+			<ul></ul>
+		</div>
+		<button class="back-button">
+			<object type="image/svg+xml" data="../images/back_button.svg" id="back-icon">
+			</object>
+		</button>
+
 		<!-- <footer>
 			<div class="info">
 				<a href="https://ampproject.org" target="_blank">ampproject.org</a>

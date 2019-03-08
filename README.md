@@ -12,4 +12,5 @@ Install the extension from the [Chrome Store](https://chrome.google.com/webstore
 
 ### Credits
 
-Architecture + Detection Logic - [Wappalyzer](https://github.com/AliasIO/Wappalyzer).
+Based on [Wappalyzer](https://github.com/AliasIO/Wappalyzer).
+Syntax highligting by [Prism](https://github.com/PrismJS/prism)

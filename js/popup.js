@@ -43,6 +43,12 @@ $(window).on('load', function() {
     $(".settings-dropdown").css("display", "block");
   });
 
+  $('.feedback-button').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.open("https://github.com/ampproject/amp-readiness/issues/new");
+  });
+
   $('#license-button').click(function(e) {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
@@ -327,9 +333,7 @@ function appsToDomTemplate(response) {
                       id:'code_brackets'
                     }
                   ] 
-                  ] : ['span', {
-                    class: 'test'
-                  }]
+                  ] : null
               ]
             );
           } else if(isAMPIncompatible(appName, response.incompatible_apps)){

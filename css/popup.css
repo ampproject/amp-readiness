@@ -162,10 +162,10 @@ div.convertable_apps .detected__app {
 .converter-tabs pre {
   background: #fff;
   display: block;
-  font-size: 10px;
+  font-size: 10pt;
   line-height: 15px;
   margin: 0;
-  padding: 10px;
+  padding: 7px;
 }
 
 .converter-tabs p a {
@@ -283,10 +283,18 @@ header {
   margin: 0 0 0px 10px;
 }
 
+.logo sup{
+  vertical-align: super;
+  font-size: 12pt;
+}
+
+.logo object {
+  vertical-align: super;
+}
+
 .logo span {
   float: left;
   margin-left: 2px;
-  margin-top: 2px;
 }
 
 .settings {
@@ -306,11 +314,31 @@ header {
   background-color: #F8FCFF;
 }
 
+.feedback-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  height: 16px;
+  vertical-align: super;
+  opacity: 0.8;
+}
+
+.feedback-button:hover {
+  background-color: #F8FCFF;
+  opacity: 1
+}
+
 #settings-icon {
   height: 25px;
   width: 25px;
   pointer-events: none;
 }
+
+#feedback-icon {
+  pointer-events: none;
+}
+
 
 .back-button {
   background: transparent;
@@ -716,7 +744,7 @@ img.tooltip_image {
 }
 
 .ui-state-active img {
-  
+
 }
 
 .ui-tabs-tab {
@@ -742,6 +770,11 @@ pre[class*="language-"]>code {
   background: white;
   border: none;
   box-shadow: none;
+}
+
+code.language-html {
+  padding: 0;
+  white-space: pre-wrap;
 }
 
 .ui-tabs-anchor {

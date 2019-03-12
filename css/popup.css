@@ -110,6 +110,7 @@
   text-decoration: none;
   display: block;
   transition: 100ms all ease-in-out;
+  height: 26px;
 }
 
 .tooltip.detected__app {
@@ -145,6 +146,7 @@ div.convertable_apps .detected__app {
   font-size: 10pt;
   transition: 100ms all ease-in-out;
   font-family: "Roboto", sans-serif;
+  vertical-align: middle;
 }
 
 .converter {
@@ -206,6 +208,7 @@ div.convertable_apps .detected__app {
   margin-left: .3rem;
   padding: .1rem .2rem;
   text-decoration: unset;
+  vertical-align: middle;
 }
 
 .detected__app:hover .detected__app-name {
@@ -238,11 +241,13 @@ div.convertable_apps .detected__app {
   height: 14.5rem;
   align-items: center;
   justify-content: center;
+  color: #616161;
 }
 
 div.convertable_apps {
   display: block;
   transition: 100ms all ease-in-out;
+  height: 26px;
 }
 
 
@@ -360,10 +365,13 @@ header {
 }
 
 #chevrons {
-  position: relative;
+  position: absolute;
   height: 20px;
   width: 20px;
-  top: 6px;
+  margin-top: 2px;
+}
+.question-mark #chevrons {
+  margin-top: 5px;
 }
 
 #code_brackets {
@@ -587,6 +595,7 @@ footer div a:hover {
 
 span.tooltip.detected__app {
   display: inline;
+  vertical-align: middle;
 }
 
 span.tooltip.detected__app > object {
@@ -713,6 +722,7 @@ img.tooltip_image {
   border: none;
   padding: 0px !important;
   margin: 1px 0 0 0 !important;
+  letter-spacing: 0.5px;
 }
 
 

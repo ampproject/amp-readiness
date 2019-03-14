@@ -120,25 +120,23 @@ fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json
   })
   .catch(error => wappalyzer.log(`GET apps.json: ${error}`, 'driver', 'error'));
 
-// Version check
-const { version } = browser.runtime.getManifest();
+ // Version check
+(async () => {
+  const { version }  = browser.runtime.getManifest();
+  const previousVersion = await getOption('version');
 
-getOption('version')
-  .then((previousVersion) => {
-    if (previousVersion === null) {
-      
-    } else if (version !== previousVersion) {
-      getOption('upgradeMessage', true)
-        .then((upgradeMessage) => {
-          if (upgradeMessage) {
-           
-          }
-        });
-    }
+  console.log("current version: " + version)
+  console.log("previous version: " + previousVersion)
 
-    setOption('version', version);
-  });
 
+  if (previousVersion === null || version !== previousVersion) {
+    openTab({
+      url: `https://github.com/ampproject/amp-readiness/wiki/AMP-Readiness-4.0`,
+    });
+  }
+
+  await setOption('version', version);
+})();
 getOption('dynamicIcon', false);
 
 

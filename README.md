@@ -13,4 +13,5 @@ Install the extension from the [Chrome Store](https://chrome.google.com/webstore
 ### Credits
 
 Based on [Wappalyzer](https://github.com/AliasIO/Wappalyzer).
-Syntax highligting by [Prism](https://github.com/PrismJS/prism)
+Syntax highligting by [Prism](https://github.com/PrismJS/prism).
+UI Elements created using [jQuery UI](https://github.com/jquery/jquery-ui).

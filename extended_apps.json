@@ -306,7 +306,8 @@
         "Adobe Analytics",
         "AFS Analytics",
         "Alexa Internet",
-        "AT Internet",
+        "AT Internet Analyzer",
+        "AT Internet XiTi",
         "Baidu Analytics",
         "Burt",
         "Chartbeat",
@@ -382,10 +383,10 @@
         "Bringhub",
         "Outbrain",
         "Taboola",
-        "ZergNet"
+        "ZergNet",
+        "Optimizely"
     ],
     "incompatible": [
-        "Optimizely",
         "Aircall",
         "Bold Chat",
         "GoSquared",
@@ -463,20 +464,39 @@
 		"Google Analytics": {
             "type": "amp-analytics",
 			"content": "",
-			"regex": "UA-\\d+-\\d+",
-			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"{0}\",\n    \"config\" : {\n      \"{0}\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\n</amp-analytics>"
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"<GA_TRACKING_ID>\",\n    \"config\" : {\n      \"<GA_TRACKING_ID>\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>"
 		},
 		"Google Tag Manager": {
             "type": "amp-analytics",
 			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
-			"regex": ["GTM-[0-9a-z]+"],
-            "template": "<!-- Google Tag Manager -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id={0}\" data-credentials=\"include\"></amp-analytics>"
+            "template": "<!-- Google Tag Manager -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id=<AMP_CONTAINER_ID>\" data-credentials=\"include\"></amp-analytics>"
 		},
 		"New Relic": {
             "type": "amp-analytics",
 			"content": "",
-			"regex": ["(\"licenseKey\":\")([0-9a-z]+)(\")", "(\"applicationID\":\")([0-9]+)(\")"],
-			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application\/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": {0},\r\n      \"licenseKey\": {1}r\n    }\r\n  }\r\n<\/script>\r\n<\/amp-analytics>"
-		}
+			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application\/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": \"<NEW_RELIC_APP_ID>\",\r\n      \"licenseKey\": \"<NEW_RELIC_LICENSE_KEY>\"\n    }\r\n  }\r\n<\/script>\r\n<\/amp-analytics>"
+        },
+        "Acquia Lift": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"acquialift\" id=\"acquialift\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"siteId\": \"<ACQUIA_LIFT_SITE_ID>\",\r\n               \"accountId\": \"<MY_ACCOUNT_ID>\",\r\n               \"decisionApiUrl\": \"<DECISION_API_URL>\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Adobe Analytics": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"adobeanalytics\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"host\": \"<HOST_URL>\",\r\n               \"reportSuites\": \"<REPORT_SUITE_ID>\",\r\n               \"pageName\": \"<PAGE_NAME>\"\r\n           },\r\n           \"triggers\": {\r\n               \"pageLoad\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageView\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "AT Internet Analyzer": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"<SITE_NUMBER>\",\r\n               \"log\": \"<SECURED_COLLECTION_SERVER>\",\r\n               \"domain\": \"<COLLECTION_DOMAIN>\",\r\n               \"title\": \"<NAME_OF_PAGE>\",\r\n               \"level2\": \"<LEVEL_2_OF_PAGE>\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "AT Internet XiTi": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"<SITE_NUMBER>\",\r\n               \"log\": \"<SECURED_COLLECTION_SERVER>\",\r\n               \"domain\": \"<COLLECTION_DOMAIN>\",\r\n               \"title\": \"<NAME_OF_PAGE>\",\r\n               \"level2\": \"<LEVEL_2_OF_PAGE>\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        }
+
+        
 	}
 }

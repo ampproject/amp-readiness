@@ -158,35 +158,36 @@ function convertApp(app) {
     // Loop through regexes
     content = convertableApps[app].content;
     template = convertableApps[app].template;
-    var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
-    // Check for matches on the first regex
-    for (var i = 0; i < expressions.length; i++) {
-      // Check for data on each regex (i flag ignores case)
-      var regex = new RegExp(expressions[i], ["i"]);
-      // Find pattern in every URL
-      for (url in convertableUrls) {
-        regex_results = regex.exec(url);
-        // Set the template only once
-        if (regex_results !== null) {
-          console.log("found a match in a URL:" + url);
-          //Push the first of the results on there
-          result.push(regex_results[0]);
-        }
-      }
-      // Check for the pattern in the HTML if we didn't find it in the URLs
-      if (result == null) {
-        // Check for matches on the first regex
-        result = regex.exec(pageHtml);
-        if (result !== null) {
-          console.log("found a match in the HTML:" + pageHtml);
-          result = result[0]
-        }
-      }   
-    }
+    //We will revisit code completion later
+    // var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
+    // // Check for matches on the first regex
+    // for (var i = 0; i < expressions.length; i++) {
+    //   // Check for data on each regex (i flag ignores case)
+    //   var regex = new RegExp(expressions[i], ["i"]);
+    //   // Find pattern in every URL
+    //   for (url in convertableUrls) {
+    //     regex_results = regex.exec(url);
+    //     // Set the template only once
+    //     if (regex_results !== null) {
+    //       console.log("found a match in a URL:" + url);
+    //       //Push the first of the results on there
+    //       result.push(regex_results[0]);
+    //     }
+    //   }
+    //   // Check for the pattern in the HTML if we didn't find it in the URLs
+    //   if (result == null) {
+    //     // Check for matches on the first regex
+    //     result = regex.exec(pageHtml);
+    //     if (result !== null) {
+    //       console.log("found a match in the HTML:" + pageHtml);
+    //       result = result[0]
+    //     }
+    //   }   
+    // }
     console.log(template);
     console.log(content);
 
-    renderedHTML = renderAppConversionHtml(template, result, app);
+    renderedHTML = renderAppConversionHtml(template, app);
     var html = content ? '<p class="converted-content">' + content + '</p>' : '';
     html += '<pre><code class="language-html">' + renderedHTML + '</code></pre>';
 
@@ -200,21 +201,23 @@ function convertApp(app) {
   $('.converter-tabs').show();
   $('.back-button').show();
   Prism.highlightAll();
+  $('.token.string:contains("<")').css("background-color", "yellow");
 
 }
 
-function renderAppConversionHtml(html, result, app) {
+// function renderAppConversionHtml(html, result, app) {
+function renderAppConversionHtml(html, app) {
   if (convertableApps[app].type === "amp-analytics"){
     html = "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" + html;
   }
-  if (result != null) {
-    console.log(result);
-    if (app === "New Relic"){
-      html = html.replace('{0}', result[0]).replace('{1}', result[1]);
-    } else if (app === "Google Tag Manager" || app === "Google Analytics"){
-      html = html.replace(/\{0\}/g, result[0]);
-    }
-  }
+  // if (result != null) {
+  //   console.log(result);
+  //   if (app === "New Relic"){
+  //     html = html.replace('{0}', result[0]).replace('{1}', result[1]);
+  //   } else if (app === "Google Tag Manager" || app === "Google Analytics"){
+  //     html = html.replace(/\{0\}/g, result[0]);
+  //   }
+  // }
   return html.replace(new RegExp('<', 'g'), '&lt;')
               .replace(new RegExp('>', 'g'), '&gt;'); ;
 }

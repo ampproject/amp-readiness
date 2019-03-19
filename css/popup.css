@@ -790,3 +790,7 @@ code.language-html {
 .ui-tabs-anchor {
   float: right !important;
 }
+
+.highlight {
+  background-color: yellow;
+}

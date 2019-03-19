@@ -66,7 +66,7 @@ $(window).on('load', function() {
     $('.converter').hide();
     $('.back-button').hide();
     $('.converter-tabs').hide();
-  })
+  });
 
   $(window).hover(function(e) {
     if ($(e.target).attr('class')){
@@ -74,8 +74,8 @@ $(window).on('load', function() {
         $(".settings-dropdown").css("display", "none");
       }
     }
-  })
-  
+  });
+
   /**
    * Create tooltips for categories and technologies
    */
@@ -201,14 +201,26 @@ function convertApp(app) {
   $('.converter-tabs').show();
   $('.back-button').show();
   Prism.highlightAll();
-  $('.token.string:contains("<")').css("background-color", "yellow");
+  $('span.token.string, span.token.attr-value').html((i, html) => {
+    console.log(html);
+    var tag_regex = /\[\[.*\]\]/;
+    if (tag_regex.test(html)){
+      console.log("MATCH")
+      return html.replace(/(\[\[.*\]\])/, '<span class="highlight">$1</span>')
+    } else {
+      console.log("no match")
+    }
+  });
 
 }
 
 // function renderAppConversionHtml(html, result, app) {
 function renderAppConversionHtml(html, app) {
   if (convertableApps[app].type === "amp-analytics"){
-    html = "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" + html;
+    html = "//Add this to the head\n" +
+           "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" +
+           "//Add this to the body\n" +
+           html;
   }
   // if (result != null) {
   //   console.log(result);
@@ -336,7 +348,20 @@ function appsToDomTemplate(response) {
                       id:'code_brackets'
                     }
                   ] 
-                  ] : null
+                ] : null,
+                [
+                  'span', {
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
+                  }, [
+                    'object', {
+                      style: 'display:none',
+                      type: 'image/svg+xml',
+                      data:'../images/chevrons.svg',
+                      id:'chevrons'
+                    }
+                  ] 
+                ] 
               ]
             );
           } else if(isAMPIncompatible(appName, response.incompatible_apps)){

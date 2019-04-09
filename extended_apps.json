@@ -435,7 +435,8 @@
     "Google Analytics": {
       "type": "amp-analytics",
       "content": "",
-      "template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_TRACKING_ID]]\",\n    \"config\" : {\n      \"[[GA_TRACKING_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>"
+      "template":
+        "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_ACCOUNT_ID]]\",\n    \"config\" : {\n      \"[[GA_ACCOUNT_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>"
     },
     "Google Tag Manager": {
       "type": "amp-analytics",

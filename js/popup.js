@@ -217,9 +217,9 @@ function convertApp(app) {
 // function renderAppConversionHtml(html, result, app) {
 function renderAppConversionHtml(html, app) {
   if (convertableApps[app].type === "amp-analytics"){
-    html = "//Add this to the head\n" +
+    html = "//Add this to <head>\n" +
            "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" +
-           "//Add this to the body\n" +
+           "//Add this to <body>\n" +
            html;
   }
   // if (result != null) {
@@ -461,10 +461,9 @@ function appsToDomTemplate(response) {
                   'div', {
                     class: 'detected__category-name',
                   }, [
-                    'a', {
+                    'span', {
                       class: 'detected__category-link',
                       target: '_blank',
-                      href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
                     },
                     browser.i18n.getMessage(`categoryName${cat}`),
                   ],
@@ -486,10 +485,9 @@ function appsToDomTemplate(response) {
                   'div', {
                     class: 'detected__category-name',
                   }, [
-                    'a', {
+                    'span', {
                       class: 'detected__category-link',
                       target: '_blank',
-                      href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
                     },
                     browser.i18n.getMessage(`categoryName${cat}`),
                   ], [
@@ -523,10 +521,9 @@ function appsToDomTemplate(response) {
                   'div', {
                     class: 'detected__category-name',
                   }, [
-                    'a', {
+                    'span', {
                       class: 'detected__category-link',
                       target: '_blank',
-                      href: `https://www.wappalyzer.com/categories/${response.categories[cat].name}`,
                     },
                     browser.i18n.getMessage(`categoryName${cat}`),
                   ], [

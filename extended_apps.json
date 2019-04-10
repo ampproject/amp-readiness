@@ -45,7 +45,7 @@
             "website": "http://www.koego.com/",
             "extended": true
         },
-        "Krux (Salesforce DMP)": {
+        "Krux": {
             "cats": [
                 10
             ],
@@ -334,7 +334,7 @@
         "Nielsen",
         "Nielsen Marketing Cloud",
         "OEWA",
-        "Parsely",
+        "Parse.ly",
         "Piano",
         "Quantcast",
         "Segment",
@@ -346,7 +346,7 @@
         "Umeng+ Analytics",
         "Treasure Data",
         "Webtrekk",
-        "Yandex Metrica",
+        "Yandex.Metrika",
         "AMPize.me",
         "Arc Publishing",
         "Canvas",
@@ -389,6 +389,9 @@
     "incompatible": [
         "Aircall",
         "Bold Chat",
+        "Crazy Egg",
+        "Clicktail",
+        "Hot Jar",
         "GoSquared",
         "LiveAgent",
         "LiveChat",
@@ -398,8 +401,7 @@
         "Raychat",
         "Tawk.to",
         "UserLike",
-        "Zendesk Chat",
-        "reCAPTCHA"
+        "Zendesk Chat"
     ],
     "conversionCategoryTooltips": {
         "1": {
@@ -464,12 +466,12 @@
 		"Google Analytics": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_TRACKING_ID]]\",\n    \"config\" : {\n      \"[[GA_TRACKING_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>"
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_TRACKING_ID]]\",\n    \"config\" : {\n      \"[[GA_TRACKING_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\r\n<\/amp-analytics>"
 		},
 		"Google Tag Manager": {
             "type": "amp-analytics",
 			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
-            "template": "<!-- Google Tag Manager -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id=[[AMP_CONTAINER_ID]]\" data-credentials=\"include\"></amp-analytics>"
+            "template": "<!-- Google Tag Manager -->\r\n<amp-analytics config=\"https:\/\/www.googletagmanager.com\/amp.json?id=[[AMP_CONTAINER_ID]]\" data-credentials=\"include\">\r\n <script type=\"application\/json\">\r\n   {\r\n     \"linkers\": {\r\n       \"_gl\": {\r\n       \"enabled\": true,\r\n         \"ids\": {\r\n           \"_ga\": \"CLIENT_ID(AMP_ECID_GOOGLE,,_ga)\"\r\n         },\r\n        \"proxyOnly\": false\r\n      }\r\n     }\r\n   }\r\n <\/script>\r\n<\/amp-analytics>"
 		},
 		"New Relic": {
             "type": "amp-analytics",
@@ -495,8 +497,76 @@
             "type": "amp-analytics",
 			"content": "",
 			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Chartbeat": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"burt\" id=\"burt\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackingKey\": \"[[TRACKING_KEY]]\",\r\n               \"category\": \"[[CATEGORY]]\",\r\n               \"subCategory\": \"[[SUBCATEGORY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "comScore": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"comscore\" id=\"comscore\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"c2\": \"[[C2_VALUE]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Dynatrace": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"dynatrace\" id=\"dynatrace\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"app\": \"[[APP_ID]]\",\r\n               \"tenant\": \"[[TENANT_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Facebook": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"facebookpixel\" id=\"facebook-pixel\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pixelId\": \"[[PIXEL_ID]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"trackPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Google Ads": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"gtag_id\": \"[[AW_CONVERSION_ID]]\",\r\n               \"config\": {\r\n                   \"[[AW_CONVERSION_ID]]\": {\r\n                       \"groups\": \"default\"\r\n                   }\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "INFOnline": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"infonline\" id=\"infonline\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"st\": \"[[ID]]\",\r\n               \"co\": \"[[COMMENT]]\",\r\n               \"cp\": \"[[CP_ID]]\",\r\n               \"ps\": \"[[PS_ID]]\"\r\n           },\r\n           \"requests\": {\r\n               \"url\": \"[[TARGET_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Krux": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"krux\" config=\"https:\/\/cdn.krxd.net\/controltag\/amp\/[[SALESFORCE_DMP_ID]].json\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"extraUrlParams\": {\r\n               \"user.status\": \"[[STATUS]]\",\r\n               \"page.keywords\": \"[[PAGE, KEYWORD, ARRAY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Mobify": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"mobify\" id=\"mobify\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"projectSlug\": \"[[SLUG]]\",\r\n               \"templateName\": \"[[TEMPLATE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Parse.ly": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"parsely\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"apikey\": \"[[API_KEY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Quantcast": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"quantcast\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pcode\": \"[[PCODE]]\",\r\n               \"labels\": [[LABEL ARRAY]]\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Segment": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"segment\">\r\n   <script>\r\n       {\r\n           \"vars\": {\r\n               \"writeKey\": \"[[SEGMENT_WRITE_KEY]]\",\r\n               \"name\": \"[[PAGE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Webtrekk": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"webtrekk_v2\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackDomain\": \"[[TRACK_DOMAIN]]\",\r\n               \"trackId\": \"[[TRACK_ID]]\"\r\n           },\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Yandex.Metrika": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"metrika\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"counterId\": \"[[COUNTER_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+        },
+        "Optimizely": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"optimizely\"> </amp-analytics>\r\n"
         }
-
-        
 	}
 }

@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "webextension-polyfill": "0.2.1",
+    "webextension-polyfill": "0.4.0",
     "jquery": "3.4.1",
     "jquery-ui-dist": "1.12.1"
   }

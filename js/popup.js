@@ -84,7 +84,7 @@ $(window).on('load', function() {
     position: { my: "right center", collision: "fit"},
     content: function() {
       htmlResult = ""
-      if ($(this).hasClass("detected__app")) {
+      if ($(this).hasClass("app_tooltip")) {
         title = $(this).parent().find(".detected__app-name").text()
         description = $(this).attr('data_tooltip_left')
         version = $(this).parent().find(".detected__app-version").text()
@@ -351,7 +351,7 @@ function appsToDomTemplate(response) {
                 ] : null,
                 [
                   'span', {
-                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'app_tooltip tooltip':''} `,
                     data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
                   }, [
                     'object', {
@@ -394,7 +394,7 @@ function appsToDomTemplate(response) {
                 ] : null,
                 [
                   'span', {
-                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'app_tooltip tooltip':''} `,
                     data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
                   }, [
                     'object', {
@@ -437,7 +437,7 @@ function appsToDomTemplate(response) {
                 ] : null,
                 [
                   'span', {
-                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'tooltip':''} detected__app`,
+                    class: `${technologyHasTooltip(appName, response.tech_tooltips) ? 'app_tooltip tooltip':''}`,
                     data_tooltip_left: `${technologyHasTooltip(appName, response.tech_tooltips) ? response.tech_tooltips[appName]:''}`,
                   }, [
                     'object', {

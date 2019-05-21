@@ -113,11 +113,11 @@
   height: 26px;
 }
 
-.tooltip.detected__app {
+.app_tooltip{
   opacity: 0.5;
 }
 
-.tooltip.detected__app:hover {
+.app_tooltip:hover {
   opacity: 1;
 }
 
@@ -593,12 +593,12 @@ footer div a:hover {
   font-weight: normal;
 }
 
-span.tooltip.detected__app {
+span.app_tooltip {
   display: inline;
   vertical-align: middle;
 }
 
-span.tooltip.detected__app > object {
+span.app_tooltip > object {
   display: inline !important;
 }
 

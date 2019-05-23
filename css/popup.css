@@ -113,11 +113,11 @@
   height: 26px;
 }
 
-.app_tooltip{
+.tooltip.detected__app {
   opacity: 0.5;
 }
 
-.app_tooltip:hover {
+.tooltip.detected__app:hover {
   opacity: 1;
 }
 
@@ -155,8 +155,6 @@ div.convertable_apps .detected__app {
 
 .back-button {
   display: none;
-  position: relative;
-  bottom: 3px;
 }
 
 .converter-tabs {
@@ -595,12 +593,12 @@ footer div a:hover {
   font-weight: normal;
 }
 
-span.app_tooltip {
+span.tooltip.detected__app {
   display: inline;
   vertical-align: middle;
 }
 
-span.app_tooltip > object {
+span.tooltip.detected__app > object {
   display: inline !important;
 }
 
@@ -702,7 +700,6 @@ img.tooltip_image {
   /*border-bottom: 1px solid #DDDDDD !important;*/
   border-radius: 0px !important;
   padding: 0;
-  display: inline-block;
 }
 
 .ui-widget.ui-widget-content {

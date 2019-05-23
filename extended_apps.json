@@ -454,8 +454,12 @@
             "reference": "https://www.ampproject.org/learn/overview/"
         }
     },
-    "incompatibleCategoryTooltips": {
-        "52": "A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page"
+    "Branch": {
+      "cats": [10],
+      "html": "cdn\\.branch\\.io/",
+      "icon": "Branch.png",
+      "website": "https://branch.io/",
+      "extended": true
     },
     "technologyTooltips": {
         "jQuery": "jQuery is a very common JS library that is used for convenience, but doesn't enable anything that can't be accomplished with AMP JS",

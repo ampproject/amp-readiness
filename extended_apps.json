@@ -407,6 +407,7 @@
         "1": {
             "content": "AMP pages need to be built within the template system of a CMS, or be built stand alone outside of the CMS. To create AMPs that look and feel like your non-AMPs with a CMS will require coding on your part. Plugins aren't likely to convert everything automatically, and could give sub-par results.",
             "reference": null
+
         },
         "5": {
             "content": "Social features can be added in AMP pages using the amp-social-share component",
@@ -457,7 +458,6 @@
         "52": "A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page"
     },
     "technologyTooltips": {
-        "Optimizely": "Client side A/B testing is being worked on by the team, and estimated to ship by end of Q1 2019.",
         "jQuery": "jQuery is a very common JS library that is used for convenience, but doesn't enable anything that can't be accomplished with AMP JS",
         "GoSquared": "If you aren't using the chat feature of GoSquared, then it is possible to integrate GoSquared Analytics within AMP. A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page",
         "reCAPTCHA": "reCAPTCHA will have native support in AMP by the end of Q1, 2019. Please reference ampproject/amphtml issue 2273 in GitHub for any updates."
@@ -466,107 +466,128 @@
 		"Google Analytics": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_TRACKING_ID]]\",\n    \"config\" : {\n      \"[[GA_TRACKING_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\r\n<\/amp-analytics>"
-		},
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_TRACKING_ID]]\",\n    \"config\" : {\n      \"[[GA_TRACKING_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\r\n<\/amp-analytics>",
+            "link": "https://developers.google.com/analytics/devguides/collection/amp-analytics/"
+        },
 		"Google Tag Manager": {
             "type": "amp-analytics",
 			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
-            "template": "<!-- Google Tag Manager -->\r\n<amp-analytics config=\"https:\/\/www.googletagmanager.com\/amp.json?id=[[AMP_CONTAINER_ID]]\" data-credentials=\"include\">\r\n <script type=\"application\/json\">\r\n   {\r\n     \"linkers\": {\r\n       \"_gl\": {\r\n       \"enabled\": true,\r\n         \"ids\": {\r\n           \"_ga\": \"CLIENT_ID(AMP_ECID_GOOGLE,,_ga)\"\r\n         },\r\n        \"proxyOnly\": false\r\n      }\r\n     }\r\n   }\r\n <\/script>\r\n<\/amp-analytics>"
-		},
+			"template": "<!-- Google Tag Manager -->\r\n<amp-analytics config=\"https:\/\/www.googletagmanager.com\/amp.json?id=[[AMP_CONTAINER_ID]]\" data-credentials=\"include\">\r\n<\/amp-analytics>",
+            "link": "https://developers.google.com/google-ads/amp/landing-pages#google_tag_manager"
+        },
 		"New Relic": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application\/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": \"[[NEW_RELIC_APP_ID]]\",\r\n      \"licenseKey\": \"[[NEW_RELIC_LICENSE_KEY]]\"\n    }\r\n  }\r\n<\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application\/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": \"[[NEW_RELIC_APP_ID]]\",\r\n      \"licenseKey\": \"[[NEW_RELIC_LICENSE_KEY]]\"\n    }\r\n  }\r\n<\/script>\r\n<\/amp-analytics>",
+            "link": "https://docs.newrelic.com/docs/browser/new-relic-browser/installation/monitor-amp-pages-new-relic-browser"
         },
         "Acquia Lift": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"acquialift\" id=\"acquialift\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"siteId\": \"[[ACQUIA_LIFT_SITE_ID]]\",\r\n               \"accountId\": \"[[MY_ACCOUNT_ID]]\",\r\n               \"decisionApiUrl\": \"[[DECISION_API_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"acquialift\" id=\"acquialift\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"siteId\": \"[[ACQUIA_LIFT_SITE_ID]]\",\r\n               \"accountId\": \"[[MY_ACCOUNT_ID]]\",\r\n               \"decisionApiUrl\": \"[[DECISION_API_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://docs.acquia.com/lift"
         },
         "Adobe Analytics": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"adobeanalytics\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"host\": \"[[HOST_URL]]\",\r\n               \"reportSuites\": \"[[REPORT_SUITE_ID]]\",\r\n               \"pageName\": \"[[PAGE_NAME]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"pageLoad\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageView\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"adobeanalytics\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"host\": \"[[HOST_URL]]\",\r\n               \"reportSuites\": \"[[REPORT_SUITE_ID]]\",\r\n               \"pageName\": \"[[PAGE_NAME]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"pageLoad\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageView\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://marketing.adobe.com/resources/help/en_US/sc/implement/accelerated-mobile-pages.html"
         },
         "AT Internet Analyzer": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://developers.atinternet-solutions.com/javascript-en/advanced-features-javascript-en/accelerated-mobile-pages-amp-javascript-en/"
         },
         "AT Internet XiTi": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://developers.atinternet-solutions.com/javascript-en/advanced-features-javascript-en/accelerated-mobile-pages-amp-javascript-en/"
         },
         "Chartbeat": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"burt\" id=\"burt\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackingKey\": \"[[TRACKING_KEY]]\",\r\n               \"category\": \"[[CATEGORY]]\",\r\n               \"subCategory\": \"[[SUBCATEGORY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"burt\" id=\"burt\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackingKey\": \"[[TRACKING_KEY]]\",\r\n               \"category\": \"[[CATEGORY]]\",\r\n               \"subCategory\": \"[[SUBCATEGORY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://support.chartbeat.com/docs/integrations.html#amp"
         },
         "comScore": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"comscore\" id=\"comscore\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"c2\": \"[[C2_VALUE]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"comscore\" id=\"comscore\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"c2\": \"[[C2_VALUE]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://www.comscore.com/"
         },
         "Dynatrace": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"dynatrace\" id=\"dynatrace\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"app\": \"[[APP_ID]]\",\r\n               \"tenant\": \"[[TENANT_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"dynatrace\" id=\"dynatrace\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"app\": \"[[APP_ID]]\",\r\n               \"tenant\": \"[[TENANT_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.dynatrace.com/technologies/web/amp-monitoring/"
         },
         "Facebook": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"facebookpixel\" id=\"facebook-pixel\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pixelId\": \"[[PIXEL_ID]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"trackPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"facebookpixel\" id=\"facebook-pixel\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pixelId\": \"[[PIXEL_ID]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"trackPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.facebook.com/business/a/facebook-pixel"
         },
         "Google Ads": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"gtag_id\": \"[[AW_CONVERSION_ID]]\",\r\n               \"config\": {\r\n                   \"[[AW_CONVERSION_ID]]\": {\r\n                       \"groups\": \"default\"\r\n                   }\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"gtag_id\": \"[[AW_CONVERSION_ID]]\",\r\n               \"config\": {\r\n                   \"[[AW_CONVERSION_ID]]\": {\r\n                       \"groups\": \"default\"\r\n                   }\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://support.google.com/adwords/answer/1722054?hl=en"
         },
         "INFOnline": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"infonline\" id=\"infonline\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"st\": \"[[ID]]\",\r\n               \"co\": \"[[COMMENT]]\",\r\n               \"cp\": \"[[CP_ID]]\",\r\n               \"ps\": \"[[PS_ID]]\"\r\n           },\r\n           \"requests\": {\r\n               \"url\": \"[[TARGET_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"infonline\" id=\"infonline\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"st\": \"[[ID]]\",\r\n               \"co\": \"[[COMMENT]]\",\r\n               \"cp\": \"[[CP_ID]]\",\r\n               \"ps\": \"[[PS_ID]]\"\r\n           },\r\n           \"requests\": {\r\n               \"url\": \"[[TARGET_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.infonline.de/"
         },
         "Krux": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"krux\" config=\"https:\/\/cdn.krxd.net\/controltag\/amp\/[[SALESFORCE_DMP_ID]].json\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"extraUrlParams\": {\r\n               \"user.status\": \"[[STATUS]]\",\r\n               \"page.keywords\": \"[[PAGE, KEYWORD, ARRAY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"krux\" config=\"https:\/\/cdn.krxd.net\/controltag\/amp\/[[SALESFORCE_DMP_ID]].json\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"extraUrlParams\": {\r\n               \"user.status\": \"[[STATUS]]\",\r\n               \"page.keywords\": \"[[PAGE, KEYWORD, ARRAY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://konsole.zendesk.com/hc/en-us/articles/216596608"
         },
         "Mobify": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"mobify\" id=\"mobify\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"projectSlug\": \"[[SLUG]]\",\r\n               \"templateName\": \"[[TEMPLATE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"mobify\" id=\"mobify\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"projectSlug\": \"[[SLUG]]\",\r\n               \"templateName\": \"[[TEMPLATE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://docs.mobify.com/amp-sdk/latest/guides/amp-analytics/"
         },
         "Parse.ly": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"parsely\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"apikey\": \"[[API_KEY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"parsely\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"apikey\": \"[[API_KEY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://parsely.com/docs/integration/tracking/google-amp.html"
         },
         "Quantcast": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"quantcast\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pcode\": \"[[PCODE]]\",\r\n               \"labels\": [[LABEL ARRAY]]\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"quantcast\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pcode\": \"[[PCODE]]\",\r\n               \"labels\": [[LABEL ARRAY]]\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.quantcast.com/help/guides/"
         },
         "Segment": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"segment\">\r\n   <script>\r\n       {\r\n           \"vars\": {\r\n               \"writeKey\": \"[[SEGMENT_WRITE_KEY]]\",\r\n               \"name\": \"[[PAGE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"segment\">\r\n   <script>\r\n       {\r\n           \"vars\": {\r\n               \"writeKey\": \"[[SEGMENT_WRITE_KEY]]\",\r\n               \"name\": \"[[PAGE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://segment.com/docs/spec/"
         },
         "Webtrekk": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"webtrekk_v2\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackDomain\": \"[[TRACK_DOMAIN]]\",\r\n               \"trackId\": \"[[TRACK_ID]]\"\r\n           },\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"webtrekk_v2\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackDomain\": \"[[TRACK_DOMAIN]]\",\r\n               \"trackId\": \"[[TRACK_ID]]\"\r\n           },\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://supportcenter.webtrekk.com/en/public/amp-analytics.html"
         },
         "Yandex.Metrika": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"metrika\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"counterId\": \"[[COUNTER_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>"
+			"template": "<amp-analytics type=\"metrika\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"counterId\": \"[[COUNTER_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://yandex.com/support/metrica/code/install-counter-amp.xml"
         },
         "Optimizely": {
             "type": "amp-analytics",
 			"content": "",
-			"template": "<amp-analytics type=\"optimizely\"> </amp-analytics>\r\n"
+			"template": "<amp-analytics type=\"optimizely\">\r\n <script type=\"application\/json\">\r\n   {\r\n       \"vars\": {\r\n           \/\/ Optimizely event tracking \/ logic here\r\n       },\r\n       \"triggers\": {\r\n           \"button\": {\r\n               \"selector\": \"#the-button\",\r\n               \"on\": \"click\"\r\n           }\r\n       }\r\n   }\r\n <\/script>\r\n<\/amp-analytics>",
+            "link": "https://blog.optimizely.com/2019/04/18/optimizely-google-amp/"
         }
 	}
 }

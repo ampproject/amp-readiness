@@ -30,6 +30,7 @@ $(window).on('load', function() {
    * Handles click event on </> buttons for code conversion
    */
   $('.detected__app-convert').click(function(e) {
+    trackButton(e);
     e.preventDefault();
     e.stopPropagation();
     console.log("Converting code for: " + $(this).data('type'))
@@ -37,6 +38,7 @@ $(window).on('load', function() {
   });
 
   $('.settings-button').click(function(e) {
+    trackButton(e);
     e.preventDefault();
     e.stopPropagation();
     console.log("Clicked settings button");
@@ -44,12 +46,14 @@ $(window).on('load', function() {
   });
 
   $('.feedback-button').click(function(e) {
+    trackButton(e);
     e.preventDefault();
     e.stopPropagation();
     window.open("https://github.com/ampproject/amp-readiness/issues/new");
   });
 
   $('#license-button').click(function(e) {
+    trackButton(e);
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
     } else {
@@ -58,6 +62,7 @@ $(window).on('load', function() {
   });
 
   $('.back-button').click(function(e) {
+    trackButton(e);
     e.preventDefault();
     e.stopPropagation();
     $('.container').show();
@@ -137,7 +142,10 @@ $(window).on('load', function() {
     $('.converter-tabs').append("<div id='" + hash + "'></div>");
   });
 
+
   $('.converter-tabs').tabs();
+
+
   
   $('.ui-tabs-tab').click(function(e) {
     var appName = $(this).first().text();
@@ -153,11 +161,12 @@ function convertApp(app) {
   if(!$('.converter-tabs #' + appHash).is(':empty')) {
     console.log("already generated snippet!");
   } else {
-    var template, content = null;
+    var template, content, link = null;
     var result = [];
     // Loop through regexes
     content = convertableApps[app].content;
     template = convertableApps[app].template;
+    link = convertableApps[app].link;
     //We will revisit code completion later
     // var expressions = typeof convertableApps[app].regex === "string" ? [convertableApps[app].regex] : convertableApps[app].regex;
     // // Check for matches on the first regex
@@ -186,10 +195,12 @@ function convertApp(app) {
     // }
     console.log(template);
     console.log(content);
+    console.log(link);
 
     renderedHTML = renderAppConversionHtml(template, app);
     var html = content ? '<p class="converted-content">' + content + '</p>' : '';
-    html += '<pre><code class="language-html">' + renderedHTML + '</code></pre>';
+    html = '<pre><code class="language-html">' + renderedHTML + '</code></pre>';
+    html += '<p class="converted-content">More documentation available <a target="_blank" href="' + link + '">here<a/></p>';
 
     $('.converter-tabs #'+ appHash).prepend(html);
   }
@@ -217,9 +228,9 @@ function convertApp(app) {
 // function renderAppConversionHtml(html, result, app) {
 function renderAppConversionHtml(html, app) {
   if (convertableApps[app].type === "amp-analytics"){
-    html = "//Add this to <head>\n" +
+    html = "<!-- Add this to <head> -->\n" +
            "<script async custom-element=\"amp-analytics\" src=\"https://cdn.ampproject.org/v0/amp-analytics-0.1.js\"></script>\n" +
-           "//Add this to <body>\n" +
+           "<!-- Add this to <body> -->\n" +
            html;
   }
   // if (result != null) {
@@ -237,7 +248,6 @@ function renderAppConversionHtml(html, app) {
 function replaceDomWhenReady(dom) {
   if (/complete|interactive|loaded/.test(document.readyState)) {
     replaceDom(dom);
-
   } else {
     document.addEventListener('DOMContentLoaded', () => {
       replaceDom(dom);
@@ -643,7 +653,18 @@ _gaq.push(['_setAccount', 'UA-58015925-3']);
 _gaq.push(['_trackPageview']);
 
 (function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  var ga = document.createElement('script');
+  ga.type = 'text/javascript';
+  ga.async = true;
   ga.src = 'https://ssl.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(ga, s);
 })();
+
+function trackButton(e) {
+  console.log(e);
+  if (e.target.className === "detected__app-convert") {
+    _gaq.push(['_trackEvent', "Conversion Button for " + e.target.dataset.type, 'clicked']);
+  } else
+    _gaq.push(['_trackEvent', "UI Button " + e.target.className, 'clicked']);
+};

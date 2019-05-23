@@ -120,7 +120,7 @@ fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json
   })
   .catch(error => wappalyzer.log(`GET apps.json: ${error}`, 'driver', 'error'));
 
- // Version check
+ // Version check. We only show this notification for new users and users upgrading from versions below 4.0
 (async () => {
   const { version }  = browser.runtime.getManifest();
   const previousVersion = await getOption('version');
@@ -129,7 +129,7 @@ fetch('https://raw.githubusercontent.com/AliasIO/Wappalyzer/master/src/apps.json
   console.log("previous version: " + previousVersion)
 
 
-  if (previousVersion === null || version !== previousVersion) {
+  if (previousVersion === null || previousVersion < 4.0) {
     openTab({
       url: `https://github.com/ampproject/amp-readiness/wiki/AMP-Readiness-4.0`,
     });

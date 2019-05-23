@@ -1,19 +1,458 @@
 {
-  "apps": {
-    "Bluekai": {
-      "cats": [36],
-      "html": "__bkframe",
-      "icon": "BlueKai.png",
-      "website":
-        "https://www.oracle.com/marketingcloud/products/data-management-platform/index.html",
-      "extended": true
+    "apps": {
+        "Bluekai": {
+            "cats": [
+                36
+            ],
+            "html": "__bkframe",
+            "icon": "BlueKai.png",
+            "website": "https://www.oracle.com/marketingcloud/products/data-management-platform/index.html",
+            "extended": true
+        },
+        "Bing Ads": {
+            "cats": [
+                36
+            ],
+            "html": "<script[\\s\\S]*bat\\.bing\\.com/bat.js[\\s\\S]*script>",
+            "icon": "Bing Ads.png",
+            "website": "https://bingads.microsoft.com/",
+            "extended": true
+        },
+        "Branch": {
+            "cats": [
+                10
+            ],
+            "html": "cdn\\.branch\\.io/",
+            "icon": "Branch.png",
+            "website": "https://branch.io/",
+            "extended": true
+        },
+        "Google Ads": {
+            "cats": [
+                36
+            ],
+            "html": "<script[\\s\\S]*googleads\\.g\\.doubleclick\\.net/pagead/viewthroughconversion[\\s\\S]*script>",
+            "icon": "Google Ads.png",
+            "website": "https://ads.google.com/home/",
+            "extended": true
+        },
+        "Koego": {
+            "cats": [
+                10
+            ],
+            "html": "tracking\\.koego\\.com/end/ego\\.js",
+            "icon": "Koego.png",
+            "website": "http://www.koego.com/",
+            "extended": true
+        },
+        "Krux": {
+            "cats": [
+                10
+            ],
+            "html": [
+                "cdn\\.krxd\\.net/userdata",
+                "beacon\\.krxd\\.net",
+                "cdn\\.krxd\\.net/ctjs",
+                "cdn\\.krxd\\.net/partnerjs"
+            ],
+            "icon": "Krux.png",
+            "website": "https://www.salesforce.com/products/marketing-cloud/data-management/",
+            "extended": true
+        },
+        "Prospector": {
+            "cats": [
+                10
+            ],
+            "html": [
+                "processprospector\\.js",
+                "<[^>]+data-name=['\"]prospectscript"
+            ],
+            "icon": "Prospector.png",
+            "website": "https://www.prospectorpro.co/",
+            "extended": true
+        },
+        "Sklik": {
+            "cats": [
+                36
+            ],
+            "html": "c\\.imedia\\.cz/js/script.js",
+            "icon": "Sklik.png",
+            "website": "https://www.sklik.cz/",
+            "extended": true
+        },
+        "Sharethrough": {
+            "cats": [
+                36
+            ],
+            "html": "\\.sharethrough\\.com",
+            "icon": "Sharethrough.png",
+            "website": "https://www.sharethrough.com/",
+            "extended": true
+        },
+        "Skimlinks": {
+            "cats": [
+                36
+            ],
+            "html": "skimlinks.*\\.js",
+            "icon": "Skimlinks.png",
+            "website": "https://skimlinks.com/",
+            "extended": true
+        },
+        "Yieldmo": {
+            "cats": [
+                36
+            ],
+            "html": "static\\.yieldmo\\.com",
+            "icon": "Yieldmo.png",
+            "website": "https://www.yieldmo.com/",
+            "extended": true
+        },
+        "Taboola": {
+            "cats": [
+                5
+            ],
+            "html": "cdn.taboola.com",
+            "icon": "Taboola.png",
+            "website": "https://www.taboola.com/",
+            "extended": true
+        },
+        "Bizible": {
+            "cats": [
+                32
+            ],
+            "html": "https://cdn.bizible.com/BizibleAcct.js",
+            "icon": "Marketo.png",
+            "website": "https://www.bizible.com/",
+            "extended": true
+        },
+        "CallRail": {
+            "cats": [
+                10
+            ],
+            "html": "cdn.callrail.com",
+            "icon": "CallRail.png",
+            "website": "https://www.callrail.com/",
+            "extended": true
+        }
     },
-    "Bing Ads": {
-      "cats": [36],
-      "html": "<script[\\s\\S]*bat\\.bing\\.com/bat.js[\\s\\S]*script>",
-      "icon": "Bing Ads.png",
-      "website": "https://bingads.microsoft.com/",
-      "extended": true
+    "supported": [
+        "A8",
+        "A9",
+        "AccessTrade",
+        "Adblade",
+        "AdButler",
+        "Adform",
+        "Adfox",
+        "Ad Generation",
+        "Adhese",
+        "Adincube",
+        "ADITION",
+        "Adman",
+        "AdmanMedia",
+        "Admixer",
+        "AdOcean",
+        "AdPicker",
+        "AdPlugg",
+        "AdReactor",
+        "AdSense",
+        "AdsNative",
+        "AdSpeed",
+        "AdSpirit",
+        "AdStir",
+        "AdTech",
+        "AdThrive",
+        "AdUnity",
+        "Ad Up Technology",
+        "Adventive",
+        "Adverline",
+        "Adverticum",
+        "AdvertServe",
+        "Affiliate-B",
+        "AMoAd",
+        "AppNexus",
+        "AppVador",
+        "Atomx",
+        "BeOpinion",
+        "Bidtellect",
+        "brainy",
+        "Broadstreet Ads",
+        "CA A.J.A. Infeed",
+        "CA-ProFit-X",
+        "Cedato",
+        "Chargeads",
+        "Colombia",
+        "Connatix",
+        "Content.ad",
+        "Criteo",
+        "CSA",
+        "CxenseDisplay",
+        "Dianomi",
+        "Directadvert",
+        "DistroScale",
+        "Dot and Media",
+        "Doubleclick",
+        "DoubleClick Ad Exchange (AdX)",
+        "DoubleClick Campaign Manager (DCM)",
+        "DoubleClick Floodlight",
+        "DoubleClick for Publishers (DFP)",
+        "eADV",
+        "E-Planning",
+        "Ezoic",
+        "Felmat",
+        "FlexOneELEPHANT",
+        "FlexOneHARRIER",
+        "Flite",
+        "fluct",
+        "Fusion",
+        "GenieeSSP",
+        "Giraff",
+        "GMOSSP",
+        "GumGum",
+        "Holder",
+        "I-Mobile",
+        "Imonomy",
+        "iBillboard",
+        "Imedia",
+        "Improve Digital",
+        "Index Exchange",
+        "Industrybrains",
+        "InMobi",
+        "Innity",
+        "Kargo",
+        "Kiosked",
+        "Kixer",
+        "Kuadio",
+        "Ligatus",
+        "LockerDome",
+        "LOKA",
+        "MADS",
+        "MANTIS",
+        "Media.net",
+        "MediaImpact",
+        "Mediavine",
+        "Medyanet",
+        "Meg",
+        "MicroAd",
+        "MixiMedia",
+        "Mixpo",
+        "Monetizer101",
+        "myTarget",
+        "myWidget",
+        "Nativo",
+        "Navegg",
+        "Nend",
+        "NETLETIX",
+        "Noddus",
+        "Nokta",
+        "Open AdStream (OAS)",
+        "OpenX",
+        "Pixels",
+        "plista",
+        "polymorphicAds",
+        "popin",
+        "PubGuru",
+        "PubMatic",
+        "Pubmine",
+        "PulsePoint",
+        "Purch",
+        "Rambler&Co",
+        "Realclick",
+        "Red for Publishers",
+        "Relap",
+        "Revcontent",
+        "RevJet",
+        "Rubicon Project",
+        "RUNative",
+        "Sekindo",
+        "Sharethrough",
+        "Sklik",
+        "SlimCut Media",
+        "Smart AdServer",
+        "smartclip",
+        "sogou Ad",
+        "Sortable",
+        "SOVRN",
+        "SpotX",
+        "SunMedia",
+        "Swoop",
+        "Teads",
+        "TripleLift",
+        "Trugaze",
+        "UZOU",
+        "ValueCommerce",
+        "video intelligence",
+        "Videonow",
+        "Viralize",
+        "UAS",
+        "Unruly",
+        "VMFive",
+        "Webediads",
+        "Weborama",
+        "Widespace",
+        "Wisteria",
+        "WPMedia",
+        "Xlift",
+        "Yahoo",
+        "YahooJP",
+        "Yandex",
+        "Yengo",
+        "Yieldbot",
+        "Yieldmo",
+        "Yieldone",
+        "Yieldpro",
+        "Zedo",
+        "Zucks",
+        "Acquia Lift",
+        "Adobe Analytics",
+        "AFS Analytics",
+        "Alexa Internet",
+        "AT Internet Analyzer",
+        "AT Internet XiTi",
+        "Baidu Analytics",
+        "Burt",
+        "Chartbeat",
+        "Clicky Web Analytics",
+        "comScore",
+        "Cxense",
+        "Dynatrace",
+        "Eulerian Analytics",
+        "Facebook Pixel",
+        "Gemius",
+        "Google Ads",
+        "Google Analytics",
+        "Google Tag Manager",
+        "INFOnline / IVW",
+        "Krux",
+        "Linkpulse",
+        "Lotame",
+        "Médiamétrie",
+        "mediarithmics",
+        "Moat Analytics",
+        "Mobify",
+        "mParticle",
+        "New Relic",
+        "Nielsen",
+        "Nielsen Marketing Cloud",
+        "OEWA",
+        "Parse.ly",
+        "Piano",
+        "Quantcast",
+        "Segment",
+        "SOASTA mPulse",
+        "SimpleReach",
+        "Snowplow Analytics",
+        "Rambler/TOP-100",
+        "Top.Mail.Ru",
+        "Umeng+ Analytics",
+        "Treasure Data",
+        "Webtrekk",
+        "Yandex.Metrika",
+        "AMPize.me",
+        "Arc Publishing",
+        "Canvas",
+        "Drupal",
+        "Fastcommerce",
+        "Hatena",
+        "Kentico",
+        "Marfeel",
+        "Rabbit",
+        "Squarespace",
+        "Textpattern",
+        "TownNews",
+        "Tumblr",
+        "WordPress",
+        "Accelerated Mobile Pages",
+        "3Q SN",
+        "AOL O2",
+        "Beachfront Reach",
+        "Brid.tv",
+        "Brightcove",
+        "Dailymotion",
+        "Gfycat",
+        "Hulu",
+        "Izlesene",
+        "JW Player",
+        "Kaltura",
+        "nexxOMNIA",
+        "Ooyala",
+        "Soundcloud",
+        "Springboard",
+        "Vimeo",
+        "Vine",
+        "YouTube",
+        "Bringhub",
+        "Outbrain",
+        "Taboola",
+        "ZergNet",
+        "Optimizely"
+    ],
+    "incompatible": [
+        "Aircall",
+        "Bold Chat",
+        "Crazy Egg",
+        "ClickTale",
+        "Hotjar",
+        "GoSquared",
+        "LiveAgent",
+        "LiveChat",
+        "LiveHelp",
+        "LivePerson",
+        "Olark",
+        "Raychat",
+        "Tawk.to",
+        "UserLike",
+        "Zendesk Chat"
+    ],
+    "conversionCategoryTooltips": {
+        "1": {
+            "content": "AMP pages need to be built within the template system of a CMS, or be built stand alone outside of the CMS. To create AMPs that look and feel like your non-AMPs with a CMS will require coding on your part. Plugins aren't likely to convert everything automatically, and could give sub-par results.",
+            "reference": null
+
+        },
+        "5": {
+            "content": "Social features can be added in AMP pages using the amp-social-share component",
+            "reference": "https://www.ampproject.org/docs/reference/components/amp-social-share"
+        },
+        "6": {
+            "content": "Many ecommerce platforms can serve AMP pages. Ask the vendor if they support AMP",
+            "reference": "https://www.ampproject.org/learn/who-uses-amp/ecommerce/"
+        },
+        "10": {
+            "content": "If an analytics vendor isn't officially supported, there are numerous ways to send data from your AMP page to 3rd party vendors. Check the amp-analytics documentation",
+            "reference": "https://www.ampproject.org/docs/reference/components/amp-analytics"
+        },
+        "11": {
+            "content": "Commenting/blog systems such as Disqus can be added to an AMP page using the amp-iframe component.",
+            "reference": "https://github.com/disqus/disqus-install-examples/tree/master/google-amp"
+        },
+        "12": {
+            "content": "Client side JavaScript frameworks won't mesh with AMP, but AMP JS can replace the functionality of these frameworks. Server side rendering using frameworks (i.e. React, Angular) is supported.",
+            "reference": "https://www.ampproject.org/learn/about-how/"
+        },
+        "18": {
+            "content": "Web frameworks that run on the server are usable with AMP. Client side scripts utilized by these frameworks won't be usable.",
+            "reference": "https://www.ampproject.org/learn/about-how/"
+        },
+        "32": {
+            "content": "AMP analytics can send data to any endpoint for marketing automation, and most of what marketing automation achieves is done on the server. Ask the vendor if they support AMP.",
+            "reference": "https://www.ampproject.org/docs/reference/components/amp-analytics"
+        },
+        "36": {
+            "content": "Most ad networks are supported by the amp-ad component. Please see the amp-ad documentation to check the list",
+            "reference": "https://www.ampproject.org/docs/reference/components/amp-ad"
+        },
+        "41": {
+            "content": "Currently, there are ways to support payments in AMP through an amp-iframe with the allowpaymentrequest attribute set",
+            "reference": "https://ampbyexample.com/advanced/payments_in_amp/"
+        },
+        "42": {
+            "content": "The only tag manager that is currently configured to work with AMP is Google Tag Manager",
+            "reference": "https://support.google.com/tagmanager/answer/6103696?hl=en"
+        },
+        "59": {
+            "content": "It's important to be aware that external JavaScript isn't supported in AMP, but that doesn't mean you can't achieve the same functionality. AMP JS is fully capable of replacing most functionality provided by popular JS libraries",
+            "reference": "https://www.ampproject.org/learn/overview/"
+        }
     },
     "Branch": {
       "cats": [10],
@@ -22,482 +461,137 @@
       "website": "https://branch.io/",
       "extended": true
     },
-    "Google Ads": {
-      "cats": [36],
-      "html":
-        "<script[\\s\\S]*googleads\\.g\\.doubleclick\\.net/pagead/viewthroughconversion[\\s\\S]*script>",
-      "icon": "Google Ads.png",
-      "website": "https://ads.google.com/home/",
-      "extended": true
+    "technologyTooltips": {
+        "jQuery": "jQuery is a very common JS library that is used for convenience, but doesn't enable anything that can't be accomplished with AMP JS",
+        "GoSquared": "If you aren't using the chat feature of GoSquared, then it is possible to integrate GoSquared Analytics within AMP. A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page",
+        "reCAPTCHA": "reCAPTCHA will have native support in AMP by the end of Q1, 2019. Please reference ampproject/amphtml issue 2273 in GitHub for any updates."
     },
-    "Koego": {
-      "cats": [10],
-      "html": "tracking\\.koego\\.com/end/ego\\.js",
-      "icon": "Koego.png",
-      "website": "http://www.koego.com/",
-      "extended": true
-    },
-    "Krux (Salesforce DMP)": {
-      "cats": [10],
-      "html": [
-        "cdn\\.krxd\\.net/userdata",
-        "beacon\\.krxd\\.net",
-        "cdn\\.krxd\\.net/ctjs",
-        "cdn\\.krxd\\.net/partnerjs"
-      ],
-      "icon": "Krux.png",
-      "website":
-        "https://www.salesforce.com/products/marketing-cloud/data-management/",
-      "extended": true
-    },
-    "Prospector": {
-      "cats": [10],
-      "html": ["processprospector\\.js", "<[^>]+data-name=['\"]prospectscript"],
-      "icon": "Prospector.png",
-      "website": "https://www.prospectorpro.co/",
-      "extended": true
-    },
-    "Sklik": {
-      "cats": [36],
-      "html": "c\\.imedia\\.cz/js/script.js",
-      "icon": "Sklik.png",
-      "website": "https://www.sklik.cz/",
-      "extended": true
-    },
-    "Sharethrough": {
-      "cats": [36],
-      "html": "\\.sharethrough\\.com",
-      "icon": "Sharethrough.png",
-      "website": "https://www.sharethrough.com/",
-      "extended": true
-    },
-    "Skimlinks": {
-      "cats": [36],
-      "html": "skimlinks.*\\.js",
-      "icon": "Skimlinks.png",
-      "website": "https://skimlinks.com/",
-      "extended": true
-    },
-    "Yieldmo": {
-      "cats": [36],
-      "html": "static\\.yieldmo\\.com",
-      "icon": "Yieldmo.png",
-      "website": "https://www.yieldmo.com/",
-      "extended": true
-    },
-    "Taboola": {
-      "cats": [5],
-      "html": "cdn.taboola.com",
-      "icon": "Taboola.png",
-      "website": "https://www.taboola.com/",
-      "extended": true
-    },
-    "Bizible": {
-      "cats": [32],
-      "html": "https://cdn.bizible.com/BizibleAcct.js",
-      "icon": "Marketo.png",
-      "website": "https://www.bizible.com/",
-      "extended": true
-    },
-    "CallRail": {
-      "cats": [10],
-      "html": "cdn.callrail.com",
-      "icon": "CallRail.png",
-      "website": "https://www.callrail.com/",
-      "extended": true
-    }
-  },
-  "supported": [
-    "A8",
-    "A9",
-    "AccessTrade",
-    "Adblade",
-    "AdButler",
-    "Adform",
-    "Adfox",
-    "Ad Generation",
-    "Adhese",
-    "Adincube",
-    "ADITION",
-    "Adman",
-    "AdmanMedia",
-    "Admixer",
-    "AdOcean",
-    "AdPicker",
-    "AdPlugg",
-    "AdReactor",
-    "AdSense",
-    "AdsNative",
-    "AdSpeed",
-    "AdSpirit",
-    "AdStir",
-    "AdTech",
-    "AdThrive",
-    "AdUnity",
-    "Ad Up Technology",
-    "Adventive",
-    "Adverline",
-    "Adverticum",
-    "AdvertServe",
-    "Affiliate-B",
-    "AMoAd",
-    "AppNexus",
-    "AppVador",
-    "Atomx",
-    "BeOpinion",
-    "Bidtellect",
-    "brainy",
-    "Broadstreet Ads",
-    "CA A.J.A. Infeed",
-    "CA-ProFit-X",
-    "Cedato",
-    "Chargeads",
-    "Colombia",
-    "Connatix",
-    "Content.ad",
-    "Criteo",
-    "CSA",
-    "CxenseDisplay",
-    "Dianomi",
-    "Directadvert",
-    "DistroScale",
-    "Dot and Media",
-    "Doubleclick",
-    "DoubleClick Ad Exchange (AdX)",
-    "DoubleClick Campaign Manager (DCM)",
-    "DoubleClick Floodlight",
-    "DoubleClick for Publishers (DFP)",
-    "eADV",
-    "E-Planning",
-    "Ezoic",
-    "Felmat",
-    "FlexOneELEPHANT",
-    "FlexOneHARRIER",
-    "Flite",
-    "fluct",
-    "Fusion",
-    "GenieeSSP",
-    "Giraff",
-    "GMOSSP",
-    "GumGum",
-    "Holder",
-    "I-Mobile",
-    "Imonomy",
-    "iBillboard",
-    "Imedia",
-    "Improve Digital",
-    "Index Exchange",
-    "Industrybrains",
-    "InMobi",
-    "Innity",
-    "Kargo",
-    "Kiosked",
-    "Kixer",
-    "Kuadio",
-    "Ligatus",
-    "LockerDome",
-    "LOKA",
-    "MADS",
-    "MANTIS",
-    "Media.net",
-    "MediaImpact",
-    "Mediavine",
-    "Medyanet",
-    "Meg",
-    "MicroAd",
-    "MixiMedia",
-    "Mixpo",
-    "Monetizer101",
-    "myTarget",
-    "myWidget",
-    "Nativo",
-    "Navegg",
-    "Nend",
-    "NETLETIX",
-    "Noddus",
-    "Nokta",
-    "Open AdStream (OAS)",
-    "OpenX",
-    "Pixels",
-    "plista",
-    "polymorphicAds",
-    "popin",
-    "PubGuru",
-    "PubMatic",
-    "Pubmine",
-    "PulsePoint",
-    "Purch",
-    "Rambler&Co",
-    "Realclick",
-    "Red for Publishers",
-    "Relap",
-    "Revcontent",
-    "RevJet",
-    "Rubicon Project",
-    "RUNative",
-    "Sekindo",
-    "Sharethrough",
-    "Sklik",
-    "SlimCut Media",
-    "Smart AdServer",
-    "smartclip",
-    "sogou Ad",
-    "Sortable",
-    "SOVRN",
-    "SpotX",
-    "SunMedia",
-    "Swoop",
-    "Teads",
-    "TripleLift",
-    "Trugaze",
-    "UZOU",
-    "ValueCommerce",
-    "video intelligence",
-    "Videonow",
-    "Viralize",
-    "UAS",
-    "Unruly",
-    "VMFive",
-    "Webediads",
-    "Weborama",
-    "Widespace",
-    "Wisteria",
-    "WPMedia",
-    "Xlift",
-    "Yahoo",
-    "YahooJP",
-    "Yandex",
-    "Yengo",
-    "Yieldbot",
-    "Yieldmo",
-    "Yieldone",
-    "Yieldpro",
-    "Zedo",
-    "Zucks",
-    "Acquia Lift",
-    "Adobe Analytics",
-    "AFS Analytics",
-    "Alexa Internet",
-    "AT Internet Analyzer",
-    "AT Internet XiTi",
-    "Baidu Analytics",
-    "Burt",
-    "Chartbeat",
-    "Clicky Web Analytics",
-    "comScore",
-    "Cxense",
-    "Dynatrace",
-    "Eulerian Analytics",
-    "Facebook Pixel",
-    "Gemius",
-    "Google Ads",
-    "Google Analytics",
-    "Google Tag Manager",
-    "INFOnline / IVW",
-    "Krux",
-    "Linkpulse",
-    "Lotame",
-    "Médiamétrie",
-    "mediarithmics",
-    "Moat Analytics",
-    "Mobify",
-    "mParticle",
-    "New Relic",
-    "Nielsen",
-    "Nielsen Marketing Cloud",
-    "OEWA",
-    "Parsely",
-    "Piano",
-    "Quantcast",
-    "Segment",
-    "SOASTA mPulse",
-    "SimpleReach",
-    "Snowplow Analytics",
-    "Rambler/TOP-100",
-    "Top.Mail.Ru",
-    "Umeng+ Analytics",
-    "Treasure Data",
-    "Webtrekk",
-    "Yandex Metrica",
-    "AMPize.me",
-    "Arc Publishing",
-    "Canvas",
-    "Drupal",
-    "Fastcommerce",
-    "Hatena",
-    "Kentico",
-    "Marfeel",
-    "Rabbit",
-    "Squarespace",
-    "Textpattern",
-    "TownNews",
-    "Tumblr",
-    "WordPress",
-    "Accelerated Mobile Pages",
-    "3Q SN",
-    "AOL O2",
-    "Beachfront Reach",
-    "Brid.tv",
-    "Brightcove",
-    "Dailymotion",
-    "Gfycat",
-    "Hulu",
-    "Izlesene",
-    "JW Player",
-    "Kaltura",
-    "nexxOMNIA",
-    "Ooyala",
-    "Soundcloud",
-    "Springboard",
-    "Vimeo",
-    "Vine",
-    "YouTube",
-    "Bringhub",
-    "Outbrain",
-    "Taboola",
-    "ZergNet",
-    "Optimizely"
-  ],
-  "incompatible": [
-    "Aircall",
-    "Bold Chat",
-    "GoSquared",
-    "LiveAgent",
-    "LiveChat",
-    "LiveHelp",
-    "LivePerson",
-    "Olark",
-    "Raychat",
-    "Tawk.to",
-    "UserLike",
-    "Zendesk Chat",
-    "Crazy Egg",
-    "Click Tale",
-    "Hotjar"
-  ],
-  "conversionCategoryTooltips": {
-    "1": {
-      "content":
-        "AMP pages need to be built within the template system of a CMS, or be built stand alone outside of the CMS. To create AMPs that look and feel like your non-AMPs with a CMS will require coding on your part. Plugins aren't likely to convert everything automatically, and could give sub-par results.",
-      "reference": null
-    },
-    "5": {
-      "content":
-        "Social features can be added in AMP pages using the amp-social-share component",
-      "reference":
-        "https://www.ampproject.org/docs/reference/components/amp-social-share"
-    },
-    "6": {
-      "content":
-        "Many ecommerce platforms can serve AMP pages. Ask the vendor if they support AMP",
-      "reference": "https://www.ampproject.org/learn/who-uses-amp/ecommerce/"
-    },
-    "10": {
-      "content":
-        "If an analytics vendor isn't officially supported, there are numerous ways to send data from your AMP page to 3rd party vendors. Check the amp-analytics documentation",
-      "reference":
-        "https://www.ampproject.org/docs/reference/components/amp-analytics"
-    },
-    "11": {
-      "content":
-        "Commenting/blog systems such as Disqus can be added to an AMP page using the amp-iframe component.",
-      "reference":
-        "https://github.com/disqus/disqus-install-examples/tree/master/google-amp"
-    },
-    "12": {
-      "content":
-        "Client side JavaScript frameworks won't mesh with AMP, but AMP JS can replace the functionality of these frameworks. Server side rendering using frameworks (i.e. React, Angular) is supported.",
-      "reference": "https://www.ampproject.org/learn/about-how/"
-    },
-    "18": {
-      "content":
-        "Web frameworks that run on the server are usable with AMP. Client side scripts utilized by these frameworks won't be usable.",
-      "reference": "https://www.ampproject.org/learn/about-how/"
-    },
-    "32": {
-      "content":
-        "AMP analytics can send data to any endpoint for marketing automation, and most of what marketing automation achieves is done on the server. Ask the vendor if they support AMP.",
-      "reference":
-        "https://www.ampproject.org/docs/reference/components/amp-analytics"
-    },
-    "36": {
-      "content":
-        "Most ad networks are supported by the amp-ad component. Please see the amp-ad documentation to check the list",
-      "reference": "https://www.ampproject.org/docs/reference/components/amp-ad"
-    },
-    "41": {
-      "content":
-        "Currently, there are ways to support payments in AMP through an amp-iframe with the allowpaymentrequest attribute set",
-      "reference": "https://ampbyexample.com/advanced/payments_in_amp/"
-    },
-    "42": {
-      "content":
-        "The only tag manager that is currently configured to work with AMP is Google Tag Manager",
-      "reference": "https://support.google.com/tagmanager/answer/6103696?hl=en"
-    },
-    "59": {
-      "content":
-        "It's important to be aware that external JavaScript isn't supported in AMP, but that doesn't mean you can't achieve the same functionality. AMP JS is fully capable of replacing most functionality provided by popular JS libraries",
-      "reference": "https://www.ampproject.org/learn/overview/"
-    }
-  },
-  "incompatibleCategoryTooltips": {
-    "52":
-      "A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page"
-  },
-  "technologyTooltips": {
-    "Optimizely":
-      "Client side A/B testing is being worked on by the team, and estimated to ship by end of Q1 2019.",
-    "jQuery":
-      "jQuery is a very common JS library that is used for convenience, but doesn't enable anything that can't be accomplished with AMP JS",
-    "GoSquared":
-      "If you aren't using the chat feature of GoSquared, then it is possible to integrate GoSquared Analytics within AMP. A chat feature would have to be reserved for another part of your site. Currently not possible within an AMP page",
-    "reCAPTCHA":
-      "reCAPTCHA will have native support in AMP by the end of Q1, 2019. Please reference ampproject/amphtml issue 2273 in GitHub for any updates."
-  },
-  "conversionPatterns": {
-    "Google Analytics": {
-      "type": "amp-analytics",
-      "content": "",
-      "template":
-        "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_ACCOUNT_ID]]\",\n    \"config\" : {\n      \"[[GA_ACCOUNT_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>"
-    },
-    "Google Tag Manager": {
-      "type": "amp-analytics",
-      "content":
-        "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
-      "template":
-        "<!-- Google Tag Manager -->\n<amp-analytics config=\"https://www.googletagmanager.com/amp.json?id=[[AMP_CONTAINER_ID]]\" data-credentials=\"include\"></amp-analytics>"
-    },
-    "New Relic": {
-      "type": "amp-analytics",
-      "content": "",
-      "template":
-        "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": \"[[NEW_RELIC_APP_ID]]\",\r\n      \"licenseKey\": \"[[NEW_RELIC_LICENSE_KEY]]\"\n    }\r\n  }\r\n</script>\r\n</amp-analytics>"
-    },
-    "Acquia Lift": {
-      "type": "amp-analytics",
-      "content": "",
-      "template":
-        "<amp-analytics type=\"acquialift\" id=\"acquialift\">\r\n   <script type=\"application/json\">\r\n       {\r\n           \"vars\": {\r\n               \"siteId\": \"[[ACQUIA_LIFT_SITE_ID]]\",\r\n               \"accountId\": \"[[MY_ACCOUNT_ID]]\",\r\n               \"decisionApiUrl\": \"[[DECISION_API_URL]]\"\r\n           }\r\n       }\r\n   </script>\r\n</amp-analytics>"
-    },
-    "Adobe Analytics": {
-      "type": "amp-analytics",
-      "content": "",
-      "template":
-        "<amp-analytics type=\"adobeanalytics\">\r\n   <script type=\"application/json\">\r\n       {\r\n           \"vars\": {\r\n               \"host\": \"[[HOST_URL]]\",\r\n               \"reportSuites\": \"[[REPORT_SUITE_ID]]\",\r\n               \"pageName\": \"[[PAGE_NAME]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"pageLoad\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageView\"\r\n               }\r\n           }\r\n       }\r\n   </script>\r\n</amp-analytics>"
-    },
-    "AT Internet Analyzer": {
-      "type": "amp-analytics",
-      "content": "",
-      "template":
-        "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   </script>\r\n</amp-analytics>"
-    },
-    "AT Internet XiTi": {
-      "type": "amp-analytics",
-      "content": "",
-      "template":
-        "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   </script>\r\n</amp-analytics>"
-    }
-  }
+	"conversionPatterns": {
+		"Google Analytics": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\n<script type=\"application/json\">\n{\n  \"vars\" : {\n    \"gtag_id\": \"[[GA_TRACKING_ID]]\",\n    \"config\" : {\n      \"[[GA_TRACKING_ID]]\": { \"groups\": \"default\" }\n    }\n  }\n}\n</script>\r\n<\/amp-analytics>",
+            "link": "https://developers.google.com/analytics/devguides/collection/amp-analytics/"
+        },
+		"Google Tag Manager": {
+            "type": "amp-analytics",
+			"content": "Follow the guide at <a target='_blank' href='https://support.google.com/tagmanager/answer/6103696'>https://support.google.com/tagmanager/answer/6103696</a> to setup a GTM AMP Container",
+			"template": "<!-- Google Tag Manager -->\r\n<amp-analytics config=\"https:\/\/www.googletagmanager.com\/amp.json?id=[[AMP_CONTAINER_ID]]\" data-credentials=\"include\">\r\n<\/amp-analytics>",
+            "link": "https://developers.google.com/google-ads/amp/landing-pages#google_tag_manager"
+        },
+		"New Relic": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"newrelic\" id=\"newrelic\">\r\n<script type=\"application\/json\">\r\n  {\r\n    \"vars\": {\r\n      \"appId\": \"[[NEW_RELIC_APP_ID]]\",\r\n      \"licenseKey\": \"[[NEW_RELIC_LICENSE_KEY]]\"\n    }\r\n  }\r\n<\/script>\r\n<\/amp-analytics>",
+            "link": "https://docs.newrelic.com/docs/browser/new-relic-browser/installation/monitor-amp-pages-new-relic-browser"
+        },
+        "Acquia Lift": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"acquialift\" id=\"acquialift\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"siteId\": \"[[ACQUIA_LIFT_SITE_ID]]\",\r\n               \"accountId\": \"[[MY_ACCOUNT_ID]]\",\r\n               \"decisionApiUrl\": \"[[DECISION_API_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://docs.acquia.com/lift"
+        },
+        "Adobe Analytics": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"adobeanalytics\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"host\": \"[[HOST_URL]]\",\r\n               \"reportSuites\": \"[[REPORT_SUITE_ID]]\",\r\n               \"pageName\": \"[[PAGE_NAME]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"pageLoad\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageView\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://marketing.adobe.com/resources/help/en_US/sc/implement/accelerated-mobile-pages.html"
+        },
+        "AT Internet Analyzer": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://developers.atinternet-solutions.com/javascript-en/advanced-features-javascript-en/accelerated-mobile-pages-amp-javascript-en/"
+        },
+        "AT Internet XiTi": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"atinternet\" id=\"atinternet\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"site\": \"[[SITE_NUMBER]]\",\r\n               \"log\": \"[[SECURED_COLLECTION_SERVER]]\",\r\n               \"domain\": \"[[COLLECTION_DOMAIN]]\",\r\n               \"title\": \"[[NAME_OF_PAGE]]\",\r\n               \"level2\": \"[[LEVEL_2_OF_PAGE]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"defaultPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://developers.atinternet-solutions.com/javascript-en/advanced-features-javascript-en/accelerated-mobile-pages-amp-javascript-en/"
+        },
+        "Chartbeat": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"burt\" id=\"burt\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackingKey\": \"[[TRACKING_KEY]]\",\r\n               \"category\": \"[[CATEGORY]]\",\r\n               \"subCategory\": \"[[SUBCATEGORY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://support.chartbeat.com/docs/integrations.html#amp"
+        },
+        "comScore": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"comscore\" id=\"comscore\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"c2\": \"[[C2_VALUE]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://www.comscore.com/"
+        },
+        "Dynatrace": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"dynatrace\" id=\"dynatrace\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"app\": \"[[APP_ID]]\",\r\n               \"tenant\": \"[[TENANT_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.dynatrace.com/technologies/web/amp-monitoring/"
+        },
+        "Facebook": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"facebookpixel\" id=\"facebook-pixel\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pixelId\": \"[[PIXEL_ID]]\"\r\n           },\r\n           \"triggers\": {\r\n               \"trackPageview\": {\r\n                   \"on\": \"visible\",\r\n                   \"request\": \"pageview\"\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.facebook.com/business/a/facebook-pixel"
+        },
+        "Google Ads": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"gtag\" data-credentials=\"include\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"gtag_id\": \"[[AW_CONVERSION_ID]]\",\r\n               \"config\": {\r\n                   \"[[AW_CONVERSION_ID]]\": {\r\n                       \"groups\": \"default\"\r\n                   }\r\n               }\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://support.google.com/adwords/answer/1722054?hl=en"
+        },
+        "INFOnline": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"infonline\" id=\"infonline\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"st\": \"[[ID]]\",\r\n               \"co\": \"[[COMMENT]]\",\r\n               \"cp\": \"[[CP_ID]]\",\r\n               \"ps\": \"[[PS_ID]]\"\r\n           },\r\n           \"requests\": {\r\n               \"url\": \"[[TARGET_URL]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.infonline.de/"
+        },
+        "Krux": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"krux\" config=\"https:\/\/cdn.krxd.net\/controltag\/amp\/[[SALESFORCE_DMP_ID]].json\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"extraUrlParams\": {\r\n               \"user.status\": \"[[STATUS]]\",\r\n               \"page.keywords\": \"[[PAGE, KEYWORD, ARRAY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://konsole.zendesk.com/hc/en-us/articles/216596608"
+        },
+        "Mobify": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"mobify\" id=\"mobify\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"projectSlug\": \"[[SLUG]]\",\r\n               \"templateName\": \"[[TEMPLATE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://docs.mobify.com/amp-sdk/latest/guides/amp-analytics/"
+        },
+        "Parse.ly": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"parsely\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"apikey\": \"[[API_KEY]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "http://parsely.com/docs/integration/tracking/google-amp.html"
+        },
+        "Quantcast": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"quantcast\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"pcode\": \"[[PCODE]]\",\r\n               \"labels\": [[LABEL ARRAY]]\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://www.quantcast.com/help/guides/"
+        },
+        "Segment": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"segment\">\r\n   <script>\r\n       {\r\n           \"vars\": {\r\n               \"writeKey\": \"[[SEGMENT_WRITE_KEY]]\",\r\n               \"name\": \"[[PAGE_NAME]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://segment.com/docs/spec/"
+        },
+        "Webtrekk": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"webtrekk_v2\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"trackDomain\": \"[[TRACK_DOMAIN]]\",\r\n               \"trackId\": \"[[TRACK_ID]]\"\r\n           },\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://supportcenter.webtrekk.com/en/public/amp-analytics.html"
+        },
+        "Yandex.Metrika": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"metrika\">\r\n   <script type=\"application\/json\">\r\n       {\r\n           \"vars\": {\r\n               \"counterId\": \"[[COUNTER_ID]]\"\r\n           }\r\n       }\r\n   <\/script>\r\n<\/amp-analytics>",
+            "link": "https://yandex.com/support/metrica/code/install-counter-amp.xml"
+        },
+        "Optimizely": {
+            "type": "amp-analytics",
+			"content": "",
+			"template": "<amp-analytics type=\"optimizely\">\r\n <script type=\"application\/json\">\r\n   {\r\n       \"vars\": {\r\n           \/\/ Optimizely event tracking \/ logic here\r\n       },\r\n       \"triggers\": {\r\n           \"button\": {\r\n               \"selector\": \"#the-button\",\r\n               \"on\": \"click\"\r\n           }\r\n       }\r\n   }\r\n <\/script>\r\n<\/amp-analytics>",
+            "link": "https://blog.optimizely.com/2019/04/18/optimizely-google-amp/"
+        }
+	}
 }

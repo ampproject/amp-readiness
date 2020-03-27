@@ -2,7 +2,7 @@
 	"name": "AMP Readiness Tool",
 	"short_name": "AMP Readiness Tool",
 	"author": "Jeffrey Jose, Phillip Kriegel, Frank Broersen",
-	"homepage_url": "https://github.com/ampproject/ampbench/tree/master/readiness-tool",
+	"homepage_url": "https://github.com/ampproject/amp-readiness",
 	"description": "Identify web technologies that are relevant to AMP",
 	"version": "4.0.2",
 	"default_locale": "en",
